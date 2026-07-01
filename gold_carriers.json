@@ -127,5 +127,74 @@
     "legal_name": "JAMES R PERRY",
     "carrier_type": "INTRASTATE_ONLY",
     "authority_required": "NO"
+  },
+
+  "1074419": {
+    "_name": "LDI TRUCKING INC",
+    "_notes": "Bug 2 verification DOT (batch 02). FOR_HIRE with reinstatement pattern — CONFIRMED_ACTIVE, revocation_date=None. Verified Jul 1 2026.",
+    "carrier_type": "FOR_HIRE_INTERSTATE",
+    "authority_status": "CONFIRMED_ACTIVE",
+    "authority_required": "YES"
+  },
+
+  "31047": {
+    "_name": "NORMAN BROTHERS INC",
+    "_notes": "Round 3 audit fix. Socrata carrier_operation='C' (Intrastate Non-HM). cargo_type='AUTHORIZED FOR HIRE' + MC108103 (inactive). carrier_operation overrides MC presence — must classify as FOR_HIRE_INTRASTATE_ONLY, not FOR_HIRE_INTERSTATE.",
+    "legal_name": "NORMAN BROTHERS INC",
+    "carrier_type": "FOR_HIRE_INTRASTATE_ONLY",
+    "authority_required": "NO",
+    "insurance_required": "NO"
+  },
+
+  "810652": {
+    "_name": "DAVID HYKE",
+    "_notes": "Round 3 audit fix. Socrata carrier_operation='C' (Intrastate Non-HM). cargo_type='EXEMPT FOR HIRE' + MC459374 (inactive). Must classify as EXEMPT_FOR_HIRE_INTRASTATE_ONLY.",
+    "legal_name": "DAVID HYKE",
+    "carrier_type": "EXEMPT_FOR_HIRE_INTRASTATE_ONLY",
+    "authority_required": "NO",
+    "insurance_required": "NO"
+  },
+
+  "973209": {
+    "_name": "WEBB FARMS INC",
+    "_notes": "Round 3 — confirm still correctly classified. Socrata carrier_operation='C' (Intrastate Non-HM). cargo_type='PRIVATE PROPERTY', no MC. Classification moves from PRIVATE to PRIVATE_PROPERTY_INTRASTATE_NON_HM.",
+    "legal_name": "WEBB FARMS INC",
+    "carrier_type": "PRIVATE_PROPERTY_INTRASTATE_NON_HM",
+    "authority_required": "NO",
+    "insurance_required": "NO"
+  },
+
+  "4275752": {
+    "_name": "VALLEY RIDGE LOGISTICS LLC",
+    "_notes": "Round 3 audit fix. Socrata carrier_operation='B' (Intrastate HM), hm_ind='Y'. cargo_type='PRIVATE PROPERTY', no MC. Must classify as PRIVATE_PROPERTY_INTRASTATE_HM with HM notice in report.",
+    "legal_name": "VALLEY RIDGE LOGISTICS LLC",
+    "carrier_type": "PRIVATE_PROPERTY_INTRASTATE_HM",
+    "authority_required": "NO",
+    "insurance_required": "NO"
+  },
+
+  "3128165": {
+    "_name": "JR TRANSPORTATION JUST RITE LLC",
+    "_notes": "Round 3 fleet fix. Socrata: truck_units=0, total_cars=1, power_units=1. DB total_trucks corrected to 0. non_cmv_units=1. carrier_operation='A' (Interstate) — stays FOR_HIRE_INTERSTATE. fleet_power_units=0 + fleet_drivers=1 will trigger Rule 16 asymmetry conflict (expected — carrier has car not truck).",
+    "legal_name": "JR TRANSPORTATION JUST RITE LLC",
+    "carrier_type": "FOR_HIRE_INTERSTATE",
+    "authority_required": "YES"
+  },
+
+  "1864365": {
+    "_name": "MOUNTAIN TOP LANDSCAPE COMPANY INC",
+    "_notes": "Round 3 passenger flag. Socrata: crgo_passengers='X', carrier_operation='A' (Interstate). cargo_type='PRIVATE PROPERTY' — stays PRIVATE. has_passenger_cargo=True → passenger verification notice appears in report.",
+    "legal_name": "MOUNTAIN TOP LANDSCAPE COMPANY INC",
+    "carrier_type": "PRIVATE",
+    "authority_required": "NO",
+    "insurance_required": "NO"
+  },
+
+  "2833702": {
+    "_name": "MAR-JAC TRANSPORTATION LLC",
+    "_notes": "Regression: must stay MIXED_OPERATION across all rounds. Socrata carrier_operation='A' (Interstate). cargo_type='PRIVATE PROPERTY;AUTHORIZED FOR HIRE', MC947611 active. Verified Jul 1 2026.",
+    "legal_name": "MAR-JAC TRANSPORTATION LLC",
+    "carrier_type": "MIXED_OPERATION",
+    "authority_required": "YES"
   }
 }

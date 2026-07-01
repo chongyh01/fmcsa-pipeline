@@ -1,5 +1,5 @@
 ================================================================================
-CARRIER FACTS + VALIDATION AUDIT — 2026-07-01 20:54:42
+CARRIER FACTS + VALIDATION AUDIT — 2026-07-01 21:29:13
 Layers: 1 (carrier_facts.py)  +  2 (validation_rules.py)
 ================================================================================
 
@@ -48,7 +48,7 @@ Note: 14 trucks/13 drivers — fleet should both be non-zero
     [PASS] Rule 15 no_overconfident_negative_from_empty_records: OK
     [PASS] Rule 16 fleet_data_not_asymmetric: OK — power_units=14, drivers=13
     [PASS] Rule 17 inspection_count_non_negative_int: OK — inspection_count=2
-    [PASS] Rule 18 data_confidence_keys_present: OK — {'insurance': 'HIGH', 'identity': 'HIGH', 'fleet': 'HIGH', 'authority': 'HIGH'}
+    [PASS] Rule 18 data_confidence_keys_present: OK — {'insurance': 'HIGH', 'fleet': 'HIGH', 'identity': 'HIGH', 'authority': 'HIGH'}
     [PASS] Rule 19 for_hire_has_mc_or_auth_evidence: N/A — carrier_type=PRIVATE
     [PASS] Rule 20 accident_date_parseable_if_set: N/A — no accident_date set
     [PASS] Rule 21 authorized_carrier_not_classified_private: N/A — authority_status=NOT_REQUIRED
@@ -98,7 +98,7 @@ Note: inspection count: report said 12, SMS ~9 — verify dedup gives correct co
     [PASS] Rule 15 no_overconfident_negative_from_empty_records: OK
     [PASS] Rule 16 fleet_data_not_asymmetric: OK — power_units=1, drivers=1
     [PASS] Rule 17 inspection_count_non_negative_int: OK — inspection_count=12
-    [PASS] Rule 18 data_confidence_keys_present: OK — {'insurance': 'HIGH', 'identity': 'HIGH', 'fleet': 'HIGH', 'authority': 'HIGH'}
+    [PASS] Rule 18 data_confidence_keys_present: OK — {'insurance': 'HIGH', 'fleet': 'HIGH', 'identity': 'HIGH', 'authority': 'HIGH'}
     [PASS] Rule 19 for_hire_has_mc_or_auth_evidence: OK — mc=MC1111962, auth_records=1
     [PASS] Rule 20 accident_date_parseable_if_set: N/A — no accident_date set
     [PASS] Rule 21 authorized_carrier_not_classified_private: OK — carrier_type=FOR_HIRE_INTERSTATE is consistent with CONFIRMED_ACTIVE authority
@@ -148,7 +148,7 @@ Note: active vs revoked + no insurance contradiction — rules 1, 6, 7 must all 
     [PASS] Rule 15 no_overconfident_negative_from_empty_records: OK
     [PASS] Rule 16 fleet_data_not_asymmetric: OK — power_units=1, drivers=1
     [PASS] Rule 17 inspection_count_non_negative_int: OK — inspection_count=2
-    [PASS] Rule 18 data_confidence_keys_present: OK — {'insurance': 'HIGH', 'identity': 'HIGH', 'fleet': 'HIGH', 'authority': 'HIGH'}
+    [PASS] Rule 18 data_confidence_keys_present: OK — {'insurance': 'HIGH', 'fleet': 'HIGH', 'identity': 'HIGH', 'authority': 'HIGH'}
     [PASS] Rule 19 for_hire_has_mc_or_auth_evidence: OK — mc=MC1231283, auth_records=2
     [PASS] Rule 20 accident_date_parseable_if_set: N/A — no accident_date set
     [PASS] Rule 21 authorized_carrier_not_classified_private: N/A — authority_status=CONFIRMED_REVOKED
@@ -198,7 +198,7 @@ Note: summary inactive vs findings active — usdot_status must be consistent
     [PASS] Rule 15 no_overconfident_negative_from_empty_records: OK
     [PASS] Rule 16 fleet_data_not_asymmetric: OK — power_units=1, drivers=1
     [PASS] Rule 17 inspection_count_non_negative_int: OK — inspection_count=0
-    [PASS] Rule 18 data_confidence_keys_present: OK — {'insurance': 'LOW', 'identity': 'HIGH', 'fleet': 'HIGH', 'authority': 'MEDIUM'}
+    [PASS] Rule 18 data_confidence_keys_present: OK — {'insurance': 'LOW', 'fleet': 'HIGH', 'identity': 'HIGH', 'authority': 'MEDIUM'}
     [PASS] Rule 19 for_hire_has_mc_or_auth_evidence: OK — mc=MC1397346, auth_records=1
     [PASS] Rule 20 accident_date_parseable_if_set: N/A — no accident_date set
     [PASS] Rule 21 authorized_carrier_not_classified_private: N/A — authority_status=REQUIRES_VERIFICATION
@@ -248,7 +248,7 @@ Note: revoked vs active conflict — rules 1 and 7 must catch contradiction if p
     [PASS] Rule 15 no_overconfident_negative_from_empty_records: OK
     [PASS] Rule 16 fleet_data_not_asymmetric: OK — power_units=2, drivers=2
     [PASS] Rule 17 inspection_count_non_negative_int: OK — inspection_count=0
-    [PASS] Rule 18 data_confidence_keys_present: OK — {'insurance': 'MEDIUM', 'identity': 'HIGH', 'fleet': 'HIGH', 'authority': 'HIGH'}
+    [PASS] Rule 18 data_confidence_keys_present: OK — {'insurance': 'MEDIUM', 'fleet': 'HIGH', 'identity': 'HIGH', 'authority': 'HIGH'}
     [PASS] Rule 19 for_hire_has_mc_or_auth_evidence: OK — mc=MC297804, auth_records=5
     [PASS] Rule 20 accident_date_parseable_if_set: N/A — no accident_date set
     [PASS] Rule 21 authorized_carrier_not_classified_private: N/A — authority_status=CONFIRMED_REVOKED
@@ -298,7 +298,7 @@ Note: private, 1/1 — must classify as PRIVATE, not FOR_HIRE_INTERSTATE (rules 
     [PASS] Rule 15 no_overconfident_negative_from_empty_records: OK
     [PASS] Rule 16 fleet_data_not_asymmetric: OK — power_units=1, drivers=1
     [PASS] Rule 17 inspection_count_non_negative_int: OK — inspection_count=5
-    [PASS] Rule 18 data_confidence_keys_present: OK — {'insurance': 'HIGH', 'identity': 'HIGH', 'fleet': 'HIGH', 'authority': 'HIGH'}
+    [PASS] Rule 18 data_confidence_keys_present: OK — {'insurance': 'HIGH', 'fleet': 'HIGH', 'identity': 'HIGH', 'authority': 'HIGH'}
     [PASS] Rule 19 for_hire_has_mc_or_auth_evidence: N/A — carrier_type=PRIVATE
     [PASS] Rule 20 accident_date_parseable_if_set: N/A — no accident_date set
     [PASS] Rule 21 authorized_carrier_not_classified_private: N/A — authority_status=NOT_REQUIRED
@@ -348,7 +348,7 @@ Note: private property 1/1 — same as above, rules 2 and 3
     [PASS] Rule 15 no_overconfident_negative_from_empty_records: OK
     [PASS] Rule 16 fleet_data_not_asymmetric: OK — power_units=1, drivers=1
     [PASS] Rule 17 inspection_count_non_negative_int: OK — inspection_count=0
-    [PASS] Rule 18 data_confidence_keys_present: OK — {'insurance': 'HIGH', 'identity': 'HIGH', 'fleet': 'HIGH', 'authority': 'HIGH'}
+    [PASS] Rule 18 data_confidence_keys_present: OK — {'insurance': 'HIGH', 'fleet': 'HIGH', 'identity': 'HIGH', 'authority': 'HIGH'}
     [PASS] Rule 19 for_hire_has_mc_or_auth_evidence: N/A — carrier_type=PRIVATE
     [PASS] Rule 20 accident_date_parseable_if_set: N/A — no accident_date set
     [PASS] Rule 21 authorized_carrier_not_classified_private: N/A — authority_status=NOT_REQUIRED
@@ -398,7 +398,7 @@ Note: for-hire wording vs service/intrastate — carrier_type must match evidenc
     [PASS] Rule 15 no_overconfident_negative_from_empty_records: OK
     [PASS] Rule 16 fleet_data_not_asymmetric: OK — power_units=1, drivers=1
     [PASS] Rule 17 inspection_count_non_negative_int: OK — inspection_count=0
-    [PASS] Rule 18 data_confidence_keys_present: OK — {'insurance': 'LOW', 'identity': 'HIGH', 'fleet': 'HIGH', 'authority': 'LOW'}
+    [PASS] Rule 18 data_confidence_keys_present: OK — {'insurance': 'LOW', 'fleet': 'HIGH', 'identity': 'HIGH', 'authority': 'LOW'}
     [PASS] Rule 19 for_hire_has_mc_or_auth_evidence: N/A — carrier_type=REQUIRES_VERIFICATION
     [PASS] Rule 20 accident_date_parseable_if_set: N/A — no accident_date set
     [PASS] Rule 21 authorized_carrier_not_classified_private: N/A — authority_status=NOT_FOUND

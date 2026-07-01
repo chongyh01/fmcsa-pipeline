@@ -1,38 +1,29 @@
 """
-_generate_verification_batch.py
-================================
-Post-fix verification batch — 30 carrier reports.
-
-Mandated DOTs (bug-fix verification):
-  2051387  TREDZ CENTRAL LLC           — Bug 1: carrier type misclassification
-  888283   PUBLIC SERVICE CO OF NC     — Bug 1: carrier type misclassification
-  1074419  LDI TRUCKING INC            — Bug 2: authority/revocation date mixing
-
-27 additional DOTs sampled for diversity:
-  - Active for-hire w/ authority, revoked/lapsed, private/no-MC
-  - At least 2-3 that produce validation_conflicts
-  - Range of fleet sizes (owner-op → large)
-  - At least one with null SMS data
+_generate_batch03.py
+====================
+Batch 03 — 30 random carrier reports for external audit.
 
 Excludes:
-  - 8 gold_carriers.json DOTs
-  - 30 DOTs from "Carrier Report 1st July 2026" (first audit batch)
+  - 12 gold_carriers.json DOTs
+  - 30 DOTs from batch 01 (Carrier Report 1st July 2026)
+  - 30 DOTs from batch 02 (02 - Carrier Report 1st July 2026)
+  - 3 mandated DOTs from batch 02
 
 Output:
-  CODES/02 - Carrier Report 1st July 2026/DOT_<number>.txt
-  CODES/02 - Carrier Report 1st July 2026/manifest.csv
+  CODES/03 - Carrier Report 1st July 2026/DOT_<number>.txt
+  CODES/03 - Carrier Report 1st July 2026/manifest.csv
 
 Usage:
-    python _generate_verification_batch.py
+    python _generate_batch03.py
 """
 
-import os, sys, csv, time, textwrap
+import os, sys, csv, textwrap
 import psycopg2
 from pathlib import Path
 from datetime import datetime
 from dotenv import load_dotenv
 
-load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
+load_dotenv(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".env"))
 if sys.platform == "win32":
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
@@ -43,55 +34,64 @@ DB_URL = os.getenv("SUPABASE_DB_URL", "")
 if not DB_URL:
     print("ERROR: SUPABASE_DB_URL not set"); sys.exit(1)
 
-OUTPUT_DIR = Path(__file__).parent / "02 - Carrier Report 1st July 2026"
+OUTPUT_DIR = Path(__file__).parent / "03 - Carrier Report 1st July 2026"
 OUTPUT_DIR.mkdir(exist_ok=True)
+
+W = 80
 
 # ── Exclusion sets ─────────────────────────────────────────────────────────────
 
 GOLD_DOTS = {
     "204814", "3431540", "3612954", "3841767",
     "623336", "3012101", "1612145", "2308088",
+    # Round 2 gold additions
+    "2051387", "888283", "830598", "833248",
+    "2383948", "3036633", "2675124",
 }
 
-PREV_BATCH_DOTS = {
+BATCH01_DOTS = {
     "2898056","675795","539473","488677","1302916","1372987","3411477","3384102",
     "3105097","3933118","4021252","4080399","1528750","1732647","3496197","4076555",
     "611058","2933699","2069221","1810135","4512553","2041810","1788189","713937",
     "919057","987933","1181967","2719904","2615378","4046894",
 }
 
-# 3 mandated verification DOTs (kept even though 1074419 was not in prev batch)
-MANDATED = ["2051387", "888283", "1074419"]
+BATCH02_DOTS = {
+    "1074419","1017339","1083818","1258131","1346690","142781","1605056","194077",
+    "1982156","2175746","2292725","2322078","2456715","2647384","2846625","2959196",
+    "3049985","3061400","3150227","3672715","3917322","3990182","4307941","4434356",
+    "648040",
+}
 
-EXCLUDE = GOLD_DOTS | PREV_BATCH_DOTS | set(MANDATED)
+EXCLUDE = GOLD_DOTS | BATCH01_DOTS | BATCH02_DOTS
 
-W = 80
+N_TARGET = 30
 
 
 # ── Sampling ──────────────────────────────────────────────────────────────────
 
-def sample_27(conn) -> list[str]:
+def sample_30(conn) -> list[str]:
     ex = "(" + ",".join(f"'{d}'" for d in EXCLUDE) + ")"
     strata = [
-        # Active FOR_HIRE, small-medium fleet, no conflicts (baseline)
-        (7, f"""
+        # Active FOR_HIRE, small-medium fleet
+        (8, f"""
             SELECT dot_number FROM carriers
             WHERE status = 'ACTIVE'
               AND mc_number IS NOT NULL AND mc_number NOT IN ('MC','')
               AND total_trucks BETWEEN 3 AND 50
               AND total_drivers > 0
               AND dot_number NOT IN {ex}
-            ORDER BY RANDOM() LIMIT 18
+            ORDER BY RANDOM() LIMIT 20
         """),
         # Active FOR_HIRE, owner-op
-        (3, f"""
+        (4, f"""
             SELECT dot_number FROM carriers
             WHERE status = 'ACTIVE'
               AND mc_number IS NOT NULL AND mc_number NOT IN ('MC','')
               AND total_trucks BETWEEN 1 AND 2
               AND total_drivers BETWEEN 1 AND 2
               AND dot_number NOT IN {ex}
-            ORDER BY RANDOM() LIMIT 8
+            ORDER BY RANDOM() LIMIT 10
         """),
         # Revoked / lapsed (INACTIVE)
         (6, f"""
@@ -99,18 +99,18 @@ def sample_27(conn) -> list[str]:
             WHERE status = 'INACTIVE'
               AND mc_number IS NOT NULL AND mc_number NOT IN ('MC','')
               AND dot_number NOT IN {ex}
-            ORDER BY RANDOM() LIMIT 14
+            ORDER BY RANDOM() LIMIT 15
         """),
         # Private, no MC
-        (3, f"""
+        (4, f"""
             SELECT dot_number FROM carriers
             WHERE status = 'ACTIVE'
               AND (mc_number IS NULL OR mc_number IN ('MC',''))
               AND total_trucks > 0
               AND dot_number NOT IN {ex}
-            ORDER BY RANDOM() LIMIT 8
+            ORDER BY RANDOM() LIMIT 10
         """),
-        # Large fleet (>50 trucks) — likely to have validation_conflicts
+        # Large fleet (> 50 trucks)
         (3, f"""
             SELECT dot_number FROM carriers
             WHERE status = 'ACTIVE'
@@ -119,7 +119,7 @@ def sample_27(conn) -> list[str]:
               AND dot_number NOT IN {ex}
             ORDER BY RANDOM() LIMIT 8
         """),
-        # Fleet asymmetry (triggers validation_conflict)
+        # Fleet asymmetry (drivers=0 or trucks=0)
         (3, f"""
             SELECT dot_number FROM carriers
             WHERE (
@@ -129,7 +129,7 @@ def sample_27(conn) -> list[str]:
             AND dot_number NOT IN {ex}
             ORDER BY RANDOM() LIMIT 8
         """),
-        # Carriers with no SMS scores row (null SMS data)
+        # No SMS row
         (2, f"""
             SELECT c.dot_number FROM carriers c
             LEFT JOIN sms_scores s ON s.dot_number = c.dot_number
@@ -152,9 +152,8 @@ def sample_27(conn) -> list[str]:
         seen.update(chosen)
     cur.close()
 
-    # top up to 27 if any stratum ran short
-    if len(selected) < 27:
-        short = 27 - len(selected)
+    if len(selected) < N_TARGET:
+        short = N_TARGET - len(selected)
         cur = conn.cursor()
         ex2 = "(" + ",".join(f"'{d}'" for d in seen) + ")"
         cur.execute(f"""
@@ -163,15 +162,15 @@ def sample_27(conn) -> list[str]:
             ORDER BY RANDOM() LIMIT {short * 3}
         """)
         for (dot,) in cur.fetchall():
-            if dot not in seen and len(selected) < 27:
+            if dot not in seen and len(selected) < N_TARGET:
                 selected.append(dot)
                 seen.add(dot)
         cur.close()
 
-    return selected[:27]
+    return selected[:N_TARGET]
 
 
-# ── Report formatting (same template as _generate_audit_batch.py) ─────────────
+# ── Report formatting ─────────────────────────────────────────────────────────
 
 def fleet_bucket(pu: int) -> str:
     if pu == 0:   return "0 (unverified)"
@@ -184,25 +183,26 @@ def fleet_bucket(pu: int) -> str:
 
 def _display_sentinel(val: str) -> str:
     if val == "NOT_FOUND":
-        return "No record found in imported dataset — verify against SAFER before relying on this field"
+        return ("No record found in imported dataset — verify against SAFER "
+                "before relying on this field")
     return val
 
 
 def _display_authority_status(val: str) -> str:
     if val == "NOT_FOUND":
         return ("No active authority record found in imported dataset. "
-                "Possible causes: carrier never held authority, records not yet imported, "
-                "or docket number mismatch. Verify against SAFER/L&I.")
+                "Possible causes: carrier never held authority, records not yet "
+                "imported, or docket number mismatch. Verify against SAFER/L&I.")
     return val
 
 
-def format_report(facts, results, conflicts, dot, ts, tag="") -> str:
+def format_report(facts, results, conflicts, dot, ts) -> str:
     lines = []
     def p(s=""): lines.append(s)
 
     p("=" * W)
-    p(f"CARRIER INTELLIGENCE REPORT — FMCSA DATA")
-    p(f"Generated : {ts}  {tag}")
+    p("CARRIER INTELLIGENCE REPORT — FMCSA DATA")
+    p(f"Generated : {ts}")
     p(f"DOT       : {dot}")
     p("=" * W)
     p()
@@ -225,8 +225,10 @@ def format_report(facts, results, conflicts, dot, ts, tag="") -> str:
     p()
 
     auth_events = [r for r in facts._authority_records if r.get("status")]
-    alert_revocs = [a for a in facts._alerts
-                    if "INVOLUNTARY_REVOCATION" in (a.get("event_type") or "").upper()]
+    alert_revocs = [
+        a for a in facts._alerts
+        if "INVOLUNTARY_REVOCATION" in (a.get("event_type") or "").upper()
+    ]
     if auth_events or alert_revocs:
         p("── HISTORICAL AUTHORITY EVENTS " + "─" * (W - 30))
         for rec in auth_events:
@@ -235,10 +237,8 @@ def format_report(facts, results, conflicts, dot, ts, tag="") -> str:
             stat = rec.get("status") or "—"
             rsn  = rec.get("reason") or ""
             line = f"  {eff}  {stat}"
-            if revd:
-                line += f"  (resolved {revd})"
-            if rsn:
-                line += f"  [{rsn}]"
+            if revd: line += f"  (resolved {revd})"
+            if rsn:  line += f"  [{rsn}]"
             p(line)
         for alert in alert_revocs:
             edate = str(alert.get("event_date") or "—")[:10]
@@ -266,10 +266,12 @@ def format_report(facts, results, conflicts, dot, ts, tag="") -> str:
     p(f"  Crashes       : {facts.crash_count}  (historical total, all available records)")
     p(f"  Violations    : {facts.violation_count}  (historical total, all available records)")
     if facts.boc3_on_file == "YES":
-        p(f"  BOC-3 on File : YES")
+        p("  BOC-3 on File : YES")
     else:
-        p(f"  BOC-3 on File : BOC-3 status not verified from imported data — manual L&I/MOTUS verification required")
-    p(f"  SMS Data      : {'Present' if facts.sms_percentile_present else 'Not present in imported dataset'}")
+        p("  BOC-3 on File : BOC-3 status not verified from imported data "
+          "— manual L&I/MOTUS verification required")
+    p(f"  SMS Data      : "
+      f"{'Present' if facts.sms_percentile_present else 'Not present in imported dataset'}")
     p()
 
     p("── DATA CONFIDENCE " + "─" * (W - 19))
@@ -297,9 +299,10 @@ def format_report(facts, results, conflicts, dot, ts, tag="") -> str:
         for i, c in enumerate(conflicts, 1):
             p(f"  [{i}] Rule : {c['rule']}")
             p(f"      Fields: {', '.join(c['fields'])}")
-            wrapped = textwrap.fill(c["detail"], width=W - 12,
-                                    initial_indent="      Detail: ",
-                                    subsequent_indent="              ")
+            wrapped = textwrap.fill(
+                c["detail"], width=W - 12,
+                initial_indent="      Detail: ",
+                subsequent_indent="              ")
             p(wrapped)
     p()
 
@@ -307,75 +310,27 @@ def format_report(facts, results, conflicts, dot, ts, tag="") -> str:
     p("Data source: FMCSA MCMIS via Socrata open data (data.transportation.gov)")
     p("Pipeline  : carrier_facts.py + validation_rules.py (Carrier Check USA)")
     p("=" * W)
-
     return "\n".join(lines)
 
 
-# ── Verification checks ───────────────────────────────────────────────────────
-
-def verify_bug_fixes(dot: str, facts, results) -> dict:
-    """Return verification result dict for the 3 mandated DOTs."""
-    checks = {}
-
-    if dot in ("2051387", "888283"):
-        # Bug 1: must be PRIVATE, no FOR_HIRE_INTERSTATE
-        checks["carrier_type_is_PRIVATE"] = facts.carrier_type == "PRIVATE"
-        checks["authority_required_NO"]    = facts.authority_required == "NO"
-        checks["insurance_required_NO"]    = facts.insurance_required == "NO"
-        # Must not display a fabricated MC number as active (mc_number may exist in DB
-        # as an import artifact, but carrier_type must be PRIVATE regardless)
-        checks["no_FOR_HIRE_classification"] = facts.carrier_type != "FOR_HIRE_INTERSTATE"
-
-    if dot == "1074419":
-        # Bug 2: CONFIRMED_ACTIVE with revocation_date cleared to None
-        checks["authority_status_CONFIRMED_ACTIVE"] = facts.authority_status == "CONFIRMED_ACTIVE"
-        checks["revocation_date_is_None"]           = facts.authority_revocation_date is None
-        # Rule 01 must PASS (no active+revoked contradiction)
-        rule01 = next((r for r in results if r.rule_name == "authority_not_both_active_and_revoked"), None)
-        checks["rule_01_passes"]                    = rule01 is not None and rule01.passed
-
-    return checks
-
-
 # ── Main ──────────────────────────────────────────────────────────────────────
-
-def build_with_retry(conn, dot, max_tries=3):
-    for attempt in range(max_tries):
-        try:
-            return build_carrier_facts(conn, dot)
-        except Exception as e:
-            if attempt < max_tries - 1:
-                try: conn.close()
-                except: pass
-                conn = psycopg2.connect(DB_URL, connect_timeout=30)
-                conn.autocommit = True
-            else:
-                raise
-    return None
-
 
 def main():
     conn = psycopg2.connect(DB_URL, connect_timeout=30)
     conn.autocommit = True
 
-    print("Sampling 27 diversity DOTs...")
-    random_27 = sample_27(conn)
-    all_dots = MANDATED + random_27
-    print(f"  Total DOTs to process: {len(all_dots)}  "
-          f"(3 mandated + {len(random_27)} random)")
+    print(f"Sampling {N_TARGET} DOTs for batch 03...")
+    dots = sample_30(conn)
+    print(f"  Got {len(dots)} DOTs\n")
 
     ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     manifest_rows = []
     written = []
     failed  = []
-    verification_results = {}
 
-    for i, dot in enumerate(all_dots, 1):
-        is_mandated = dot in MANDATED
-        tag = "[VERIFICATION]" if is_mandated else ""
-        print(f"  [{i:02d}/30] DOT {dot} {tag}", end=" ... ", flush=True)
+    for i, dot in enumerate(dots, 1):
+        print(f"  [{i:02d}/{N_TARGET}] DOT {dot}", end=" ... ", flush=True)
 
-        # Reconnect every 10 carriers
         if i % 10 == 1 and i > 1:
             try: conn.close()
             except: pass
@@ -383,7 +338,7 @@ def main():
             conn.autocommit = True
 
         try:
-            facts = build_with_retry(conn, dot)
+            facts = build_carrier_facts(conn, dot)
             if facts.legal_name == NOT_FOUND:
                 print("NOT IN DB — skipped")
                 failed.append(dot)
@@ -392,35 +347,24 @@ def main():
             results, conflicts = run_validation_with_conflicts(facts)
             n_fail = sum(1 for r in results if not r.passed)
 
-            if is_mandated:
-                verification_results[dot] = {
-                    "legal_name": facts.legal_name,
-                    "checks": verify_bug_fixes(dot, facts, results),
-                    "carrier_type": facts.carrier_type,
-                    "authority_status": facts.authority_status,
-                    "authority_revocation_date": facts.authority_revocation_date,
-                    "mc_number": facts.mc_number,
-                }
-
-            report_text = format_report(facts, results, conflicts, dot, ts, tag)
+            report_text = format_report(facts, results, conflicts, dot, ts)
             out_path = OUTPUT_DIR / f"DOT_{dot}.txt"
             out_path.write_text(report_text, encoding="utf-8")
 
             manifest_rows.append({
-                "dot_number":            dot,
-                "legal_name":            facts.legal_name,
-                "carrier_type":          facts.carrier_type,
-                "usdot_status":          facts.usdot_status,
-                "authority_status":      facts.authority_status,
-                "fleet_power_units":     facts.fleet_power_units,
-                "fleet_drivers":         facts.fleet_drivers,
-                "fleet_bucket":          fleet_bucket(facts.fleet_power_units),
-                "inspection_count":      facts.inspection_count,
-                "sms_present":           facts.sms_percentile_present,
-                "validation_failures":   n_fail,
-                "has_conflicts":         "YES" if conflicts else "NO",
-                "conflict_rules":        "; ".join(c["rule"] for c in conflicts),
-                "is_verification_dot":   "YES" if is_mandated else "NO",
+                "dot_number":          dot,
+                "legal_name":          facts.legal_name,
+                "carrier_type":        facts.carrier_type,
+                "usdot_status":        facts.usdot_status,
+                "authority_status":    facts.authority_status,
+                "fleet_power_units":   facts.fleet_power_units,
+                "fleet_drivers":       facts.fleet_drivers,
+                "fleet_bucket":        fleet_bucket(facts.fleet_power_units),
+                "inspection_count":    facts.inspection_count,
+                "sms_present":         facts.sms_percentile_present,
+                "validation_failures": n_fail,
+                "has_conflicts":       "YES" if conflicts else "NO",
+                "conflict_rules":      "; ".join(c["rule"] for c in conflicts),
             })
             written.append(dot)
             status = (f"OK  ({n_fail} fail{'s' if n_fail != 1 else ''}, "
@@ -433,7 +377,6 @@ def main():
 
     conn.close()
 
-    # ── Manifest ──────────────────────────────────────────────────────────────
     manifest_path = OUTPUT_DIR / "manifest.csv"
     if manifest_rows:
         fieldnames = list(manifest_rows[0].keys())
@@ -441,50 +384,21 @@ def main():
             w = csv.DictWriter(f, fieldnames=fieldnames)
             w.writeheader()
             w.writerows(manifest_rows)
-        print(f"\nManifest written: {manifest_path.name}  ({len(manifest_rows)} rows)")
 
-    # ── Verification report ───────────────────────────────────────────────────
     print(f"\n{'=' * W}")
-    print("VERIFICATION RESULTS — 3 BUG-FIX DOTs")
-    print("=" * W)
-    all_checks_passed = True
-    for dot, vr in verification_results.items():
-        print(f"\nDOT {dot}  {vr['legal_name']}")
-        print(f"  carrier_type          : {vr['carrier_type']}")
-        print(f"  authority_status      : {vr['authority_status']}")
-        print(f"  authority_revoc_date  : {vr['authority_revocation_date']}")
-        print(f"  mc_number in DB       : {vr['mc_number']}")
-        for check, passed in vr["checks"].items():
-            icon = "PASS" if passed else "FAIL"
-            print(f"  [{icon}] {check}")
-            if not passed:
-                all_checks_passed = False
-
-    print()
-    if all_checks_passed and verification_results:
-        print("ALL VERIFICATION CHECKS PASSED — Bug 1 and Bug 2 fixes confirmed.")
-    else:
-        print("*** ONE OR MORE VERIFICATION CHECKS FAILED — review above ***")
-
-    # ── Summary ───────────────────────────────────────────────────────────────
-    with_conflicts = [r for r in manifest_rows if r["has_conflicts"] == "YES"]
-    print(f"\n{'=' * W}")
-    print("BATCH SUMMARY")
+    print("BATCH 03 SUMMARY")
     print(f"  Reports written : {len(written)}")
     print(f"  Failed / skipped: {len(failed)}")
+    with_conflicts = [r for r in manifest_rows if r["has_conflicts"] == "YES"]
     print(f"  With conflicts  : {len(with_conflicts)}")
     print(f"  Output folder   : {OUTPUT_DIR}")
     print("=" * W)
 
-    print("\nAll DOTs processed:")
+    print("\nAll DOTs:")
     for r in manifest_rows:
-        flag  = " [CONFLICT]"      if r["has_conflicts"] == "YES" else ""
-        vtag  = " [VERIFICATION]"  if r["is_verification_dot"] == "YES" else ""
-        print(f"  DOT {r['dot_number']:<10} {r['authority_status']:<25} "
-              f"fleet={r['fleet_power_units']:<5} {r['legal_name'][:35]}{flag}{vtag}")
-
-    if failed:
-        print(f"\nFailed / skipped: {', '.join(failed)}")
+        flag = " [CONFLICT]" if r["has_conflicts"] == "YES" else ""
+        print(f"  DOT {r['dot_number']:<10} {r['carrier_type']:<22} "
+              f"fleet={r['fleet_power_units']:<5} {r['legal_name'][:35]}{flag}")
 
 
 if __name__ == "__main__":

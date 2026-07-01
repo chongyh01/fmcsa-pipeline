@@ -1,0 +1,103 @@
+================================================================================
+CARRIER INTELLIGENCE REPORT — FMCSA DATA
+Generated : 2026-07-01 21:01:23
+DOT       : 3285049
+================================================================================
+
+── CARRIER IDENTITY ────────────────────────────────────────────────────────────
+  Legal Name    : CJ'S PRIORITY TRANSPORTS LLC
+  DOT Number    : 3285049
+  MC Number     : MC1039309
+  Carrier Type  : MIXED_OPERATION
+  USDOT Status  : INACTIVE
+
+── CURRENT AUTHORITY ───────────────────────────────────────────────────────────
+  Required      : YES
+  Status        : CONFIRMED_REVOKED
+  Revoc Date    : 2024-09-23
+  First Auth    : 2019-06-13
+  Active Period : 2019-06-13 to 2024-09-23 (5 yr)
+
+── HISTORICAL AUTHORITY EVENTS ──────────────────────────────────────────────────
+  2024-03-27  INVOLUNTARY REVOCATION  (resolved 2024-04-19)  [DISCONTINUED REVOCATION]
+  2022-10-13  INVOLUNTARY REVOCATION  (resolved 2022-11-08)  [DISCONTINUED REVOCATION]
+  2021-10-13  INVOLUNTARY REVOCATION  (resolved 2021-11-09)  [DISCONTINUED REVOCATION]
+  2020-11-17  REINSTATED  (resolved 2024-09-23)  [REVOKED]
+  2019-06-13  GRANTED  (resolved 2019-12-02)  [REVOKED]
+  2024-09-23  ALERT: INVOLUNTARY REVOCATION
+  2019-12-02  ALERT: INVOLUNTARY REVOCATION
+
+── INSURANCE ───────────────────────────────────────────────────────────────────
+  Required      : YES
+  Status        : CONFIRMED_LAPSED
+  Cancellation  : YES
+  Replacement   : NO
+
+── FLEET & OPERATIONS ──────────────────────────────────────────────────────────
+  Power Units   : 1  (1-2 (owner-op))
+  Drivers       : 1
+  Inspections   : 0  (historical total, all available records; deduped)
+  Crashes       : 0  (historical total, all available records)
+  Violations    : 0  (historical total, all available records)
+  BOC-3 on File : BOC-3 status not verified from imported data — manual L&I/MOTUS verification required
+  SMS Data      : Not present in imported dataset
+
+── DATA CONFIDENCE ─────────────────────────────────────────────────────────────
+  authority     : HIGH
+  insurance     : HIGH
+  fleet         : HIGH
+  identity      : HIGH
+
+── VALIDATION RULES ────────────────────────────────────────────────────────────
+  21/21 rules passed | 0 failed
+
+  [PASS] Rule 01 authority_not_both_active_and_revoked
+         N/A — authority is not CONFIRMED_ACTIVE
+  [PASS] Rule 02 private_no_authority_required
+         N/A — carrier_type=MIXED_OPERATION
+  [PASS] Rule 03 private_no_insurance_required
+         N/A — carrier_type=MIXED_OPERATION
+  [PASS] Rule 04 intrastate_not_rendered_as_revoked
+         N/A — carrier_type=MIXED_OPERATION
+  [PASS] Rule 05 no_sms_without_inspections
+         OK — inspection_count=0, no SMS — consistent
+  [PASS] Rule 06 lapsed_requires_explicit_cancellation
+         OK — cancellation confirmed by explicit record
+  [PASS] Rule 07 revoked_requires_revocation_event
+         OK — revocation_date=2024-09-23
+  [PASS] Rule 08 authority_status_is_valid_sentinel
+         OK — =CONFIRMED_REVOKED
+  [PASS] Rule 09 usdot_status_is_valid
+         OK — =INACTIVE
+  [PASS] Rule 10 no_mc_placeholder
+         OK — mc_number=MC1039309
+  [PASS] Rule 11 insurance_dates_internally_consistent
+         OK
+  [PASS] Rule 12 first_authority_date_not_future
+         OK — first_authority_date=2019-06-13
+  [PASS] Rule 13 accident_date_is_valid_past_date
+         N/A — no accident_date filter
+  [PASS] Rule 14 no_prohibited_wording_in_status_fields
+         OK
+  [PASS] Rule 15 no_overconfident_negative_from_empty_records
+         OK
+  [PASS] Rule 16 fleet_data_not_asymmetric
+         OK — power_units=1, drivers=1
+  [PASS] Rule 17 inspection_count_non_negative_int
+         OK — inspection_count=0
+  [PASS] Rule 18 data_confidence_keys_present
+         OK — {'insurance': 'HIGH', 'fleet': 'HIGH', 'identity': 'HIGH', 'authority': 'HIGH'}
+  [PASS] Rule 19 for_hire_has_mc_or_auth_evidence
+         OK — mc=MC1039309, auth_records=5
+  [PASS] Rule 20 accident_date_parseable_if_set
+         N/A — no accident_date set
+  [PASS] Rule 21 authorized_carrier_not_classified_private
+         N/A — authority_status=CONFIRMED_REVOKED
+
+── VALIDATION CONFLICTS ────────────────────────────────────────────────────────
+  None detected.
+
+================================================================================
+Data source: FMCSA MCMIS via Socrata open data (data.transportation.gov)
+Pipeline  : carrier_facts.py + validation_rules.py (Carrier Check USA)
+================================================================================

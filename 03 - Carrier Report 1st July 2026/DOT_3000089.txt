@@ -1,0 +1,110 @@
+================================================================================
+CARRIER INTELLIGENCE REPORT — FMCSA DATA
+Generated : 2026-07-01 21:01:23
+DOT       : 3000089
+================================================================================
+
+── CARRIER IDENTITY ────────────────────────────────────────────────────────────
+  Legal Name    : CAROLINA SOUTHERN LOGISTICS
+  DOT Number    : 3000089
+  MC Number     : MC023600
+  Carrier Type  : FOR_HIRE_INTERSTATE
+  USDOT Status  : INACTIVE
+
+── CURRENT AUTHORITY ───────────────────────────────────────────────────────────
+  Required      : YES
+  Status        : CONFIRMED_REVOKED
+  Revoc Date    : 2021-04-26
+  First Auth    : 2018-03-19
+  Active Period : 2018-03-19 to 2021-04-26 (3 yr)
+
+── HISTORICAL AUTHORITY EVENTS ──────────────────────────────────────────────────
+  2020-10-28  INVOLUNTARY REVOCATION  (resolved 2020-11-24)  [DISCONTINUED REVOCATION]
+  2020-10-08  REINSTATED  (resolved 2021-04-26)  [REVOKED]
+  2020-03-12  INVOLUNTARY REVOCATION  (resolved 2020-04-09)  [DISCONTINUED REVOCATION]
+  2019-11-29  INVOLUNTARY REVOCATION  (resolved 2019-12-24)  [DISCONTINUED REVOCATION]
+  2019-09-24  INVOLUNTARY REVOCATION  (resolved 2019-09-27)  [DISCONTINUED REVOCATION]
+  2019-09-03  INVOLUNTARY REVOCATION  (resolved 2019-08-30)  [DISCONTINUED REVOCATION]
+  2019-07-29  INVOLUNTARY REVOCATION  (resolved 2019-07-31)  [DISCONTINUED REVOCATION]
+  2019-05-23  REINSTATED  (resolved 2020-06-08)  [REVOKED]
+  2018-09-11  REINSTATED  (resolved 2019-01-02)  [REVOKED]
+  2018-03-19  GRANTED  (resolved 2018-05-30)  [REVOKED]
+  2021-04-26  ALERT: INVOLUNTARY REVOCATION
+  2020-06-08  ALERT: INVOLUNTARY REVOCATION
+  2019-01-02  ALERT: INVOLUNTARY REVOCATION
+  2018-05-30  ALERT: INVOLUNTARY REVOCATION
+
+── INSURANCE ───────────────────────────────────────────────────────────────────
+  Required      : YES
+  Status        : REQUIRES_VERIFICATION
+  Cancellation  : YES
+  Replacement   : YES
+
+── FLEET & OPERATIONS ──────────────────────────────────────────────────────────
+  Power Units   : 1  (1-2 (owner-op))
+  Drivers       : 2
+  Inspections   : 0  (historical total, all available records; deduped)
+  Crashes       : 0  (historical total, all available records)
+  Violations    : 0  (historical total, all available records)
+  BOC-3 on File : BOC-3 status not verified from imported data — manual L&I/MOTUS verification required
+  SMS Data      : Not present in imported dataset
+
+── DATA CONFIDENCE ─────────────────────────────────────────────────────────────
+  authority     : HIGH
+  insurance     : MEDIUM
+  fleet         : HIGH
+  identity      : HIGH
+
+── VALIDATION RULES ────────────────────────────────────────────────────────────
+  21/21 rules passed | 0 failed
+
+  [PASS] Rule 01 authority_not_both_active_and_revoked
+         N/A — authority is not CONFIRMED_ACTIVE
+  [PASS] Rule 02 private_no_authority_required
+         N/A — carrier_type=FOR_HIRE_INTERSTATE
+  [PASS] Rule 03 private_no_insurance_required
+         N/A — carrier_type=FOR_HIRE_INTERSTATE
+  [PASS] Rule 04 intrastate_not_rendered_as_revoked
+         N/A — carrier_type=FOR_HIRE_INTERSTATE
+  [PASS] Rule 05 no_sms_without_inspections
+         OK — inspection_count=0, no SMS — consistent
+  [PASS] Rule 06 lapsed_requires_explicit_cancellation
+         N/A — insurance_status=REQUIRES_VERIFICATION
+  [PASS] Rule 07 revoked_requires_revocation_event
+         OK — revocation_date=2021-04-26
+  [PASS] Rule 08 authority_status_is_valid_sentinel
+         OK — =CONFIRMED_REVOKED
+  [PASS] Rule 09 usdot_status_is_valid
+         OK — =INACTIVE
+  [PASS] Rule 10 no_mc_placeholder
+         OK — mc_number=MC023600
+  [PASS] Rule 11 insurance_dates_internally_consistent
+         OK
+  [PASS] Rule 12 first_authority_date_not_future
+         OK — first_authority_date=2018-03-19
+  [PASS] Rule 13 accident_date_is_valid_past_date
+         N/A — no accident_date filter
+  [PASS] Rule 14 no_prohibited_wording_in_status_fields
+         OK
+  [PASS] Rule 15 no_overconfident_negative_from_empty_records
+         OK
+  [PASS] Rule 16 fleet_data_not_asymmetric
+         OK — power_units=1, drivers=2
+  [PASS] Rule 17 inspection_count_non_negative_int
+         OK — inspection_count=0
+  [PASS] Rule 18 data_confidence_keys_present
+         OK — {'insurance': 'MEDIUM', 'fleet': 'HIGH', 'identity': 'HIGH', 'authority': 'HIGH'}
+  [PASS] Rule 19 for_hire_has_mc_or_auth_evidence
+         OK — mc=MC023600, auth_records=10
+  [PASS] Rule 20 accident_date_parseable_if_set
+         N/A — no accident_date set
+  [PASS] Rule 21 authorized_carrier_not_classified_private
+         N/A — authority_status=CONFIRMED_REVOKED
+
+── VALIDATION CONFLICTS ────────────────────────────────────────────────────────
+  None detected.
+
+================================================================================
+Data source: FMCSA MCMIS via Socrata open data (data.transportation.gov)
+Pipeline  : carrier_facts.py + validation_rules.py (Carrier Check USA)
+================================================================================

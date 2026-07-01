@@ -1,0 +1,112 @@
+================================================================================
+CARRIER INTELLIGENCE REPORT — FMCSA DATA
+Generated : 2026-07-01 21:01:23
+DOT       : 616218
+================================================================================
+
+── CARRIER IDENTITY ────────────────────────────────────────────────────────────
+  Legal Name    : HADWICK TRUCKING INC
+  DOT Number    : 616218
+  MC Number     : MC295969
+  Carrier Type  : MIXED_OPERATION
+  USDOT Status  : ACTIVE
+
+── CURRENT AUTHORITY ───────────────────────────────────────────────────────────
+  Required      : YES
+  Status        : CONFIRMED_ACTIVE
+  First Auth    : 1996-01-08
+  Active Period : 1996-01-08 to present (30 yr)
+
+── HISTORICAL AUTHORITY EVENTS ──────────────────────────────────────────────────
+  2013-08-12  INVOLUNTARY REVOCATION  (resolved 2013-09-09)  [DISCONTINUED REVOCATION]
+  2012-09-26  INVOLUNTARY REVOCATION  (resolved 2012-09-27)  [DISCONTINUED REVOCATION]
+  2012-08-13  INVOLUNTARY REVOCATION  (resolved 2012-09-10)  [DISCONTINUED REVOCATION]
+  2011-08-11  INVOLUNTARY REVOCATION  (resolved 2011-09-06)  [DISCONTINUED REVOCATION]
+  2005-11-22  INVOLUNTARY REVOCATION  (resolved 2005-12-20)  [DISCONTINUED REVOCATION]
+  2005-08-19  INVOLUNTARY REVOCATION  (resolved 2005-09-06)  [DISCONTINUED REVOCATION]
+  2005-02-03  REINSTATED
+  2000-09-28  INVOLUNTARY REVOCATION  (resolved 2000-10-18)  [DISCONTINUED REVOCATION]
+  1997-11-07  INVOLUNTARY REVOCATION  (resolved 1997-11-21)  [DISCONTINUED REVOCATION]
+  1996-01-08  GRANTED  (resolved 2005-01-25)  [REVOKED]
+  2005-01-25  ALERT: INVOLUNTARY REVOCATION
+
+── INSURANCE ───────────────────────────────────────────────────────────────────
+  Required      : YES
+  Status        : CONFIRMED_ACTIVE
+  Cancellation  : YES
+  Replacement   : YES
+
+── FLEET & OPERATIONS ──────────────────────────────────────────────────────────
+  Power Units   : 3  (3-10 (small))
+  Drivers       : 2
+  Inspections   : 8  (historical total, all available records; deduped)
+  Crashes       : 3  (historical total, all available records)
+  Violations    : 11  (historical total, all available records)
+  BOC-3 on File : BOC-3 status not verified from imported data — manual L&I/MOTUS verification required
+  SMS Data      : Not present in imported dataset
+
+── DATA CONFIDENCE ─────────────────────────────────────────────────────────────
+  authority     : HIGH
+  insurance     : HIGH
+  fleet         : HIGH
+  identity      : HIGH
+
+── VALIDATION RULES ────────────────────────────────────────────────────────────
+  20/21 rules passed | 1 failed
+
+  [PASS] Rule 01 authority_not_both_active_and_revoked
+         OK
+  [PASS] Rule 02 private_no_authority_required
+         N/A — carrier_type=MIXED_OPERATION
+  [PASS] Rule 03 private_no_insurance_required
+         N/A — carrier_type=MIXED_OPERATION
+  [PASS] Rule 04 intrastate_not_rendered_as_revoked
+         N/A — carrier_type=MIXED_OPERATION
+  [PASS] Rule 05 no_sms_without_inspections
+         N/A — inspection_count=8
+  [PASS] Rule 06 lapsed_requires_explicit_cancellation
+         N/A — insurance_status=CONFIRMED_ACTIVE
+  [PASS] Rule 07 revoked_requires_revocation_event
+         N/A — authority_status=CONFIRMED_ACTIVE
+  [PASS] Rule 08 authority_status_is_valid_sentinel
+         OK — =CONFIRMED_ACTIVE
+  [PASS] Rule 09 usdot_status_is_valid
+         OK — =ACTIVE
+  [PASS] Rule 10 no_mc_placeholder
+         OK — mc_number=MC295969
+  [FAIL] Rule 11 insurance_dates_internally_consistent
+         cancellation_date 2007-07-26 < effective_date 2007-07-27 for COUNTRY MUTUAL INSURANCE CO. — impossible
+  [PASS] Rule 12 first_authority_date_not_future
+         OK — first_authority_date=1996-01-08
+  [PASS] Rule 13 accident_date_is_valid_past_date
+         N/A — no accident_date filter
+  [PASS] Rule 14 no_prohibited_wording_in_status_fields
+         OK
+  [PASS] Rule 15 no_overconfident_negative_from_empty_records
+         OK
+  [PASS] Rule 16 fleet_data_not_asymmetric
+         OK — power_units=3, drivers=2
+  [PASS] Rule 17 inspection_count_non_negative_int
+         OK — inspection_count=8
+  [PASS] Rule 18 data_confidence_keys_present
+         OK — {'insurance': 'HIGH', 'fleet': 'HIGH', 'identity': 'HIGH', 'authority': 'HIGH'}
+  [PASS] Rule 19 for_hire_has_mc_or_auth_evidence
+         OK — mc=MC295969, auth_records=10
+  [PASS] Rule 20 accident_date_parseable_if_set
+         N/A — no accident_date set
+  [PASS] Rule 21 authorized_carrier_not_classified_private
+         OK — carrier_type=MIXED_OPERATION is consistent with CONFIRMED_ACTIVE authority
+
+── VALIDATION CONFLICTS ────────────────────────────────────────────────────────
+  1 conflict(s) found — manual SAFER verification recommended.
+
+  [1] Rule : insurance_dates_internally_consistent
+      Fields: insurance_status, _insurance_records
+      Detail: cancellation_date 2007-07-26 < effective_date
+              2007-07-27 for COUNTRY MUTUAL INSURANCE CO. —
+              impossible
+
+================================================================================
+Data source: FMCSA MCMIS via Socrata open data (data.transportation.gov)
+Pipeline  : carrier_facts.py + validation_rules.py (Carrier Check USA)
+================================================================================

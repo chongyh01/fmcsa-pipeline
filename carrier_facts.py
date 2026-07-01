@@ -25,13 +25,18 @@ NOT_FOUND             = "NOT_FOUND"
 REQUIRES_VERIFICATION = "REQUIRES_VERIFICATION"
 
 # carrier_type
-FOR_HIRE_INTERSTATE  = "FOR_HIRE_INTERSTATE"
-MIXED_OPERATION      = "MIXED_OPERATION"      # for-hire + private both present
-PRIVATE              = "PRIVATE"
-INTRASTATE           = "INTRASTATE"           # legacy; prefer INTRASTATE_ONLY for new carriers
-INTRASTATE_ONLY      = "INTRASTATE_ONLY"      # authorised for hire at state level, no federal MC
-PASSENGER            = "PASSENGER"
-UNKNOWN              = "UNKNOWN"
+FOR_HIRE_INTERSTATE              = "FOR_HIRE_INTERSTATE"
+MIXED_OPERATION                  = "MIXED_OPERATION"                   # for-hire + private, Interstate
+PRIVATE                          = "PRIVATE"
+INTRASTATE                       = "INTRASTATE"                        # legacy
+INTRASTATE_ONLY                  = "INTRASTATE_ONLY"                   # for-hire, state authority only, no federal MC
+PASSENGER                        = "PASSENGER"
+UNKNOWN                          = "UNKNOWN"
+# Round 3 — carrier_operation dimension (A=Interstate, B=Intrastate HM, C=Intrastate Non-HM)
+FOR_HIRE_INTRASTATE_ONLY         = "FOR_HIRE_INTRASTATE_ONLY"          # Auth For Hire + intrastate op
+EXEMPT_FOR_HIRE_INTRASTATE_ONLY  = "EXEMPT_FOR_HIRE_INTRASTATE_ONLY"   # Exempt For Hire + intrastate op
+PRIVATE_PROPERTY_INTRASTATE_HM   = "PRIVATE_PROPERTY_INTRASTATE_HM"    # Private + intrastate HM
+PRIVATE_PROPERTY_INTRASTATE_NON_HM = "PRIVATE_PROPERTY_INTRASTATE_NON_HM"  # Private + intrastate non-HM
 
 # authority_status / insurance_status
 CONFIRMED_ACTIVE  = "CONFIRMED_ACTIVE"
@@ -65,6 +70,8 @@ class CarrierFacts:
     insurance_replacement:    str             # YES | NO | NOT_FOUND | NOT_REQUIRED
     fleet_power_units:        int
     fleet_drivers:            int
+    fleet_non_cmv_units:      int             # non-commercial motor vehicles (cars/sedans) — separate from CMV trucks
+    has_passenger_cargo:      bool            # True if FMCSA census shows 'Passengers' in Cargo Carried
     inspection_count:         int             # deduped via DISTINCT ON (inspection_date, state, level)
     crash_count:              int
     violation_count:          int
@@ -102,37 +109,69 @@ def _fmt(d: Optional[date]) -> Optional[str]:
 
 def _infer_carrier_type(carrier: dict, authority_records: list) -> str:
     """
-    Infer carrier_type from cargo_type (multi-value), MC number, and authority records.
+    Infer carrier_type from cargo_type, carrier_operation, MC number, and authority records.
 
-    cargo_type is a semicolon-delimited field from the FMCSA carrier census — a carrier
-    may have multiple operation classifications simultaneously (e.g. both
-    "PRIVATE PROPERTY" and "AUTHORIZED FOR HIRE").  The old substring match on the
-    joined string incorrectly treated "PRIVATE PROPERTY;AUTHORIZED FOR HIRE" as PRIVATE.
+    carrier_operation (Round 3 field):
+      'A' = Interstate            — use existing interstate logic
+      'B' = Intrastate Only (HM)  — force intrastate classification regardless of MC
+      'C' = Intrastate Only (Non-HM) — same
+      None/'' = unknown           — fall back to existing logic (backward compatible)
 
-    Priority order:
-    1. PASSENGER signal in any cargo_type part → PASSENGER
-    2. PRIVATE + interstate for-hire (has_mc OR federal auth records) → MIXED_OPERATION
-    3. Interstate for-hire (no private) → FOR_HIRE_INTERSTATE
-    4. PRIVATE only (no for-hire flag, or for-hire flag but no MC/federal auth) → PRIVATE
-    5. FOR-HIRE flag present but NO MC and NO federal auth records → INTRASTATE_ONLY
-       (state-authorised carrier; no federal FMCSA docket number)
-    6. INTRASTATE flag in cargo → INTRASTATE_ONLY
-    7. MC number present with no cargo flag (data quality gap) → FOR_HIRE_INTERSTATE
-    8. Default → REQUIRES_VERIFICATION (genuinely unknown; never guess)
+    cargo_type is semicolon-delimited; must parse as a set of parts, never substring-match
+    the joined string (Round 2 fix: "PRIVATE PROPERTY;AUTHORIZED FOR HIRE" has both flags).
+
+    Priority when carrier_operation = B or C (intrastate):
+      1. PASSENGER → PASSENGER
+      2. EXEMPT FOR HIRE → EXEMPT_FOR_HIRE_INTRASTATE_ONLY
+      3. AUTHORIZED FOR HIRE → FOR_HIRE_INTRASTATE_ONLY
+      4. PRIVATE + HM  → PRIVATE_PROPERTY_INTRASTATE_HM
+      5. PRIVATE + Non-HM → PRIVATE_PROPERTY_INTRASTATE_NON_HM
+      6. → INTRASTATE_ONLY (fallback)
+
+    Priority when carrier_operation = A or NULL (interstate / unknown):
+      1. PASSENGER → PASSENGER
+      2. PRIVATE + interstate for-hire → MIXED_OPERATION
+      3. Interstate for-hire → FOR_HIRE_INTERSTATE
+      4. PRIVATE → PRIVATE
+      5. FOR-HIRE/EXEMPT (no federal evidence) → INTRASTATE_ONLY
+      6. INTRASTATE flag → INTRASTATE_ONLY
+      7. MC number only → FOR_HIRE_INTERSTATE
+      8. → REQUIRES_VERIFICATION
     """
     mc        = (carrier.get("mc_number") or "").strip()
     cargo_raw = (carrier.get("cargo_type") or "")
+    carrier_op = (carrier.get("carrier_operation") or "").strip().upper()
     parts     = {p.strip().upper() for p in cargo_raw.split(";") if p.strip()}
 
-    has_passenger  = any("PASSENGER" in p for p in parts)
-    has_for_hire   = any(
+    has_passenger       = any("PASSENGER" in p for p in parts)
+    has_for_hire        = any(
         "AUTHORIZED FOR HIRE" in p or "AUTH. FOR HIRE" in p or "AUTH FOR HIRE" in p
         for p in parts
     )
-    has_private    = any("PRIVATE" in p for p in parts)
-    has_intrastate = any("INTRASTATE" in p for p in parts)
-    has_mc         = bool(mc and mc != "MC" and len(mc) > 2)
+    has_exempt_for_hire = any("EXEMPT" in p and "HIRE" in p for p in parts)
+    has_private         = any("PRIVATE" in p for p in parts)
+    has_intrastate      = any("INTRASTATE" in p for p in parts)
+    has_mc              = bool(mc and mc != "MC" and len(mc) > 2)
 
+    is_intrastate_hm    = carrier_op == "B"
+    is_intrastate_nonhm = carrier_op == "C"
+    is_intrastate_op    = is_intrastate_hm or is_intrastate_nonhm
+
+    # When FMCSA carrier_operation explicitly designates intrastate, override all
+    # interstate signals (MC number, authority records) — the carrier's own MCS-150
+    # filing is authoritative about interstate vs. intrastate scope.
+    if is_intrastate_op:
+        if has_passenger:
+            return PASSENGER
+        if has_exempt_for_hire:
+            return EXEMPT_FOR_HIRE_INTRASTATE_ONLY
+        if has_for_hire:
+            return FOR_HIRE_INTRASTATE_ONLY
+        if has_private:
+            return PRIVATE_PROPERTY_INTRASTATE_HM if is_intrastate_hm else PRIVATE_PROPERTY_INTRASTATE_NON_HM
+        return INTRASTATE_ONLY
+
+    # Interstate or unknown carrier_operation — existing logic (backward compatible).
     # Federal authority evidence: any GRANTED or REINSTATED record (not DISCONTINUED).
     # authority_type is NULL in our import — use status field instead.
     has_federal_auth = any(
@@ -150,7 +189,6 @@ def _infer_carrier_type(carrier: dict, authority_records: list) -> str:
         return PASSENGER
 
     if has_private and is_interstate_fh:
-        # Both operation types present — carrier operates in both modes.
         return MIXED_OPERATION
 
     if is_interstate_fh:
@@ -162,9 +200,9 @@ def _infer_carrier_type(carrier: dict, authority_records: list) -> str:
         # artifact (TREDZ CENTRAL / PUBLIC SERVICE NC pattern).
         return PRIVATE
 
-    # For-hire flag present but no MC and no federal authority records
+    # For-hire (authorized or exempt) but no MC and no federal authority records
     # → operating under state authority only, not FMCSA interstate authority.
-    if has_for_hire:
+    if has_for_hire or has_exempt_for_hire:
         return INTRASTATE_ONLY
 
     if has_intrastate:
@@ -349,7 +387,8 @@ def build_carrier_facts(conn, dot_number: str, accident_date: Optional[str] = No
     cur.execute("""
         SELECT dot_number, mc_number, legal_name, status,
                total_drivers, total_trucks, cargo_type,
-               safety_rating, safety_rating_date
+               safety_rating, safety_rating_date,
+               carrier_operation, non_cmv_units, has_passenger_cargo
         FROM carriers WHERE dot_number = %s
     """, (dot_number,))
     row = cur.fetchone()
@@ -364,6 +403,7 @@ def build_carrier_facts(conn, dot_number: str, accident_date: Optional[str] = No
             active_authority_period=None, insurance_required=NOT_FOUND,
             insurance_status=NOT_FOUND, insurance_cancellation=NOT_FOUND,
             insurance_replacement=NOT_FOUND, fleet_power_units=0, fleet_drivers=0,
+            fleet_non_cmv_units=0, has_passenger_cargo=False,
             inspection_count=0, crash_count=0, violation_count=0,
             boc3_on_file=NOT_FOUND, sms_percentile_present=False,
             accident_date=accident_date,
@@ -372,7 +412,8 @@ def build_carrier_facts(conn, dot_number: str, accident_date: Optional[str] = No
 
     cols    = ["dot_number", "mc_number", "legal_name", "status",
                "total_drivers", "total_trucks", "cargo_type",
-               "safety_rating", "safety_rating_date"]
+               "safety_rating", "safety_rating_date",
+               "carrier_operation", "non_cmv_units", "has_passenger_cargo"]
     carrier = dict(zip(cols, row))
 
     # Sanitize MC number — "MC" placeholder (no numeric suffix) → None
@@ -451,20 +492,23 @@ def build_carrier_facts(conn, dot_number: str, accident_date: Optional[str] = No
     valid_statuses = {"ACTIVE", "INACTIVE", "NOT AUTHORIZED", "OUT-OF-SERVICE"}
     usdot_status = raw_status if raw_status in valid_statuses else NOT_FOUND
 
-    # Authority and insurance requirements
-    if carrier_type in (PRIVATE, INTRASTATE, INTRASTATE_ONLY):
-        # No federal FMCSA authority or insurance filing required.
-        # INTRASTATE_ONLY carriers operate under state authority — display the
-        # carrier type explicitly rather than implying no regulation applies.
+    # Authority and insurance requirements (federal FMCSA level)
+    # All intrastate types operate under state authority — no federal FMCSA filing required.
+    _NO_FEDERAL_FILING_TYPES = {
+        PRIVATE, INTRASTATE, INTRASTATE_ONLY,
+        FOR_HIRE_INTRASTATE_ONLY, EXEMPT_FOR_HIRE_INTRASTATE_ONLY,
+        PRIVATE_PROPERTY_INTRASTATE_HM, PRIVATE_PROPERTY_INTRASTATE_NON_HM,
+    }
+    if carrier_type in _NO_FEDERAL_FILING_TYPES:
         authority_required = "NO"
         insurance_required = "NO"
     elif carrier_type in (UNKNOWN, REQUIRES_VERIFICATION):
         authority_required = REQUIRES_VERIFICATION
         insurance_required = REQUIRES_VERIFICATION
     else:
-        # FOR_HIRE_INTERSTATE, MIXED_OPERATION, PASSENGER — all have for-hire exposure.
-        # MIXED_OPERATION must show authority/insurance status even though it also does
-        # private hauling; the for-hire portion triggers federal filing requirements.
+        # FOR_HIRE_INTERSTATE, MIXED_OPERATION, PASSENGER — all have for-hire interstate
+        # exposure. MIXED_OPERATION triggers federal filing requirements for the for-hire
+        # portion even though it also does private hauling.
         authority_required = "YES"
         insurance_required = "YES"
 
@@ -526,6 +570,8 @@ def build_carrier_facts(conn, dot_number: str, accident_date: Optional[str] = No
         insurance_replacement=ins_replace,
         fleet_power_units=carrier.get("total_trucks") or 0,
         fleet_drivers=carrier.get("total_drivers") or 0,
+        fleet_non_cmv_units=carrier.get("non_cmv_units") or 0,
+        has_passenger_cargo=bool(carrier.get("has_passenger_cargo")),
         inspection_count=inspection_count,
         crash_count=crash_count,
         violation_count=violation_count,

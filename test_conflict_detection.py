@@ -15,6 +15,8 @@ from carrier_facts import (
     CarrierFacts,
     NOT_FOUND, CONFIRMED_ACTIVE, CONFIRMED_REVOKED, NOT_REQUIRED,
     FOR_HIRE_INTERSTATE, MIXED_OPERATION, PRIVATE, INTRASTATE_ONLY,
+    FOR_HIRE_INTRASTATE_ONLY, EXEMPT_FOR_HIRE_INTRASTATE_ONLY,
+    PRIVATE_PROPERTY_INTRASTATE_HM, PRIVATE_PROPERTY_INTRASTATE_NON_HM,
 )
 from validation_rules import run_validation_with_conflicts
 
@@ -54,6 +56,8 @@ def base_facts(**overrides):
         insurance_replacement=NOT_REQUIRED,
         fleet_power_units=2,
         fleet_drivers=2,
+        fleet_non_cmv_units=0,
+        has_passenger_cargo=False,
         inspection_count=5,
         crash_count=0,
         violation_count=0,

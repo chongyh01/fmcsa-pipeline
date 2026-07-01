@@ -123,13 +123,18 @@ def rule_03_private_no_insurance_required(f) -> RuleResult:
 
 def rule_04_intrastate_not_rendered_as_revoked(f) -> RuleResult:
     """
-    INTRASTATE / INTRASTATE_ONLY carriers never held FMCSA interstate authority.
+    Intrastate carriers never held FMCSA interstate operating authority.
     Their authority_status must be NOT_REQUIRED — not CONFIRMED_REVOKED or
-    CONFIRMED_ACTIVE, which would falsely imply they had (and lost / hold)
-    federal authority.
+    CONFIRMED_ACTIVE, which would falsely imply federal authority was held.
+    Covers all intrastate types added in Rounds 2 and 3.
     """
     cf = _cf()
-    if f.carrier_type not in (cf.INTRASTATE, cf.INTRASTATE_ONLY):
+    _INTRASTATE_TYPES = {
+        cf.INTRASTATE, cf.INTRASTATE_ONLY,
+        cf.FOR_HIRE_INTRASTATE_ONLY, cf.EXEMPT_FOR_HIRE_INTRASTATE_ONLY,
+        cf.PRIVATE_PROPERTY_INTRASTATE_HM, cf.PRIVATE_PROPERTY_INTRASTATE_NON_HM,
+    }
+    if f.carrier_type not in _INTRASTATE_TYPES:
         return _na(4, "intrastate_not_rendered_as_revoked", f"carrier_type={f.carrier_type}")
     bad_statuses = {cf.CONFIRMED_REVOKED, cf.CONFIRMED_ACTIVE}
     if f.authority_status in bad_statuses:
@@ -415,7 +420,10 @@ def rule_21_authorized_carrier_not_classified_private(f) -> RuleResult:
     if f.authority_status != cf.CONFIRMED_ACTIVE:
         return _na(21, "authorized_carrier_not_classified_private",
                    f"authority_status={f.authority_status}")
-    bad_types = {cf.PRIVATE, cf.INTRASTATE_ONLY, cf.INTRASTATE}
+    bad_types = {
+        cf.PRIVATE, cf.INTRASTATE_ONLY, cf.INTRASTATE,
+        cf.PRIVATE_PROPERTY_INTRASTATE_HM, cf.PRIVATE_PROPERTY_INTRASTATE_NON_HM,
+    }
     if f.carrier_type in bad_types:
         return _fail(21, "authorized_carrier_not_classified_private",
                      f"authority_status=CONFIRMED_ACTIVE but carrier_type={f.carrier_type} "

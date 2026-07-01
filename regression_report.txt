@@ -1,6 +1,6 @@
 ================================================================================
-CARRIER FACTS REGRESSION SUITE — 2026-07-01 20:55:13
-Gold file: gold_carriers.json  |  Carriers: 15
+CARRIER FACTS REGRESSION SUITE — 2026-07-01 21:27:55
+Gold file: gold_carriers.json  |  Carriers: 23
 ================================================================================
 
 ────────────────────────────────────────────────────────────────────────────────
@@ -63,14 +63,48 @@ DOT 3036633  —  STEEL VALLEY CONTRACTORS LLC
 DOT 2675124  —  JAMES R PERRY
   IDENTICAL  (3 fields checked)
 
+────────────────────────────────────────────────────────────────────────────────
+DOT 1074419  —  LDI TRUCKING INC
+  [WARN] 1 validation rule(s) failed — see audit_8_dots.py for details
+  IDENTICAL  (3 fields checked)
+
+────────────────────────────────────────────────────────────────────────────────
+DOT 31047  —  NORMAN BROTHERS INC
+  IDENTICAL  (4 fields checked)
+
+────────────────────────────────────────────────────────────────────────────────
+DOT 810652  —  DAVID HYKE
+  IDENTICAL  (4 fields checked)
+
+────────────────────────────────────────────────────────────────────────────────
+DOT 973209  —  WEBB FARMS INC
+  IDENTICAL  (4 fields checked)
+
+────────────────────────────────────────────────────────────────────────────────
+DOT 4275752  —  VALLEY RIDGE LOGISTICS LLC
+  IDENTICAL  (4 fields checked)
+
+────────────────────────────────────────────────────────────────────────────────
+DOT 3128165  —  JR TRANSPORTATION JUST RITE LLC
+  [WARN] 1 validation rule(s) failed — see audit_8_dots.py for details
+  IDENTICAL  (3 fields checked)
+
+────────────────────────────────────────────────────────────────────────────────
+DOT 1864365  —  MOUNTAIN TOP LANDSCAPE COMPANY INC
+  IDENTICAL  (4 fields checked)
+
+────────────────────────────────────────────────────────────────────────────────
+DOT 2833702  —  MAR-JAC TRANSPORTATION LLC
+  IDENTICAL  (3 fields checked)
+
 ================================================================================
 REGRESSION SUMMARY
 ================================================================================
-  Carriers checked: 15
-  Identical:        15
+  Carriers checked: 23
+  Identical:        23
   Changed:          0
   Errors/not in DB: 0
-  Fields matched:   49/49 (100.0%)
+  Fields matched:   78/78 (100.0%)
 
   All gold fields matched. No regressions detected.
 ================================================================================

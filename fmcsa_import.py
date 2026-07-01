@@ -427,9 +427,16 @@ def load_carriers(df, conn):
             "zip":                sv(r.get("phy_zip")),
             "phone":              sv(r.get("phone") or r.get("telephone")),
             "total_drivers":      iv(r.get("total_drivers")),
-            # power_units = trucks in FMCSA census CSV (truck_units is a subset, use power_units)
-            "total_trucks":       iv(r.get("power_units") or r.get("truck_units")),
-            "cargo_type":         sv(r.get("classdef") or r.get("carrier_operation") or r.get("cargo_carried_id")),
+            # truck_units = CMV trucks only (Socrata field); power_units includes non-CMV
+            # power_units in Socrata = truck_units + total_cars; we store CMV count only
+            "total_trucks":       iv(r.get("truck_units") or 0),
+            "cargo_type":         sv(r.get("classdef") or r.get("cargo_carried_id")),
+            # carrier_operation: 'A'=Interstate, 'B'=Intrastate HM, 'C'=Intrastate Non-HM
+            "carrier_operation":  sv(r.get("carrier_operation")),
+            # non_cmv_units = total_cars (light vehicles registered but not CMV trucks)
+            "non_cmv_units":      iv(r.get("total_cars") or 0),
+            # has_passenger_cargo: 'X' in crgo_passengers field
+            "has_passenger_cargo": bool(sv(r.get("crgo_passengers"))),
             "status":             STATUS_CODE_MAP.get(status_raw, status_raw) if status_raw else None,
             "safety_rating":      sv(r.get("safety_rating")),
             "safety_rating_date": safe_date(r.get("safety_rating_date")),

@@ -1,4 +1,4 @@
-"""Regenerate 5 reports affected by Round 2 carrier-type fix."""
+"""Regenerate 7 reports for Round 3 DOTs (intrastate dimension + fleet fix)."""
 import os, sys, textwrap
 import psycopg2
 from pathlib import Path
@@ -19,7 +19,7 @@ if not DB_URL:
 OUTPUT_DIR = Path(__file__).parent / "02 - Carrier Report 1st July 2026"
 W = 80
 
-TARGETS = ["2383948", "3036633", "2675124", "2051387", "888283"]
+TARGETS = ["31047", "810652", "973209", "4275752", "3128165", "1864365", "2833702"]
 
 
 def fleet_bucket(pu):
@@ -168,7 +168,7 @@ def main():
     conn.autocommit = True
     ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-    print(f"\nRegenerating {len(TARGETS)} reports → {OUTPUT_DIR.name}/\n")
+    print(f"\nRegenerating {len(TARGETS)} Round 3 reports → {OUTPUT_DIR.name}/\n")
     for dot in TARGETS:
         print(f"  DOT {dot} ...", end=" ", flush=True)
         facts = build_carrier_facts(conn, dot)
@@ -177,11 +177,13 @@ def main():
             continue
         results, conflicts = run_validation_with_conflicts(facts)
         n_fail = sum(1 for r in results if not r.passed)
-        report_text = format_report(facts, results, conflicts, dot, ts, "[ROUND-2-FIX]")
+        report_text = format_report(facts, results, conflicts, dot, ts, "[ROUND-3-FIX]")
         out_path = OUTPUT_DIR / f"DOT_{dot}.txt"
         out_path.write_text(report_text, encoding="utf-8")
         print(f"OK  carrier_type={facts.carrier_type}  "
-              f"({n_fail} fail, {'CONFLICT' if conflicts else 'clean'})")
+              f"({n_fail} fail, {'CONFLICT' if conflicts else 'clean'})"
+              + (f"  non_cmv={facts.fleet_non_cmv_units}" if facts.fleet_non_cmv_units > 0 else "")
+              + ("  [PAX]" if facts.has_passenger_cargo else ""))
 
     conn.close()
     print("\nDone.")

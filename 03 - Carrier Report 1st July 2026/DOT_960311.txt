@@ -1,0 +1,98 @@
+================================================================================
+CARRIER INTELLIGENCE REPORT — FMCSA DATA
+Generated : 2026-07-01 21:01:23
+DOT       : 960311
+================================================================================
+
+── CARRIER IDENTITY ────────────────────────────────────────────────────────────
+  Legal Name    : TOUR PRINCE OF FLORIDA INC
+  DOT Number    : 960311
+  MC Number     : (none)
+  Carrier Type  : REQUIRES_VERIFICATION
+  USDOT Status  : ACTIVE
+
+── CURRENT AUTHORITY ───────────────────────────────────────────────────────────
+  Required      : REQUIRES_VERIFICATION
+  Status        : No active authority record found in imported dataset. Possible causes: carrier never held authority, records not yet imported, or docket number mismatch. Verify against SAFER/L&I.
+  First Auth    : —
+  Active Period : —
+
+── INSURANCE ───────────────────────────────────────────────────────────────────
+  Required      : REQUIRES_VERIFICATION
+  Status        : No record found in imported dataset — verify against SAFER before relying on this field
+  Cancellation  : NOT_FOUND
+  Replacement   : NOT_FOUND
+
+── FLEET & OPERATIONS ──────────────────────────────────────────────────────────
+  Power Units   : 0  (0 (unverified))
+  Drivers       : 3
+  Inspections   : 0  (historical total, all available records; deduped)
+  Crashes       : 0  (historical total, all available records)
+  Violations    : 0  (historical total, all available records)
+  BOC-3 on File : BOC-3 status not verified from imported data — manual L&I/MOTUS verification required
+  SMS Data      : Not present in imported dataset
+
+── DATA CONFIDENCE ─────────────────────────────────────────────────────────────
+  authority     : LOW
+  insurance     : LOW
+  fleet         : HIGH
+  identity      : HIGH
+
+── VALIDATION RULES ────────────────────────────────────────────────────────────
+  20/21 rules passed | 1 failed
+
+  [PASS] Rule 01 authority_not_both_active_and_revoked
+         N/A — authority is not CONFIRMED_ACTIVE
+  [PASS] Rule 02 private_no_authority_required
+         N/A — carrier_type=REQUIRES_VERIFICATION
+  [PASS] Rule 03 private_no_insurance_required
+         N/A — carrier_type=REQUIRES_VERIFICATION
+  [PASS] Rule 04 intrastate_not_rendered_as_revoked
+         N/A — carrier_type=REQUIRES_VERIFICATION
+  [PASS] Rule 05 no_sms_without_inspections
+         OK — inspection_count=0, no SMS — consistent
+  [PASS] Rule 06 lapsed_requires_explicit_cancellation
+         N/A — insurance_status=NOT_FOUND
+  [PASS] Rule 07 revoked_requires_revocation_event
+         N/A — authority_status=NOT_FOUND
+  [PASS] Rule 08 authority_status_is_valid_sentinel
+         OK — =NOT_FOUND
+  [PASS] Rule 09 usdot_status_is_valid
+         OK — =ACTIVE
+  [PASS] Rule 10 no_mc_placeholder
+         OK — mc_number=(none)
+  [PASS] Rule 11 insurance_dates_internally_consistent
+         N/A — insurance_status=NOT_FOUND
+  [PASS] Rule 12 first_authority_date_not_future
+         N/A — no first_authority_date
+  [PASS] Rule 13 accident_date_is_valid_past_date
+         N/A — no accident_date filter
+  [PASS] Rule 14 no_prohibited_wording_in_status_fields
+         OK
+  [PASS] Rule 15 no_overconfident_negative_from_empty_records
+         OK
+  [FAIL] Rule 16 fleet_data_not_asymmetric
+         fleet asymmetry: power_units=0, drivers=3 — one is 0 while the other is not (possible import gap)
+  [PASS] Rule 17 inspection_count_non_negative_int
+         OK — inspection_count=0
+  [PASS] Rule 18 data_confidence_keys_present
+         OK — {'insurance': 'LOW', 'fleet': 'HIGH', 'identity': 'HIGH', 'authority': 'LOW'}
+  [PASS] Rule 19 for_hire_has_mc_or_auth_evidence
+         N/A — carrier_type=REQUIRES_VERIFICATION
+  [PASS] Rule 20 accident_date_parseable_if_set
+         N/A — no accident_date set
+  [PASS] Rule 21 authorized_carrier_not_classified_private
+         N/A — authority_status=NOT_FOUND
+
+── VALIDATION CONFLICTS ────────────────────────────────────────────────────────
+  1 conflict(s) found — manual SAFER verification recommended.
+
+  [1] Rule : fleet_data_not_asymmetric
+      Fields: fleet_power_units, fleet_drivers
+      Detail: fleet asymmetry: power_units=0, drivers=3 — one is 0
+              while the other is not (possible import gap)
+
+================================================================================
+Data source: FMCSA MCMIS via Socrata open data (data.transportation.gov)
+Pipeline  : carrier_facts.py + validation_rules.py (Carrier Check USA)
+================================================================================

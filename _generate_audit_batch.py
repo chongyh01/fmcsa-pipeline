@@ -241,6 +241,12 @@ def format_report(facts, results, conflicts, stratum, dot, ts) -> str:
     # ── Fleet & operations ────────────────────────────────────────────────────
     p("── FLEET & OPERATIONS " + "─" * (W - 22))
     p(f"  Power Units   : {facts.fleet_power_units}  ({fleet_bucket(facts.fleet_power_units)})")
+    if facts.fleet_non_cmv_units > 0:
+        p(f"  Non-CMV Units : {facts.fleet_non_cmv_units}  (cars, light vehicles — not counted as CMV power units)")
+    if facts.has_passenger_cargo:
+        p("  [NOTICE] MCS-150 lists Passengers as cargo type. Verify passenger carrier"
+          " registration and insurance separately before relying on any 'not required'"
+          " statements in this report.")
     p(f"  Drivers       : {facts.fleet_drivers}")
     # Bug 3: explicitly label all counts as historical totals
     p(f"  Inspections   : {facts.inspection_count}  (historical total, all available records; deduped)")
