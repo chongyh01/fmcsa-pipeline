@@ -1,0 +1,192 @@
+==============================================================================================================
+SPOT CHECK REPORT — 2026-06-22 22:02:58
+Checking 10 carriers against SAFER + Socrata
+==============================================================================================================
+
+DOT 3776645 — VILLA BLANCA DISTRIBUTION
+  ────────────────────────────────────────────────────────────────────────────────────────────────────
+  [SAFER blocked] Manual URL: https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&query_type=queryCarrierSnapshot&query_param=USDOT&query_string=3776645
+  [vs Socrata — covers same MCMIS data as SAFER]
+  [vs Socrata]
+  ✓  Legal name                   DB=VILLA BLANCA DISTRIBUTION                  Socrata=VILLA BLANCA DISTRIBUTION
+  ✓  Status                       DB=ACTIVE                                     Socrata=A
+  ?  MC number                    DB=—                                          Socrata=—
+  ✓  Drivers                      DB=2                                          Socrata=2
+  ✓  Power units                  DB=1                                          Socrata=1
+  [Record counts: DB vs Socrata live]
+  ✓  Crashes                      DB=0                                          Socrata=0
+  ✓  Inspections                  DB=0                                          Socrata=0
+  ✓  Insurance hist               DB=0                                          Socrata=0
+  ✓  Auth history                 DB=0                                          Socrata=0
+  ────────────────────────────────────────────────────────────────────────────────────────────────────
+  RESULT: 8 passed  0 failed  1 unknown
+
+DOT 4199763 — BENNYPTOWING LLC
+  ────────────────────────────────────────────────────────────────────────────────────────────────────
+  [SAFER blocked] Manual URL: https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&query_type=queryCarrierSnapshot&query_param=USDOT&query_string=4199763
+  [vs Socrata — covers same MCMIS data as SAFER]
+  [vs Socrata]
+  ✓  Legal name                   DB=BENNYPTOWING LLC                           Socrata=BENNYPTOWING LLC
+  ✓  Status                       DB=ACTIVE                                     Socrata=A
+  ✓  MC number                    DB=MC1620005                                  Socrata=MC1620005
+  ✓  Drivers                      DB=3                                          Socrata=3
+  ✓  Power units                  DB=3                                          Socrata=3
+  [Record counts: DB vs Socrata live]
+  ✓  Crashes                      DB=0                                          Socrata=0
+  ✗  Inspections                  DB=8                                          Socrata=7
+  ✓  Insurance hist               DB=2                                          Socrata=2
+  ✓  Auth history                 DB=1                                          Socrata=1
+  ────────────────────────────────────────────────────────────────────────────────────────────────────
+  RESULT: 8 passed  1 failed  0 unknown
+
+DOT 1607520 — CRAM ROOFING COMPANY INC
+  ────────────────────────────────────────────────────────────────────────────────────────────────────
+  [SAFER blocked] Manual URL: https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&query_type=queryCarrierSnapshot&query_param=USDOT&query_string=1607520
+  [vs Socrata — covers same MCMIS data as SAFER]
+  [vs Socrata]
+  ✓  Legal name                   DB=CRAM ROOFING COMPANY INC                   Socrata=CRAM ROOFING COMPANY INC
+  ✓  Status                       DB=ACTIVE                                     Socrata=A
+  ?  MC number                    DB=—                                          Socrata=—
+  ✓  Drivers                      DB=2                                          Socrata=2
+  ✓  Power units                  DB=3                                          Socrata=3
+  [Record counts: DB vs Socrata live]
+  ✓  Crashes                      DB=1                                          Socrata=1
+  ✓  Inspections                  DB=2                                          Socrata=2
+  ✓  Insurance hist               DB=0                                          Socrata=0
+  ✓  Auth history                 DB=0                                          Socrata=0
+  ────────────────────────────────────────────────────────────────────────────────────────────────────
+  RESULT: 8 passed  0 failed  1 unknown
+
+DOT 2442130 — STEEL CITY METALS LLC
+  ────────────────────────────────────────────────────────────────────────────────────────────────────
+  [SAFER blocked] Manual URL: https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&query_type=queryCarrierSnapshot&query_param=USDOT&query_string=2442130
+  [vs Socrata — covers same MCMIS data as SAFER]
+  [vs Socrata]
+  ✓  Legal name                   DB=STEEL CITY METALS LLC                      Socrata=STEEL CITY METALS LLC
+  ✓  Status                       DB=ACTIVE                                     Socrata=A
+  ?  MC number                    DB=—                                          Socrata=—
+  ✓  Drivers                      DB=6                                          Socrata=6
+  ✓  Power units                  DB=3                                          Socrata=3
+  [Record counts: DB vs Socrata live]
+  ✗  Crashes                      DB=1                                          Socrata=2
+  ✗  Inspections                  DB=6                                          Socrata=5
+  ✓  Insurance hist               DB=0                                          Socrata=0
+  ✓  Auth history                 DB=0                                          Socrata=0
+  ────────────────────────────────────────────────────────────────────────────────────────────────────
+  RESULT: 6 passed  2 failed  1 unknown
+
+DOT 2880525 — RED WAGON, INC.
+  ────────────────────────────────────────────────────────────────────────────────────────────────────
+  [SAFER blocked] Manual URL: https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&query_type=queryCarrierSnapshot&query_param=USDOT&query_string=2880525
+  [vs Socrata — covers same MCMIS data as SAFER]
+  [vs Socrata]
+  ✓  Legal name                   DB=RED WAGON, INC.                            Socrata=RED WAGON, INC.
+  ✓  Status                       DB=ACTIVE                                     Socrata=A
+  ?  MC number                    DB=—                                          Socrata=—
+  ✓  Drivers                      DB=3                                          Socrata=3
+  ✓  Power units                  DB=1                                          Socrata=1
+  [Record counts: DB vs Socrata live]
+  ✓  Crashes                      DB=0                                          Socrata=0
+  ✓  Inspections                  DB=0                                          Socrata=0
+  ✓  Insurance hist               DB=0                                          Socrata=0
+  ✓  Auth history                 DB=0                                          Socrata=0
+  ────────────────────────────────────────────────────────────────────────────────────────────────────
+  RESULT: 8 passed  0 failed  1 unknown
+
+DOT 1049294 — KEVIN JONES
+  ────────────────────────────────────────────────────────────────────────────────────────────────────
+  [SAFER blocked] Manual URL: https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&query_type=queryCarrierSnapshot&query_param=USDOT&query_string=1049294
+  [vs Socrata — covers same MCMIS data as SAFER]
+  [vs Socrata]
+  ✓  Legal name                   DB=KEVIN JONES                                Socrata=KEVIN JONES
+  ✓  Status                       DB=ACTIVE                                     Socrata=A
+  ?  MC number                    DB=—                                          Socrata=—
+  ✓  Drivers                      DB=1                                          Socrata=1
+  ✓  Power units                  DB=1                                          Socrata=1
+  [Record counts: DB vs Socrata live]
+  ✓  Crashes                      DB=0                                          Socrata=0
+  ✓  Inspections                  DB=0                                          Socrata=0
+  ✓  Insurance hist               DB=0                                          Socrata=0
+  ✓  Auth history                 DB=0                                          Socrata=0
+  ────────────────────────────────────────────────────────────────────────────────────────────────────
+  RESULT: 8 passed  0 failed  1 unknown
+
+DOT 1779976 — DESAL EXCAVATING INC
+  ────────────────────────────────────────────────────────────────────────────────────────────────────
+  [SAFER blocked] Manual URL: https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&query_type=queryCarrierSnapshot&query_param=USDOT&query_string=1779976
+  [vs Socrata — covers same MCMIS data as SAFER]
+  [vs Socrata]
+  ✓  Legal name                   DB=DESAL EXCAVATING INC                       Socrata=DESAL EXCAVATING INC
+  ✓  Status                       DB=ACTIVE                                     Socrata=A
+  ?  MC number                    DB=—                                          Socrata=—
+  ✓  Drivers                      DB=8                                          Socrata=8
+  ✓  Power units                  DB=4                                          Socrata=4
+  [Record counts: DB vs Socrata live]
+  ✓  Crashes                      DB=1                                          Socrata=1
+  ✓  Inspections                  DB=0                                          Socrata=0
+  ✓  Insurance hist               DB=0                                          Socrata=0
+  ✓  Auth history                 DB=0                                          Socrata=0
+  ────────────────────────────────────────────────────────────────────────────────────────────────────
+  RESULT: 8 passed  0 failed  1 unknown
+
+DOT 3209003 — PEDRO ALVAREZ CAMPOS
+  ────────────────────────────────────────────────────────────────────────────────────────────────────
+  [SAFER blocked] Manual URL: https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&query_type=queryCarrierSnapshot&query_param=USDOT&query_string=3209003
+  [vs Socrata — covers same MCMIS data as SAFER]
+  [vs Socrata]
+  ✓  Legal name                   DB=PEDRO ALVAREZ CAMPOS                       Socrata=PEDRO ALVAREZ CAMPOS
+  ✓  Status                       DB=ACTIVE                                     Socrata=A
+  ?  MC number                    DB=—                                          Socrata=—
+  ✓  Drivers                      DB=1                                          Socrata=1
+  ✓  Power units                  DB=1                                          Socrata=1
+  [Record counts: DB vs Socrata live]
+  ✓  Crashes                      DB=0                                          Socrata=0
+  ✓  Inspections                  DB=0                                          Socrata=0
+  ✓  Insurance hist               DB=0                                          Socrata=0
+  ✓  Auth history                 DB=0                                          Socrata=0
+  ────────────────────────────────────────────────────────────────────────────────────────────────────
+  RESULT: 8 passed  0 failed  1 unknown
+
+DOT 3482119 — MILTON A RODRIGUEZ
+  ────────────────────────────────────────────────────────────────────────────────────────────────────
+  [SAFER blocked] Manual URL: https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&query_type=queryCarrierSnapshot&query_param=USDOT&query_string=3482119
+  [vs Socrata — covers same MCMIS data as SAFER]
+  [vs Socrata]
+  ✓  Legal name                   DB=MILTON A RODRIGUEZ                         Socrata=MILTON A RODRIGUEZ
+  ✓  Status                       DB=ACTIVE                                     Socrata=A
+  ?  MC number                    DB=—                                          Socrata=—
+  ✓  Drivers                      DB=2                                          Socrata=2
+  ✓  Power units                  DB=1                                          Socrata=1
+  [Record counts: DB vs Socrata live]
+  ✓  Crashes                      DB=0                                          Socrata=0
+  ✓  Inspections                  DB=0                                          Socrata=0
+  ✓  Insurance hist               DB=0                                          Socrata=0
+  ✓  Auth history                 DB=0                                          Socrata=0
+  ────────────────────────────────────────────────────────────────────────────────────────────────────
+  RESULT: 8 passed  0 failed  1 unknown
+
+DOT 1633717 — BRINDLEE MOUNTAIN BAPTIST CHURCH
+  ────────────────────────────────────────────────────────────────────────────────────────────────────
+  [SAFER blocked] Manual URL: https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&query_type=queryCarrierSnapshot&query_param=USDOT&query_string=1633717
+  [vs Socrata — covers same MCMIS data as SAFER]
+  [vs Socrata]
+  ✓  Legal name                   DB=BRINDLEE MOUNTAIN BAPTIST CHURCH           Socrata=BRINDLEE MOUNTAIN BAPTIST CHURCH
+  ✓  Status                       DB=ACTIVE                                     Socrata=A
+  ?  MC number                    DB=—                                          Socrata=—
+  ✓  Drivers                      DB=2                                          Socrata=2
+  ✓  Power units                  DB=1                                          Socrata=1
+  [Record counts: DB vs Socrata live]
+  ✓  Crashes                      DB=0                                          Socrata=0
+  ✓  Inspections                  DB=0                                          Socrata=0
+  ✓  Insurance hist               DB=0                                          Socrata=0
+  ✓  Auth history                 DB=0                                          Socrata=0
+  ────────────────────────────────────────────────────────────────────────────────────────────────────
+  RESULT: 8 passed  0 failed  1 unknown
+
+==============================================================================================================
+OVERALL: 78/81 fields matched (96.3%) | 3 mismatches | 9 unknown
+==============================================================================================================
+
+✓ = DB matches source   ✗ = mismatch   ? = one side missing/unavailable
+Unlinked record counts (inspections, crashes) may differ slightly if
+FMCSA has updated since our last import.

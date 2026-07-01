@@ -1,0 +1,64 @@
+================================================================================
+CARRIER FACTS REGRESSION SUITE — 2026-07-01 20:01:08
+Gold file: gold_carriers.json  |  Carriers: 12
+================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+DOT 204814  —  BINKS COCA COLA BOTTLING CO
+  IDENTICAL  (8 fields checked)
+
+────────────────────────────────────────────────────────────────────────────────
+DOT 3431540  —  YAFET TRUCKING LLC
+  IDENTICAL  (1 fields checked)
+
+────────────────────────────────────────────────────────────────────────────────
+DOT 3612954  —  AMPF LOGISTICS LLC
+  IDENTICAL  (1 fields checked)
+
+────────────────────────────────────────────────────────────────────────────────
+DOT 3841767  —  ABLE BODY LOGISTICS LLC
+  IDENTICAL  (1 fields checked)
+
+────────────────────────────────────────────────────────────────────────────────
+DOT 623336  —  CARBARB ENTERPRISES INC
+  IDENTICAL  (1 fields checked)
+
+────────────────────────────────────────────────────────────────────────────────
+DOT 3012101  —  XIANGFENG TRADING INC
+  IDENTICAL  (6 fields checked)
+
+────────────────────────────────────────────────────────────────────────────────
+DOT 1612145  —  J8 EQUIPMENT COMPANY INC
+  IDENTICAL  (6 fields checked)
+
+────────────────────────────────────────────────────────────────────────────────
+DOT 2308088  —  JEREMIAH BROOKS
+  IDENTICAL  (1 fields checked)
+
+────────────────────────────────────────────────────────────────────────────────
+DOT 2051387  —  TREDZ CENTRAL LLC
+  IDENTICAL  (4 fields checked)
+
+────────────────────────────────────────────────────────────────────────────────
+DOT 888283  —  PUBLIC SERVICE COMPANY OF NORTH CAROLINA INCORPORATED
+  IDENTICAL  (4 fields checked)
+
+────────────────────────────────────────────────────────────────────────────────
+DOT 830598  —  SURJIT S DHALIWAL
+  IDENTICAL  (3 fields checked)
+
+────────────────────────────────────────────────────────────────────────────────
+DOT 833248  —  JAVIER GONZALEZ
+  IDENTICAL  (3 fields checked)
+
+================================================================================
+REGRESSION SUMMARY
+================================================================================
+  Carriers checked: 12
+  Identical:        12
+  Changed:          0
+  Errors/not in DB: 0
+  Fields matched:   39/39 (100.0%)
+
+  All gold fields matched. No regressions detected.
+================================================================================

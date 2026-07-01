@@ -1,0 +1,141 @@
+AUTHORITY / INSURANCE STATUS VALIDATION REPORT
+Test date: 2026-06-22
+======================================================================
+
+--- ACTIVE AUTHORITY (should show ACTIVE on today's date) ---
+(Pick carriers that received GRANTED with no subsequent REVOKED)
+
+DOT          MC#            Auth Type                      Granted      Revoked      Name
+--------------------------------------------------------------------------------------------------------------
+3640999      MC1251127      —                              2021-06-21   —            MAVERICK FREIGHT BROKERS LLC
+82866        MC029910       —                              1979-06-20   —            ABF FREIGHT SYSTEM INC
+2862989      MC959641       —                              2016-03-30   —            THE CURTIS EMPIRE TRUCKING INC
+2928976      MC1084683      —                              2020-01-31   —            AYALA GROWER PRODUCE LLC
+76628        MC042866       —                              1982-06-25   —            NATIONAL VAN LINES INC
+4420870      MC1738062      —                              2025-08-06   —            BAY 1 TRANSPORT LLC
+2120928      MC739182       —                              2011-04-21   —            FATE TRUCKING INC
+3589355      MC1215196      —                              2021-04-12   —            ARC LOGISTICS LLC
+1379850      MC525727       —                              2005-06-17   —            C & A TRANSPORTATION & LOGISTICS INC
+2152141      MC748332       —                              2011-05-27   —            FORSTER FORWARDING LLC
+4435899      MC1746081      —                              2025-08-05   —            SEEK FAST TRANSPORTATION LLC
+943080       MX404703       —                              2003-07-17   —            JJHR SOLUCION EN TRANSPORTE SA DE CV
+1645981      MC606145       —                              2023-04-14   —            GRAND EXPRESS VAN LINES INC
+1787225      MC919391       —                              2015-06-17   —            CCA TRANSPORT LLC
+4391605      MC1722860      —                              2025-05-02   —            3 STRAND CORD TRANSFER LLC
+4173775      MC1605830      —                              2025-03-20   —            BISRAT LLC
+4420252      MC1737741      —                              2025-07-08   —            TYSON CARRIER INC
+3529993      MC1761800      —                              2025-10-07   —            PINE LINE XPRESS LLC
+4163320      MC1600208      —                              2024-03-27   —            IC TRUCKING LLC
+871714       MC1443680      —                              2022-08-24   —            MARIO'S TOWING LTD
+
+
+--- REVOKED AUTHORITY (should show INACTIVE/REVOKED on today's date) ---
+(Carriers with INVOLUNTARY REVOCATION and no later reinstatement)
+
+DOT          MC#            Auth Type                 Rev Date     Name
+------------------------------------------------------------------------------------------
+1662368      MC611302       —                         2009-01-07   LEO'S TRANSPORT INC
+153048       MC011663       —                         1996-03-24   INTERNATIONAL VAN LINES INC
+6066         MC112815       —                         2000-06-15   SARACCO TRUCKING CO INC
+50037        MC135118       —                         1995-08-15   MACKLIN MOVING & STORAGE
+2213105      MC181924       —                         1987-03-16   TRENTON DISTRIBUTION INC
+567369       MC282923       —                         1995-06-02   JACK D BROWN
+102558       MC002755       —                         1987-07-13   THOMAS WALSH MOVING & STORAGE INC
+66199        MC006934       —                         1991-03-28   SPAANS TRUCKING
+51027        MC059505       —                         1989-03-27   WARREN'S EXPRESS
+2586         MC091795       —                         1989-02-23   JOHN H KUHN
+105269       MC127631       —                         1989-05-16   HAWAIIAN VAN&STORAGE COMPANY LIMITE
+8298         MC136860       —                         1993-02-25   M C PARCEL DELIVERY INC
+127620       MC156844       —                         1990-09-06   BRENT DRAPER TRUCKING INC
+271377       MC180191       —                         1990-10-15   L K WALKER INC
+294814       MC196412       —                         1988-01-12   CENTURION EXHIBITS CONCEPTS CORP
+297750       MC202274       —                         1990-09-25   ONE-CALL DOES IT ALL TRANSPORTATION
+350853       MC218685       —                         1991-01-16   PAUL STEPP
+1452376      MC548876       —                         2007-12-26   GUILLEN LOGISTICS INC
+101187       MC59856        —                         1987-03-12   SALT CREEK FREIGHTWAYS
+76796        MC123272       —                         1995-08-19   FAST FREIGHT INC
+
+
+--- REINSTATED AUTHORITY (should show ACTIVE after reinstatement) ---
+
+DOT          MC#            Auth Type                 Reinst Date    Status                         Name
+-------------------------------------------------------------------------------------------------------------------
+100000       MC151598       —                         2005-12-14     REINSTATED                     HOW-DEA SERVICE CENTER INC
+1000000      MC1111926      —                         2025-08-05     REINSTATED                     JAMES EARL KILLINGSWORTH JR
+1000013      MC541036       —                         2013-02-13     REINSTATED                     ST LOUIS PARK TRANSPORTATION I
+1000051      MC428147       —                         2012-06-14     REINSTATED                     EXPRESS MOVERS INC
+1000067      MC424441       —                         2003-04-30     REINSTATED                     ROBERT W CLYMER
+1000068      MC423141       —                         2007-05-04     REINSTATED                     WALTER J STAMP
+1000084      MC541198       —                         2006-06-29     REINSTATED                     MAXWELL H DUCKETT JR
+1000087      MC423343       —                         2011-05-09     REINSTATED                     RIO VISTA HOMES INC
+1000090      MC426856       —                         2004-06-23     REINSTATED                     TRANSPORT M Y P INC
+1000091      MC490061       —                         2005-05-11     REINSTATED                     ALBERT LOVE JR
+1000093      MC422829       —                         2004-02-13     REINSTATED                     ALSEY & JUDY CHANDLER
+1000094      MC415727       —                         2005-03-03     REINSTATED                     GEORGE HALMON
+1000105      MC423287       —                         2006-01-09     REINSTATED                     RAUL GALVAN
+1000121      MC464958       —                         2006-01-09     REINSTATED                     SERVICE EXPRESS STEPHANE INC
+1000132      MC423805       —                         2009-09-28     REINSTATED                     DEWITT TRUCKING LLC
+1000133      MC425186       —                         2012-11-14     REINSTATED                     SONORA TRUCKING LLC
+1000142      MC34205        —                         2003-09-26     REINSTATED                     OFFERMAN VAN & STORAGE CO
+1000156      MC417483       —                         2022-04-12     REINSTATED                     9061-5477 QUEBEC INC
+1000162      MC423464       —                         2003-04-23     REINSTATED                     OCTAVIO TREJO HINOJOSA
+1000167      MC275226       —                         2008-10-01     REINSTATED                     LIBERTY THREE INC
+
+
+--- CANCELLED INSURANCE (most recent policy should be CANCELLED) ---
+
+DOT          MC#            Insurer                        Effective    Cancelled    Name
+--------------------------------------------------------------------------------------------------------------
+100          MC163248       THE GLENS FALLS INSURANCE CO.  1986-12-21   2004-09-27   COLUMBUS FOUNDRIES INC
+100000       MC151598       GREAT WEST CASUALTY CO.        1991-04-01   2013-10-17   HOW-DEA SERVICE CENTER INC
+1000000      MC1111926      PROGRESSIVE SPECIALTY INS. CO  2020-06-08   2025-06-16   JAMES EARL KILLINGSWORTH JR
+1000013      MC541036       AUTO OWNERS INSURANCE COMPANY  2019-03-22   2020-09-20   ST LOUIS PARK TRANSPORTATION INC
+1000018      MC424602       NORTHLAND INSURANCE COMPANY    2002-02-08   2005-08-15   KENNETH A SKULDT
+100002       MC146135       HANOVER INSURANCE CO.          2007-05-01   2007-12-07   HRIBAR BROS INC
+1000023      MC778925       ACUITY, A MUTUAL INSURANCE CO  2012-03-06   2022-05-16   RHINEHART CONSTRUCTION INC
+1000029      MC424853       AUTO OWNERS INSURANCE COMPANY  2014-04-01   2019-09-21   THREE T TRUCKING LLC
+1000032      MC426357       NATIONAL CASUALTY COMPANY      2002-08-23   2002-12-11   M N M TRUCKING INC
+1000034      MC422978       LINCOLN GENERAL INSURANCE COM  2003-12-11   2004-01-21   QUALITE & SERVICE LOGISTICK INC
+1000037      MC529536       ARGONAUT-MIDWEST INSURANCE CO  2010-04-18   2011-04-04   RIPS DELIVERY
+1000044      MC425922       HARTFORD FIRE INSURANCE COMPA  2005-09-08   2020-04-08   L & B TRANSFER INC
+1000047      MC423771       CANAL INSURANCE CO.            2002-05-31   2002-08-07   NP LOGISTIC INC
+1000051      MC428147       OOIDA RISK RETENTION GROUP, I  2013-06-06   2014-01-11   EXPRESS MOVERS INC
+1000052      MC424620       LEXINGTON INSURANCE COMPANY    2003-09-19   2004-09-19   PAT JOHNSON TRAVEL LLC
+1000057      MC421385       WILLIAMSBURG  NATIONAL INS CO  2009-06-13   2011-07-17   JOSE HUMBERTO LUNA OSUNA
+1000064      MC422888       CANAL INSURANCE CO.            2002-02-26   2003-02-26   KEN KELLEY
+1000066      MC589317       OCCIDENTAL FIRE AND CASUALTY   2025-12-09   2026-03-11   PPX LOGISTICS INC
+1000067      MC424441       PROGRESSIVE CASUALTY INSURANC  2007-01-16   2007-04-18   ROBERT W CLYMER
+1000068      MC423141       NORTHLAND INSURANCE COMPANY    2007-05-02   2008-01-07   WALTER J STAMP
+
+
+--- REPLACED INSURANCE (policy was replaced — successor should be active) ---
+
+DOT          MC#            Insurer                        Effective    Replaced     Name
+--------------------------------------------------------------------------------------------------------------
+100000       MC151598       GREAT WEST CASUALTY CO.        1991-04-01   2020-08-01   HOW-DEA SERVICE CENTER INC
+1000013      MC541036       AUTO OWNERS INSURANCE COMPANY  2013-02-12   2018-07-13   ST LOUIS PARK TRANSPORTATION INC
+100002       MC146135       ARCH INSURANCE COMPANY         2025-05-01   2026-05-01   HRIBAR BROS INC
+1000029      MC424853       AUTO OWNERS INSURANCE COMPANY  2014-04-02   2014-02-14   THREE T TRUCKING LLC
+1000032      MC426357       PROGRESSIVE CASUALTY INSURANC  2002-04-19   2002-08-23   M N M TRUCKING INC
+1000034      MC422978       LINCOLN GENERAL INSURANCE COM  2002-12-11   2003-12-11   QUALITE & SERVICE LOGISTICK INC
+1000037      MC529536       PROGRESSIVE CASUALTY INSURANC  2006-04-18   2010-04-18   RIPS DELIVERY
+1000044      MC425922       LINCOLN GENERAL INSURANCE COM  2006-09-08   2007-09-08   L & B TRANSFER INC
+1000051      MC428147       FEDERAL INSURANCE CO.          2006-05-10   2008-03-21   EXPRESS MOVERS INC
+1000062      MC1506511      PROGRESSIVE COUNTY MUTUAL      2023-01-04   2025-09-15   RICHARD ANTHONY HARMON
+1000066      MC589317       WILSHIRE INSURANCE COMPANY     2025-05-07   2025-08-03   PPX LOGISTICS INC
+1000067      MC424441       PROGRESSIVE NORTHERN INSURANC  2005-01-16   2007-01-16   ROBERT W CLYMER
+1000068      MC423141       THE INSURANCE CO OF THE STATE  2003-06-14   2004-06-14   WALTER J STAMP
+1000069      MC440624       AMERICAN ALTERNATIVE INSURANC  2023-02-28   2026-02-15   FEDERAL LOGISTICS INC
+1000070      MC504769       OAK RIVER INSURANCE COMPANY    2007-07-26   2007-07-26   TONIE DALE HELMIG
+1000073      MC425091       LINCOLN GENERAL INSURANCE COM  2002-02-04   2006-04-02   9102-5064 QUEBEC INC
+1000079      MC420456       NORTHBRIDGE GENERAL INSURANCE  2024-10-01   2025-10-01   TRANSPORT DERCY INC
+1000082      MC423429       OOIDA RISK RETENTION GROUP, I  2002-01-16   2006-04-11   JONATHON M LAYTART
+1000084      MC541198       PROGRESSIVE CASUALTY INSURANC  2005-12-07   2006-02-17   MAXWELL H DUCKETT JR
+1000087      MC423343       CAROLINA CASUALTY INSURANCE C  2002-04-17   2002-11-07   RIO VISTA HOMES INC
+
+======================================================================
+TO VALIDATE: Open FMCSA SAFER at https://safer.fmcsa.dot.gov/
+For each DOT number above, look up the carrier and verify:
+  Authority: does SAFER show the same active/revoked/reinstated status?
+  Insurance: does SAFER show the same cancelled/replaced/active status?
+======================================================================

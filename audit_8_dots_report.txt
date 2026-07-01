@@ -1,0 +1,255 @@
+================================================================================
+CARRIER FACTS + VALIDATION AUDIT — 2026-07-01 20:00:46
+Layers: 1 (carrier_facts.py)  +  2 (validation_rules.py)
+================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+DOT 204814  —  BINKS COCA COLA BOTTLING
+Note: 14 trucks/13 drivers — fleet should both be non-zero
+
+  [LAYER 1 — CARRIER_FACTS]
+  carrier_type               PRIVATE
+  usdot_status               ACTIVE
+  mc_number                  (none)
+  authority_required         NO
+  authority_status           NOT_REQUIRED
+  authority_revoc_date       —
+  first_authority_date       —
+  active_auth_period         —
+  insurance_required         NO
+  insurance_status           NOT_REQUIRED
+  insurance_cancellation     NOT_REQUIRED
+  insurance_replacement      NOT_REQUIRED
+  fleet_power_units          14
+  fleet_drivers              13
+  inspection_count           2 (deduped)
+  crash_count                2
+  violation_count            8
+  boc3_on_file               NO
+  sms_percentile             False
+  accident_date              (none)
+  data_confidence            {'authority': 'HIGH', 'insurance': 'HIGH', 'fleet': 'HIGH', 'identity': 'HIGH'}
+
+  [LAYER 2 — VALIDATION]  20/20 rules passed  ✓
+
+────────────────────────────────────────────────────────────────────────────────
+DOT 3431540  —  YAFET TRUCKING
+Note: inspection count: report said 12, SMS ~9 — verify dedup gives correct count
+
+  [LAYER 1 — CARRIER_FACTS]
+  carrier_type               FOR_HIRE_INTERSTATE
+  usdot_status               ACTIVE
+  mc_number                  MC1111962
+  authority_required         YES
+  authority_status           CONFIRMED_ACTIVE
+  authority_revoc_date       —
+  first_authority_date       2020-07-02
+  active_auth_period         2020-07-02 to present (6 yr)
+  insurance_required         YES
+  insurance_status           CONFIRMED_ACTIVE
+  insurance_cancellation     NO
+  insurance_replacement      NO
+  fleet_power_units          1
+  fleet_drivers              1
+  inspection_count           12 (deduped)
+  crash_count                0
+  violation_count            8
+  boc3_on_file               NO
+  sms_percentile             False
+  accident_date              (none)
+  data_confidence            {'authority': 'HIGH', 'insurance': 'HIGH', 'fleet': 'HIGH', 'identity': 'HIGH'}
+
+  [LAYER 2 — VALIDATION]  20/20 rules passed  ✓
+
+────────────────────────────────────────────────────────────────────────────────
+DOT 3612954  —  AMPF LOGISTICS
+Note: active vs revoked + no insurance contradiction — rules 1, 6, 7 must all pass
+
+  [LAYER 1 — CARRIER_FACTS]
+  carrier_type               FOR_HIRE_INTERSTATE
+  usdot_status               ACTIVE
+  mc_number                  MC1231283
+  authority_required         YES
+  authority_status           CONFIRMED_REVOKED
+  authority_revoc_date       2022-09-28
+  first_authority_date       2021-06-14
+  active_auth_period         2021-06-14 to 2022-09-28 (1 yr)
+  insurance_required         YES
+  insurance_status           CONFIRMED_LAPSED
+  insurance_cancellation     YES
+  insurance_replacement      NO
+  fleet_power_units          1
+  fleet_drivers              1
+  inspection_count           2 (deduped)
+  crash_count                0
+  violation_count            10
+  boc3_on_file               NO
+  sms_percentile             False
+  accident_date              (none)
+  data_confidence            {'authority': 'HIGH', 'insurance': 'HIGH', 'fleet': 'HIGH', 'identity': 'HIGH'}
+
+  [LAYER 2 — VALIDATION]  20/20 rules passed  ✓
+
+────────────────────────────────────────────────────────────────────────────────
+DOT 3841767  —  ABLE BODY LOGISTICS
+Note: summary inactive vs findings active — usdot_status must be consistent
+
+  [LAYER 1 — CARRIER_FACTS]
+  carrier_type               FOR_HIRE_INTERSTATE
+  usdot_status               INACTIVE
+  mc_number                  MC1397346
+  authority_required         YES
+  authority_status           REQUIRES_VERIFICATION
+  authority_revoc_date       —
+  first_authority_date       —
+  active_auth_period         —
+  insurance_required         YES
+  insurance_status           NOT_FOUND
+  insurance_cancellation     NOT_FOUND
+  insurance_replacement      NOT_FOUND
+  fleet_power_units          1
+  fleet_drivers              1
+  inspection_count           0 (deduped)
+  crash_count                0
+  violation_count            0
+  boc3_on_file               NO
+  sms_percentile             False
+  accident_date              (none)
+  data_confidence            {'authority': 'MEDIUM', 'insurance': 'LOW', 'fleet': 'HIGH', 'identity': 'HIGH'}
+
+  [LAYER 2 — VALIDATION]  20/20 rules passed  ✓
+
+────────────────────────────────────────────────────────────────────────────────
+DOT 623336  —  CARBARB ENTERPRISES
+Note: revoked vs active conflict — rules 1 and 7 must catch contradiction if present
+
+  [LAYER 1 — CARRIER_FACTS]
+  carrier_type               FOR_HIRE_INTERSTATE
+  usdot_status               INACTIVE
+  mc_number                  MC297804
+  authority_required         YES
+  authority_status           CONFIRMED_REVOKED
+  authority_revoc_date       1998-03-18
+  first_authority_date       1996-01-10
+  active_auth_period         1996-01-10 to 1998-03-18 (2 yr)
+  insurance_required         YES
+  insurance_status           REQUIRES_VERIFICATION
+  insurance_cancellation     YES
+  insurance_replacement      YES
+  fleet_power_units          2
+  fleet_drivers              2
+  inspection_count           0 (deduped)
+  crash_count                0
+  violation_count            0
+  boc3_on_file               NO
+  sms_percentile             False
+  accident_date              (none)
+  data_confidence            {'authority': 'HIGH', 'insurance': 'MEDIUM', 'fleet': 'HIGH', 'identity': 'HIGH'}
+
+  [LAYER 2 — VALIDATION]  20/20 rules passed  ✓
+
+────────────────────────────────────────────────────────────────────────────────
+DOT 3012101  —  XIANGFENG TRADING
+Note: private, 1/1 — must classify as PRIVATE, not FOR_HIRE_INTERSTATE (rules 2, 3)
+
+  [LAYER 1 — CARRIER_FACTS]
+  carrier_type               PRIVATE
+  usdot_status               ACTIVE
+  mc_number                  (none)
+  authority_required         NO
+  authority_status           NOT_REQUIRED
+  authority_revoc_date       —
+  first_authority_date       —
+  active_auth_period         —
+  insurance_required         NO
+  insurance_status           NOT_REQUIRED
+  insurance_cancellation     NOT_REQUIRED
+  insurance_replacement      NOT_REQUIRED
+  fleet_power_units          1
+  fleet_drivers              1
+  inspection_count           5 (deduped)
+  crash_count                0
+  violation_count            14
+  boc3_on_file               NO
+  sms_percentile             False
+  accident_date              (none)
+  data_confidence            {'authority': 'HIGH', 'insurance': 'HIGH', 'fleet': 'HIGH', 'identity': 'HIGH'}
+
+  [LAYER 2 — VALIDATION]  20/20 rules passed  ✓
+
+────────────────────────────────────────────────────────────────────────────────
+DOT 1612145  —  J8 EQUIPMENT
+Note: private property 1/1 — same as above, rules 2 and 3
+
+  [LAYER 1 — CARRIER_FACTS]
+  carrier_type               PRIVATE
+  usdot_status               ACTIVE
+  mc_number                  (none)
+  authority_required         NO
+  authority_status           NOT_REQUIRED
+  authority_revoc_date       —
+  first_authority_date       —
+  active_auth_period         —
+  insurance_required         NO
+  insurance_status           NOT_REQUIRED
+  insurance_cancellation     NOT_REQUIRED
+  insurance_replacement      NOT_REQUIRED
+  fleet_power_units          1
+  fleet_drivers              1
+  inspection_count           0 (deduped)
+  crash_count                0
+  violation_count            0
+  boc3_on_file               NO
+  sms_percentile             False
+  accident_date              (none)
+  data_confidence            {'authority': 'HIGH', 'insurance': 'HIGH', 'fleet': 'HIGH', 'identity': 'HIGH'}
+
+  [LAYER 2 — VALIDATION]  20/20 rules passed  ✓
+
+────────────────────────────────────────────────────────────────────────────────
+DOT 2308088  —  JEREMIAH BROOKS
+Note: for-hire wording vs service/intrastate — carrier_type must match evidence (rule 19)
+
+  [LAYER 1 — CARRIER_FACTS]
+  carrier_type               PRIVATE
+  usdot_status               ACTIVE
+  mc_number                  (none)
+  authority_required         NO
+  authority_status           NOT_REQUIRED
+  authority_revoc_date       —
+  first_authority_date       —
+  active_auth_period         —
+  insurance_required         NO
+  insurance_status           NOT_REQUIRED
+  insurance_cancellation     NOT_REQUIRED
+  insurance_replacement      NOT_REQUIRED
+  fleet_power_units          1
+  fleet_drivers              1
+  inspection_count           0 (deduped)
+  crash_count                0
+  violation_count            0
+  boc3_on_file               NO
+  sms_percentile             False
+  accident_date              (none)
+  data_confidence            {'authority': 'HIGH', 'insurance': 'HIGH', 'fleet': 'HIGH', 'identity': 'HIGH'}
+
+  [LAYER 2 — VALIDATION]  20/20 rules passed  ✓
+
+================================================================================
+SUMMARY
+================================================================================
+  DOT         Pass  Fail  Status         Name
+  --------------------------------------------------------------------------------
+  204814        20     0  OK             BINKS COCA COLA BOTTLING
+  3431540       20     0  OK             YAFET TRUCKING
+  3612954       20     0  OK             AMPF LOGISTICS
+  3841767       20     0  OK             ABLE BODY LOGISTICS
+  623336        20     0  OK             CARBARB ENTERPRISES
+  3012101       20     0  OK             XIANGFENG TRADING
+  1612145       20     0  OK             J8 EQUIPMENT
+  2308088       20     0  OK             JEREMIAH BROOKS
+
+  Total: 160/160 rules passed (100.0%) | 0 failures
+================================================================================
+PASS = all 20 rules green  |  FAIL = one or more rules failed
+N/A rules count as PASS (rule does not apply to this carrier type)

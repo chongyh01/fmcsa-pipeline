@@ -1,0 +1,4240 @@
+--- PAGE 1 ---
+MCMIS Vehicle Inspection Data Set Dictionary
+VEHICLE INSPECTION FILE TABLE
+Order Data Element 
+Appears in New File New Field(s) Old Field(s) Data Element Length Type Contents
+1 CHANGE_DATE DATE & TIME RECORD WAS LAST 
+UPDATED
+13 N YYYYMMDD HHMM 
+(MILITARY TIME)
+2 INSPECTION_ID INSPECTION_ID INSPECTION ID 8 N
+3 DOT_NUMBER DOT_NUMBER USDOT NUMBER 8 N
+4 REPORT_STATE REPORT_STATE REPORT STATE 2 A/N See State Abbreviations
+5 REPORT_NUMBER REPORT_NUMBER REPORT NUMBER 10 A/N SS######## where SS is 
+State code or US for Federal 
+Inspections.
+6 INSP_DATE INSP_DATE INSPECTION DATE 8 A/N YYYYMMDD
+7 INSP_START_TIME INSP_START_TIME START TIME 4 A/N Military HHMM
+8 INSP_END_TIME INSP_END_TIME END TIME 4 A/N Military HHMM
+9 REGISTRATION_DATE REGISTRATION_DATE REGISTRATION DATE 8 A/N YYYYMMDD
+10REGION REGION REGION 2 A/N 1,3-10
+11CI_STATUS_CODE CI_STATUS_CODE STATUS CODE 1 A/N U, T, C, D, N, H, I, P, or X
+12LOCATION LOCATION LOCATION 6 A/N 1-5, 9  
+13LOCATION_DESC LOCATION_DESC LOCATION DESCRIPTION 30 A/N
+14COUNTY_CODE_STATE COUNTY_CODE_STATE COUNTY CODE STATE 2 A/N See State Abbreviations
+15COUNTY_CODE COUNTY_CODE COUNTY CODE 3 A/N See County Codes
+16INSP_LEVEL_ID INSP_LEVEL_ID INSPECTION LEVEL ID 8 N 1, 2, 3, 4, 5, or 99
+17SERVICE_CENTER SERVICE_CENTER SERVICE CENTER 2 A/N
+18CENSUS_SOURCE_ID CENSUS_SOURCE_ID CENSUS SOURCE ID 8 N 1, 2, 3, 4, or 5
+19INSP_FACILITY INSP_FACILITY INSPECTION FACILITY 1 A/N F, R, Null
+20SHIPPER_NAME SHIPPER_NAME SHIPPER NAME 120 A/N
+21SHIPPING_PAPER_NUMBER SHIPPING_PAPER_NUMBER SHIPPING PAPER NUMBER 15 A/N
+22CARGO_TANK CARGO_TANK CARGO TANK 3 A/N
+23HAZMAT_PLACARD_REQ HAZMAT_PLACARD_REQ HAZMAT PLACARD REQUIRED 1 A/N Y, N, Null
+24SNET_VERSION_NUMBER SAFETYNET VERSION NUMBER 7 A/N #.#.#.#
+25SNET_SEARCH_DATE SAFETYNET SEARCH DATE 13 N YYYYMMDD HHMM 
+(MILITARY TIME)
+26ALCOHOL_CONTROL_SUB ALCOHOL_CONTROL_SUB ALCOHOL/CONTROLLED 
+SUBSTANCE CHECK
+1 A/N Y, N, U, Null
+27DRUG_INTRDCTN_SEARCH DRUG_INTRDCTN_SEARCH DRUG INTERDICTION SEARCH 1 A/N Y, N, U, Null
+28DRUG_INTRDCTN_ARRESTS DRUG_INTRDCTN_ARRESTS DRUG INTERDICTION ARREST 2 N
+29SIZE_WEIGHT_ENF SIZE_WEIGHT_ENF SIZE WEIGHT ENFORCEMENT 1 A/N Y, N, U, Null
+30TRAFFIC_ENF TRAFFIC_ENF TRAFFIC ENFORCEMENT 1 A/N Y, N, U, Null
+31LOCAL_ENF_JURISDICTION LOCAL_ENF_JURISDICTION LOCAL ENFORCEMENT 
+JURISDICTION
+1 A/N Y, N, U, Null
+32PEN_CEN_MATCH PEN_CEN_MATCH PEN CEN MATCH 1 A/N B, I, N, P, Q, Y, or Null
+33FINAL_STATUS_DATE FINAL_STATUS_DATE FINAL STATUS DATE 13 N YYYYMMDD HHMM 
+(MILITARY TIME)
+34POST_ACC_IND POST_ACC_IND POST ACCIDENT INDICATOR 1 A/N Y, N, Null
+35GROSS_COMB_VEH_WT GROSS_COMB_VEH_WT GROSS COMBINED VEHICLE 
+WEIGHT
+6 A/N
+36VIOL_TOTAL VIOL_TOTAL TOTAL VIOLATIONS 3 N
+37OOS_TOTAL OOS_TOTAL TOTAL OUT-OF-SERVICE 
+VIOLATIONS
+3 N
+38DRIVER_VIOL_TOTAL DRIVER_VIOL_TOTAL TOTAL DRIVER VIOLATIONS 3 N
+39DRIVER_OOS_TOTAL DRIVER_OOS_TOTAL TOTAL DRIVER OUT-OF-SERVICE3 N
+40VEHICLE_VIOL_TOTAL VEHICLE_VIOL_TOTAL TOTAL VEHICLE VIOLATIONS 3 N
+41VEHICLE_OOS_TOTAL VEHICLE_OOS_TOTAL TOTAL VEHICLE OUT-OF-SERVICE 3 N
+42HAZMAT_VIOL_TOTAL HAZMAT_VIOL_TOTAL HAZMAT VIOLATIONS TOTAL 3 N
+43HAZMAT_OOS_TOTAL HAZMAT_OOS_TOTAL HAZMAT OUT-OF-SERVICE 
+TOTAL
+3 N
+44SNET_SEQUENCE_ID SNET_SEQUENCE_ID SAFETYNET SEQUENCE ID 10 N
+45TRANSACTION_CODE TRANSACTION_CODE TRANSACTION CODE 1 A/N A, C, Null
+46TRANSACTION_DATE TRANSACTION_DATE TRANSACTION DATE 13 N YYYYMMDD HHMM 
+(MILITARY TIME)
+47UPLOAD_DATE UPLOAD_DATE UPLOAD DATE 13 N YYYYMMDD HHMM 
+(MILITARY TIME)
+48UPLOAD_FIRST_BYTE UPLOAD_FIRST_BYTE UPLOAD CENSUS FIRST BYTE 1 A/N
+49UPLOAD_DOT_NUMBER UPLOAD_DOT_NUMBER UPLOAD CENSUS NUMBER 8 A/N
+50UPLOAD_SEARCH_INDICATOR UPLOAD_SEARCH_INDICATOR UPLOAD SEARCH INDICATOR 1 A/N M, Null
+51CENSUS_SEARCH_DATE CENSUS_SEARCH_DATE CENSUS SEARCH DATE 13 N YYYYMMDD HHMM 
+(MILITARY TIME)
+52SNET_INPUT_DATE SNET_INPUT_DATE SAFETYNET INPUT DATE 13 N YYYYMMDD HHMM 
+(MILITARY TIME)
+53SOURCE_OFFICE SOURCE_OFFICE SOURCE OFFICE 7 A/N
+54MCMIS_ADD_DATE MCMIS_ADD_DATE MCMIS ADD DATE 13 N YYYYMMDD HHMM 
+(MILITARY TIME)
+55INSP_CARRIER_NAME INSP_CARRIER_NAME (From Carrier Table) CARRIER NAME 120 A/N
+56INSP_CARRIER_STREET INSP_CARRIER_STREET (From Carrier Table) CARRIER STREET 50 A/N
+57INSP_CARRIER_CITY INSP_CARRIER_CITY  (From Carrier Table) CARRIER CITY 25 A/N
+58INSP_CARRIER_STATE INSP_CARRIER_STATE (From Carrier Table) CARRIER STATE 2 A/N See State Abbreviations
+59INSP_CARRIER_ZIP_CODE INSP_CARRIER_ZIP_CODE (From Carrier Table)CARRIER ZIP 10 A/N
+60INSP_COLONIA INSP_COLONIA (From Carrier Table) COLONIA 25 A/N
+61DOCKET_NUMBER DOCKET_NUMBER (From Carrier Table) DOCKET NUMBER 8 N
+62INSP_INTERSTATE INSP_INTERSTATE (From Carrier Table) INTERSTATE 1 A/N Y, N, Null
+63INSP_CARRIER_STATE_ID INSP_CARRIER_STATE_ID (From Carrier Table)CARRIER STATE ID 12 A/N
+Removed from old Inspection Table INSP_CONFIDENCE_LEVEL INSPECTOR CONFIDENCE LEVEL1 A/N
+Removed from old Inspection Table PENFIELD2 PEN FIELD 2 1 A/N 0, or Null
+Removed from old Inspection Table PENFIELD3 PEN FIELD 3 1 A/N 0-9, E, N, or Null
+Removed from old Inspection Table DEFECT_VER DEFECT VERIFICATION 1 A/N (Field no longer used)
+Removed from old Inspection Table OOS_DEFECT_VER OUT-OF-SERVICE DEFECT 
+VERIFICATION
+1 A/N
+Removed from old Inspection Table VIOL_NOT_SENT VIOLATIONS NOT SENT 2 N
+Removed from old Inspection Table OOS_NOT_SENT OUT-OF-SERVICE NOT SENT 2 N
+Removed from old Inspection Table ORIG_REPORT_STATE ORIGINAL REPORT STATE 2 A/N
+Removed from old Inspection Table ORIG_REPORT_NUMBER ORIGINAL REPORT NUMBER 10 A/N
+Removed from old Inspection Table ORIG_REPORT_DATE ORIGINAL INSPECTION DATE 8 A/N YYYYMMDD
+Removed from old Inspection Table ORIG_REPORT_TIME ORIGINAL START TIME 4 A/N
+Removed from old Carrier Table INSP_CARRIER_ID CARRIER ID 8 N
+Removed from old Carrier Table INSPECTION_ID INSPECTION ID 8 N
+Removed from old Carrier Table PREFIX PREFIX 2 A/N
+Indicates New Data Element
+Indicates Removed due to No longer in use or not available
+Revision 5 Page 1 of 84 10/15/2025
+--- PAGE 2 ---
+MCMIS Vehicle Inspection Data Set Dictionary
+INSPECTIONS PER UNIT TABLE
+Order Data Element 
+Appears in New File New Field(s) Old Field(s) Data Element Length Type Contents
+1 CHANGE_DATE DATE & TIME RECORD WAS LAST 
+UPDATED
+13 N YYYYMMDD HHMM 
+(MILITARY TIME)
+2 INSPECTION_ID INSPECTION_ID INSPECTION ID 8 N
+3 INSP_UNIT_ID INSP_UNIT_ID UNIT ID 9 N
+4 INSP_UNIT_TYPE_ID INSP_UNIT_TYPE_ID UNIT TYPE 8 N 1-15
+5 INSP_UNIT_NUMBER INSP_UNIT_NUMBER UNIT NUMBER 1 N
+6 INSP_UNIT_MAKE INSP_UNIT_MAKE UNIT MAKE 10 A/N
+7 INSP_UNIT_COMPANY INSP_UNIT_COMPANY UNIT COMPANY 15 A/N
+8 INSP_UNIT_LICENSE INSP_UNIT_LICENSE UNIT LICENSE 12 A/N
+9 INSP_UNIT_LICENSE_STATE INSP_UNIT_LICENSE_STATE UNIT LICENSE STATE 2 A/N See State Abbreviations
+10INSP_UNIT_VEHICLE_ID_NUMBER INSP_UNIT_VEHICLE_ID_NUMBER UNIT VEHICLE ID NUMBER (VIN)17 A/N
+11INSP_UNIT_DECAL INSP_UNIT_DECAL DECAL ISSUED 1 A/N "Y" or "N"
+12INSP_UNIT_DECAL_NUMBER INSP_UNIT_DECAL_NUMBER UNIT DECAL NUMBER 8 A/N
+VEHICLE INSPECTIONS AND VIOLATIONS TABLE 
+Order Data Element 
+Appears in New File New Field(s) Old Field(s) Data Element Length Type Contents
+1 CHANGE_DATE DATE & TIME RECORD WAS LAST 
+UPDATED
+13 N YYYYMMDD HHMM 
+(MILITARY TIME)
+2 INSPECTION_ID INSPECTION_ID INSPECTION ID 8 N
+3 INSP_VIOLATION_ID INSP_VIOLATION_ID VIOLATION ID 9 N
+4 SEQ_NO SEQ_NO VIOLATION SEQUENCE NUMBER 3 N
+5 PART_NO PART_NO VIOLATION CODE PART NUMBER 3 A/N
+6 PART_NO_SECTION PART_NO_SECTION VIOLATION CODE SECTION 
+NUMBER
+40 A/N
+7 INSP_VIOL_UNIT INSP_VIOL_UNIT VIOLATION UNIT 1 A/N 1-9, "C", or "D"
+8 INSP_UNIT_ID INSP_UNIT_ID UNIT ID 9 N
+9 INSP_VIOLATION_CATEGORY_ID INSP_VIOLATION_CATEGORY_ID VIOLATION CATEGORY ID 8 N
+10OUT_OF_SERVICE_INDICATOR OUT_OF_SERVICE_INDICATOR OUT-OF-SERVICE INDICATOR 1 A/N "Z", "Y", "N", or Null
+11DEFECT_VERIFICATION_ID DEFECT_VERIFICATION_ID DEFECT VERIFICATION ID 8 N 1, 2, 3, 4, or 99
+12CITATION_NUMBER CITATION_NUMBER CITATION NUMBER 15 A/N
+SPECIAL STUDIES TABLE
+Order Data Element 
+Appears in New File New Field(s) Old Field(s) Data Element Length Type Contents
+1 CHANGE_DATE DATE & TIME RECORD WAS LAST 
+UPDATED
+13 N YYYYMMDD HHMM 
+(MILITARY TIME)
+2 INSPECTION_ID INSPECTION_ID INSPECTION ID 8 N
+3 INSP_STUDY_ID INSP_STUDY_ID STUDY ID 8 N
+4 STUDY STUDY STUDY 40 A/N
+5 SEQ_NO SEQ_NO SEQUENCE NUMBER 3 N
+INSPECTIONS AND CITATIONS TABLE 
+Order Data Element 
+Appears in New File New Field(s) Old Field(s) Data Element Length Type Contents
+1 CHANGE_DATE DATE & TIME RECORD WAS LAST 
+UPDATED
+13 N YYYYMMDD HHMM 
+(MILITARY TIME)
+2 INSPECTION_ID INSP_VIOL_CITATION INSPECTION_ID 8 N
+3 VIOSEQNUM INSP_VIOL_CITATION VIOSEQNUM 8 N
+4 ADJSEQ INSP_VIOL_CITATION ADJSEQ 8 N
+5 CITATION_CODE INSP_CITATION_CODE (From INSPECTION CITATION CODE Table)CITATION_CODE 8 N
+6 CITATION_RESULT INSP_CITATION_CODE (From INSPECTION CITATION CODE Table)CITATION_RESULT 100 A/N
+Removed from old Inspection Violation Citation tableINSP_VIOL_CITATION CHALLENGEID 8 N
+Removed from old Inspection Violation Citation tableINSP_VIOL_CITATION CHALLENGEID 8 N
+Removed from old Inspection Violation Citation tableINSP_VIOL_CITATION CITATIONRESULT 8 N
+Removed from old Inspection Violation Citation tableINSP_VIOL_CITATION RESULTDATE 8 A/N  YYYYMMDD
+Removed from old Inspection Violation Citation tableINSP_VIOL_CITATION COMMENTS 512 A/N
+Removed from old Inspection Violation Citation tableINSP_VIOL_CITATION CHANGESOURCE 8 N
+Removed from old Inspection Violation Citation tableINSP_VIOL_CITATION UPLOADDATE 8 A/N  YYYYMMDD
+Removed from old Inspection Violation Citation tableINSP_VIOL_CITATION ADDDATE 8 A/N  YYYYMMDD
+Removed from old Inspection Violation Citation tableINSP_VIOL_CITATION ADDUSER 30 A/N
+Removed from old Inspection Citation Code tableINSP_CITATION_CODE CHANGE_DATE 8 A/N  YYYYMMDD
+Removed from old Inspection Citation Code tableINSP_CITATION_CODE CHANGE_BY_USER 30 A/N
+Indicates New Data Element
+Indicates Removed due to No longer in use or not available
+Revision 5 Page 2 of 84 10/15/2025
+--- PAGE 3 ---
+MCMIS Vehicle Inspection Data Element Definitions
+VEHICLE INSPECTION FILE TABLE
+Data Element Definition
+INSPECTION ID
+(INSPECTION_ID)
+USDOT NUMBER
+(DOT_NUMBER)
+REPORT STATE
+(REPORT_STATE)
+REPORT NUMBER
+(REPORT_ NUMBER)
+INSPECTION DATE
+(INSP_DATE)
+START TIME
+(INSP_START_TIME)
+END TIME
+(INSP_END_TIME)
+REGISTRATION DATE
+(REGISTRATION_DATE)
+REGION [ Max Field Length 2 ] FHWA/FMCSA region in which the inspection took place. (1, 3-10)
+(REGION) Region 1: CT, ME, MA, NH, NY, NJ, RI, VT, PR and VI
+Region 3: DE, DC, MD, PA, VA and WV
+Region 4: AL, GA, FL, MS, NC, SC, TN and KY
+Region 5: IL, IN, MI, OH, MN and WI
+Region 6: AR, LA, NM, OK and TX
+Region 7: IA, KS, MO and NE
+Region 8: CO, MT, ND, SD, UT and WY
+Region 9: AZ, CA, NV, HI, GU and AS
+Region 10: AK, ID, OR and WA
+STATUS CODE
+(CI_STATUS_CODE)
+LOCATION
+(LOCATION)
+LOCATION DESCRIPTION
+(LOCATION_DESC)
+COUNTY CODE STATE
+(COUNTY_CODE_STATE)
+COUNTY CODE
+(COUNTY_CODE)
+INSPECTION LEVEL ID [ Max Field Length 8 ] This field identifies the level of the inspection using the following code: 
+(INSP_LEVEL_ID) 1 = Full
+2 = Walk-Around
+3 = Driver-Only
+4 = Special Study
+5 = Terminal
+99 = Invalid
+SERVICE CENTER
+(SERVICE_CENTER)
+CENSUS SOURCE ID
+(CENSUS_SOURCE_ID)
+INSPECTION FACILITY
+(INSP_FACILITY)
+SHIPPER NAME
+(SHIPPER_NAME)
+SHIPPING PAPER NUMBER
+(SHIPPING_PAPER_NUMBER)
+CARGO TANK
+(CARGO_TANK)
+HAZMAT PLACARD REQUIRED
+(HAZMAT_PLACARD_REQ)
+SAFETYNET VERSION NUMBER
+(SNET_VERSION_NUMBER)
+SAFETYNET SEARCH DATE
+(SNET_SEARCH_DATE)
+ALCOHOL/CONTROLLED SUBSTANCE CHECK
+(ALCOHOL_CONTROL_SUB)
+DRUG INTERDICTION SEARCH
+(DRUG_INTRDCTN_SEARCH)
+DRUG INTERDICTION ARREST
+(DRUG_INTRDCTN_ARRESTS)
+SIZE WEIGHT ENFORCEMENT
+(SIZE_WEIGHT_ENF)
+TRAFFIC ENFORCEMENT
+(TRAFFIC_ENF)
+LOCAL ENFORCEMENT JURISDICTION
+(LOCAL_ENF_JURISDICTION)
+PEN CEN MATCH
+(PEN_CEN_MATCH)
+FINAL STATUS DATE
+(FINAL_STATUS_DATE)
+POST ACCIDENT INDICATOR
+(POST_ACC_IND)
+[ Max Field Length 1 ] Indicates whether the inspection was conducted by a local jurisdiction. (Y = Yes, N = No, U = Unknown)
+[ Max Field Length 1 ] Indicates use of ASPEN carrier match. Could be B, I, N, P, Q, Y, or Null
+[ Max Field Length 13 ] Date and time in Military Time seperated by a space (YYYYMMDD HHMM) the Status Code is changed. (See 
+CI_STATUS_CODE above.)
+[ Max Field Length 1 ] Indicates whether or not the inspection was conducted after an accident. (Y = Yes, N = No, Null = Unknown)
+[ Max Field Length 1 ] Indicates whether the inspection was conducted in conjunction with a traffic enforcement action. (Y = Yes, N = No, U = 
+Unknown)
+[ Max Field Length 2 ] State/District/Province of the county where the inspection took place.  (See State Abbreviations)
+[ Max Field Length 3 ] FIPS code identifying the county in which the inspection occurred. (See County Codes)
+[ Max Field Length 2 ] Service Center Region the inspection occurred in. (MW = Midwest, EA = East, SH = South, WE = West)
+[ Max Field Length 8 ] USDOT NUMBER verification method. (1 = Matchware, 2 = Manual Census Search, 3 = Matching Algorithm, 4 = Pen-Based 
+(not used on Crashes), 5 = SafetyNet Uploaded and not changed, Null = Unknown)
+[ Max Field Length 1 ] Type of facility where the inspection was conducted. (F = Fixed, R = Roadside, Null = N/A)
+[ Max Field Length 3 ] Three-character indicator of the cargo tank type. Comes from ASPEN.
+[ Max Field Length 1 ] Indicates if hazardous material placards are required. This field is required if a hazardous materials code is entered. (Y = 
+Yes, N = No, Null = Unknown)
+[ Max field length 1 ] Indicates whether an alcohol or controlled substance check was performed. (Y = Yes, N = No, U = Unknown)
+[ Max field length 1 ] Indicates whether or not there was a drug interdiction search.  (Y = Yes, N = No, U = Unknown)
+[ Max field length 2 ] Indicates the number of drug interdiction arrests made.
+[ Max Field Length 1 ] Indicates whether the inspection was conducted in conjunction with a size/weight enforcement action.  (Y = Yes, N = No, 
+U = Unknown)
+[ Max Field Length 120 ] Name of the shipping company.
+[ Max Field Length 15 ] Unique number on the shipping papers or "NONE" if no shipping papers are present or a number is not present or 
+legible on the shipping papers.
+[ Max Field Length 7 ] Safetynet version number (#.#.#.#)
+[ Max Field Length 13 ] Safetynet search date and time in Military Time seperated by a space (YYYYMMDD HHMM)
+[ Max Field Length 30 ] Physical location where the inspection took place.
+[ Max Field Length 8 ] This is a unique identifying number assigned to an inspection record.
+[ Max Field Length 8 ] This is the USDOT number assigned by MCMIS to a census record. Each motor carrier should have only one active census 
+number. The census number has no internal coded structure. Numbers are issued sequentially as entities are added to the system.
+[ Max Field Length 2 ] State/District/Province which uploads the inspection, usually where inspection was conducted.  (See State Abbreviations)
+[ Max Field Length 10 ] A number identifying the inspection report. Format SS########, where SS is the state abbreviation, or US for Federal 
+inspections, followed by 8 alphanumeric.
+[ Max Field Length 8 ] Date the inspection was conducted. (YYYYMMDD)
+[ Max Field Length 4 ] Time the inspection started. Format: HHMM (military time) where HH is the hour and MM is the minutes. Midnight is 
+recorded as 2400. 9999 = Time unknown
+[ Max Field Length 4 ] Time the inspection ended. Format: HHMM (military time) where HH is the hour and MM is the minutes. Midnight is 
+recorded as 2400. 9999 = Time unknown
+[ Max Field Length 8 ] Indicates the date the certification of correction of defects was registered.   (YYYYMMDD)
+[ Max Field Length 1 ] Indicates the status of the inspection. (U = Unprocessed, T = To Census Search, C = Complete, D = Duplicate, N = Non-
+match, H = FMCSA hold, I = Intrastate, P = Potential Resolution, X = Non-motor carrier)
+[ Max Field Length 6 ] State assigned code representing the physical location of the inspection.
+Revision 5 Page 3 of 84 10/15/2025
+--- PAGE 4 ---
+MCMIS Vehicle Inspection Data Element Definitions
+GROSS COMBINED VEHICLE WEIGHT
+(GROSS_COMB_VEH_WT)
+TOTAL VIOLATIONS
+(VIOL_TOTAL)
+TOTAL OUT-OF-SERVICE VIOLATIONS
+(OOS_TOTAL)
+TOTAL DRIVER VIOLATIONS
+(DRIVER_VIOL_TOTAL)
+TOTAL DRIVER OUT-OF-SERVICE
+(DRIVER_OOS_TOTAL)
+TOTAL VEHICLE VIOLATIONS
+(VEHICLE_VIOL_TOTAL)
+TOTAL VEHICLE OUT-OF-SERVICE
+(VEHICLE_OOS_TOTAL)
+HAZMAT VIOLATIONS TOTAL
+(HAZMAT_VIOL_TOTAL)
+HAZMAT OUT OF SERVICE TOTAL
+(HAZMAT_OOS_TOTAL)
+SAFETYNET SEQUENCE ID
+(SNET_SEQUENCE_ID)
+TRANSACTION CODE
+(TRANSACTION_CODE)
+TRANSACTION DATE
+(TRANSACTION_DATE)
+UPLOAD DATE
+(UPLOAD_DATE)
+UPLOAD FIRST BYTE
+(UPLOAD_FIRST_BYTE)
+UPLOAD DOT NUMBER
+(UPLOAD_DOT_NUMBER)
+UPLOAD SEARCH INDICATOR
+(UPLOAD_SEARCH_INDICATOR)
+CENSUS SEARCH DATE
+(CENSUS_SEARCH_DATE)
+SAFETYNET INPUT DATE
+(SNET_INPUT_DATE)
+SOURCE OFFICE
+(SOURCE_OFFICE)
+MCMIS ADD DATE
+(MCMIS_ADD_DATE)
+CARRIER NAME
+(INSP_CARRIER_NAME)
+CARRIER STREET
+(INSP_CARRIER_STREET)
+CARRIER CITY
+(INSP_CARRIER_CITY)
+CARRIER STATE
+(INSP_CARRIER_STATE)
+CARRIER ZIP 
+(INSP_CARRIER_ZIP_CODE)
+COLONIA 
+(INSP_COLONIA)
+DOCKET NUMBER 
+(DOCKET_NUMBER)
+INTERSTATE 
+(INSP_INTERSTATE)
+CARRIER STATE ID
+(INSP_CARRIER_STATE_ID)
+[ Max Field Length 13 ] Date and time in Military Time seperated by a space (YYYYMMDD HHMM) that transaction code was entered.
+[ Max Field length 8 ] The docket number (MC, MX, or FF number) assigned by FMCSA or the former Interstate Commerce Commission to the 
+carrier reported under CARRIER NAME. Formerly known as the ICC number.
+[ Max Field length 1 ] Indicates whether the carrier is involved in interstate commerce. (Y = Yes, N = No)
+[ Max Field length 12 ] Identification number assigned by the state to the carrier.
+[ Max Field Length 13 ] Inspection upload date and time in Military Time seperated by a space (YYYYMMDD HHMM)
+[ Max Field Length 1 ] Upload census first byte.
+[ Max Field Length 8 ] USDOT number uploaded in the inspection.
+[ Max Field Length 1 ] Upload search indicator.  M = Manual, Null
+[ Max Field Length 13 ] Date and time in Military Time seperated by a space (YYYYMMDD HHMM) that census number was searched
+[ Max Field length 25 ] This field specifies the carrier's Mexican Colonia. (For Mexican domiciled Carriers)
+[ Max Field Length 13 ] Date and time in Military Time seperated by a space (YYYYMMDD HHMM) the inspection was added to MCMIS.
+[ Max Field Length 8 ] The date the inspection was input into SAFETYNET.
+[ Max Field Length 7 ] The office that sent the inspection.
+[ Max field length 120 ] The name of the individual, partnership, or corporation responsible for the transportation of goods or persons.
+[ Max field length 50 ] The street address of the principal place of business of the carrier reported under CARRIER NAME.
+[ Max field length 25 ] The name of the municipality (city or township) of the principal place of business of the carrier reported under carrier 
+name.
+[ Max field length 2 ] State/District/Province of the principal place of business of the carrier reported under CARRIER NAME.  (See State 
+Abbreviations)
+[ Max field length 10 ] ZIP code of the principal place of business of the carrier reported under CARRIER NAME.
+[ Max field length 1 ] Reason for upload from SAFETYNET. (A = Add to MCMIS, C = Change existing record in MCMIS)
+[ Max Field Length 3 ] Indicates the total number of out-of-service violations for the inspection.
+[ Max Field Length 3 ] Indicates the total number of driver violations for the inspection.
+[ Max Field Length 3 ] Indicates the total number of driver out-of-service violations for the inspection.
+[ Max Field Length 3 ] Indicates the total number of vehicle violations for the inspection.
+[ Max Field Length 3 ] Indicates the total number of vehicle out-of-service violations for the inspection.
+[ Max Field Length 3 ] Indicates the total number of hazardous material violations for the inspection.
+[ Max Field Length 3 ] Indicates the total number of hazardous material out-of-service violations for the inspection.
+[ Max Field Length 10 ] Safetynet sequence ID.
+[ Max Field Length 3 ] Indicates the total number of violations for the inspection.
+[ Max Field Length 6 ] Indicates the total gross weight of the combination vehicle. (Measured in pounds.)
+Revision 5 Page 4 of 84 10/15/2025
+--- PAGE 5 ---
+MCMIS Vehicle Inspection Data Element Definitions
+INSPECTIONS PER UNIT TABLE 
+Data Element Definition
+INSPECTION ID 
+(INSPECTION_ID)
+UNIT ID 
+(INSP_UNIT_ID)
+UNIT TYPE ID [ Max field length 8 ] A code identifying the type of vehicle unit:
+(INSP_UNIT_TYPE_ID) 1 - BU - Bus 
+2 - DC - Dolly Converter 
+3 - FT - Full Trailer
+4 - LM - Limousine
+5 - MC - Motor Carrier
+6 - OT - Other
+7 - PT - Pole Trailer
+8 - SB - School Bus
+9 - ST - Semi Trailer
+10 - TR - Straight Truck
+11 - TT -Truck Tractor
+12 - VN - Van
+13 - ZZ - Unknown
+14 - Intermodal Chassis
+15 - Crib Log Trailer
+UNIT NUMBER 
+(INSP_UNIT_NUMBER)
+UNIT MAKE 
+(INSP_UNIT_MAKE)
+UNIT COMPANY NUMBER 
+(INSP_UNIT_COMPANY)
+UNIT LICENSE
+(INSP_UNIT_LICENSE)
+UNIT LICENSE STATE
+(INSP_UNIT_LICENSE_STATE)
+UNIT VEHICLE ID NUMBER 
+(INSP_UNIT_VEHICLE_ID_NUMBER)
+DECAL ISSUED 
+(INSP_UNIT_DECAL)
+UNIT DECAL NUMBER
+(INSP_UNIT_DECAL_NUMBER)
+VEHICLE INSPECTIONS AND VIOLATIONS TABLE 
+Data Element Definition
+INSPECTION ID
+(INSPECTION_ID)
+VIOLATION ID
+(INSP_VIOLATION_ID)
+VIOLATION SEQUENCE NUMBER
+(SEQ_NO)
+VIOLATION CODE PART NUMBER
+(PART_NO)
+VIOLATION CODE SECTION NUMBER
+(PART_NO_SECTION)
+VIOLATION UNIT
+(INSP_VIOL_UNIT)
+UNIT ID
+(INSP_UNIT_ID)
+VIOLATION CATEGORY
+(INSP_VIOLATION_CATEGORY_ID)
+OUT OF SERVICE INDICATOR
+(OUT_OF_SERVICE_INDICATOR)
+DEFECT VERIFICATION ID 1 = A   -Repaired at scene
+(DEFECT_VERIFICATION_ID) 2 = B   -Towed/Escorted to repair service
+3 = N   -Non-OOS/Driver Non-OOS
+4 = D   -Other
+99 = U   -Unknown/Unverified
+CITATION NUMBER
+(CITATION_NUMBER)
+[ Max field length 9 ] This is a unique identifying number assigned to a violation.
+[ Max field length 8 ] This is a unique identifying number assigned to an inspection record.
+[ Max field length 3 ] The sequence number of the violation.
+[ Max field length 3 ] Part number of the violation cited. (Reference FMCSR, HMR)
+[ Max field length 40 ] ] Section number of the violation cited. (Reference FMCSR, HMR)
+[ Max field length 1 ] Driver, co-driver, or vehicle unit # which had the violation. (D, C, 1-6)
+[ Max field length 9 ] This is a unique identifying number assigned to an inspected unit.
+[ Max field length 2 ] The state/district/province issuing the license tags on the vehicle unit.  (See State Abbreviations)
+[ Max field length 1 ] Indicates whether the violation resulted in an out-of-service. (Z = Driver Yes, Y = Yes or N = No)
+[ Max field length 15 ] The number identifying the citation
+[ Max field length 8 ] The category number assigned to the violation. (1-99) (SeeViolation Categories)
+[ Max field length 17 ] The vehicle identification number (VIN) of the unit.
+[ Max field length 1 ] Indicates whether a CVSA decal was issued. (Y = Yes, N = No, U = Unknown)
+[ Max field length 8 ] The number on the CVSA decal.
+[ Max field length 12 ] The license tag number on the vehicle unit.
+[ Max field length 9 ] This is a unique identifying number assigned to an inspected unit.
+[ Max field length 8 ] This is a unique identifying number assigned to an inspection record.
+[ Max field length 1 ] The sequence number of the vehicle unit. (1-6)
+[ Max field length 10 ] The manufacturer of the vehicle unit.
+[ Max field length 15 ] The number assigned to the vehicle unit by the carrier.
+Revision 5 Page 5 of 84 10/15/2025
+--- PAGE 6 ---
+MCMIS Vehicle Inspection Data Element Definitions
+SPECIAL STUDIES TABLE 
+Data Element Definition
+INSPECTION ID
+(INSPECTION_ID)
+STUDY ID
+(INSP_STUDY_ID)
+STUDY
+(STUDY)
+SEQUENCE NUMBER
+(SEQ_NO)
+INSPECTIONS AND CITATIONS TABLE 
+Data Element Definition
+INSPECTION ID
+(INSPECTION_ID)
+VIOLATION SEQUENCE NUMBER
+(VIOSEQNUM)
+ADJUSTED SEQUENCE NUMBER
+(ADJSEQ)
+CITATION CODE
+(CITATION_CODE)
+CITATION RESULT
+(CITATION_RESULT)
+[ Max field length 8 ] This is a unique identifying number assigned to an inspection record.
+[ Max field length 8 ] This is a sequence number of a violation.
+[ Max field length 8 ] This is An adjusted sequence number of a violation.
+[ Max field length 8 ] This is the citation code
+[ Max field length 100 ] This is the result of the citation.
+[ Max field length 3 ] This is the sequence number of the special study. The number indicates whether data is in Study field 1, 2, 3, 4, or 5.
+[ Max field length 8 ] This is a unique identifying number assigned to a study.
+[ Max field length 8 ] This is a unique identifying number assigned to an inspection record.
+[ Max field length 40 ] This field will contain data collected as part of a special study.
+Revision 5 Page 6 of 84 10/15/2025
+--- PAGE 7 ---
+MCMIS Inspection Violation Categories
+DRIVER VIOLATIONS
+Violation Categories NumberData Element Description
+48 RTOWAY Failure to yield right of way
+49 STAHOS State/Local Hours of Service
+46 IMPTRN Improper Turns
+47 SIZWGT Size and Weight
+44 RECDRV Reckless Driving
+45 SPEDNG Speeding
+42 LANCHG Improper Lane Change
+43 IMPPAS Improper Passing
+40 CTLDEV Failure to Obey Traffic Control Device
+41 2CLOSE Following Too Close
+13 RADAR Radar Detectors
+14 OTHDRV All Other Driver Violations
+11 SEATBT Seat Belt
+12 TRFENF Traffic Enforcement
+9 DRUGS Drugs
+10 ALCOHL Alcohol
+7 OTHHOS All Other Hours-Of-Service
+8 DSQDRV Disqualified Drivers
+6 60/70 60/70/80 Hours
+3 LOGVIO No Log Book, Log Not Current, General Log Violations
+4 10/15 10/15 Hours
+1 MEDCRT Medical Certificate
+2 FLSLOG False Log Book
+5 15/20 15/20 Hours
+Revision 5 Page 7 of 84 10/15/2025
+--- PAGE 8 ---
+MCMIS Inspection Violation Categories
+VEHICLE VIOLATIONS
+Violation Categories NumberData Element Description
+HAZMAT VIOLATIONS
+Violation Categories NumberData Element Description
+39 HOTHR All Other HM Violations
+37 HSPEC Use of Non-specification Container
+38 EMGRES Emergency Response
+35 HTEST No Retest and Inspection (Cargo Tank)
+36 HSHTOF No Remote Shutoff Control
+33 HIMSHP Accepting Shipment Improperly Marked
+34 HBRACE Improper Blocking and Bracing
+31 HPAPRS Shipping Papers
+32 HPLCRD Improper Placarding
+29 PERINS Periodic Inspection
+30 OTHER All Other Vehicle Defects
+27 EXHST Exhaust Discharge
+28 EMREQP Emergency Equipment
+25 LDSECR Load Securement
+26 WNDSHL Windshield
+23 TIRES Tires
+24 WHEELS Wheels, Studs, Clamps, Etc.
+21 STERNG Steering Mechanism
+22 SUSPEN Suspension
+19 FRAMES Frames
+20 LIGHTS Lighting
+17 COUPLR Coupling Devices
+18 FUEL Fuel Systems
+15 BRKADJ Brakes, Out of Adjustment
+16 BRKOTH Brakes, All Other Violations
+Revision 5 Page 8 of 84 10/15/2025
+--- PAGE 9 ---
+MCMIS Inspection Violation Categories
+INVALID VIOLATIONS
+Violation Categories NumberData Element Description
+99 UNKNOWN Unknown
+Revision 5 Page 9 of 84 10/15/2025
+--- PAGE 10 ---
+MCMIS Glossary of Terms
+BUS: Any motor vehicle designed, constructed, and used for the commercial transportation of 15 or more passengers, including the driver.
+CARRIER TYPE: "For-hire" or "Private."
+COMMERCIAL VEHICLE: A motor vehicle, usually a truck or bus, which transports freight or passengers for compensation.
+COMMERCIAL VEHICLE SAFETY ALLIANCE (CVSA): An organization of states and provinces in the United States, Canada, and Mexico dedicated to improving the 
+uniformity of commercial motor vehicle safety enforcement.
+DEFECT GROUP: The "group" to which a given violation is attributed. In this report, all violations identifiable during the driver-vehicle inspections are assigned to 
+one of three mutually-exclusive groups: vehicle, driver, or hazardous materials.
+DOUBLE: A commercial motor vehicle consisting of a truck-tractor and two detachable trailers.
+DRIVER-ONLY INSPECTION: Examines only the driver-related aspects of the standard Full Inspection, including compliance with commercial drivers' licensing 
+requirements, medical certifications and waivers, and the hours-of-service regulations. This inspection type is a Level III inspection.
+DRIVER VIOLATION: A violation discovered during the inspection which pertains to the driver of the commercial vehicle.
+DURATION: The amount of time required to complete a given inspection. It is calculated using the "start" and "finish" times recorded by the inspector on the 
+FACILITY TYPE: The type of facility - fixed or roadside - where the inspection was conducted.
+FEDERAL MOTOR CARRIER SAFETY ADMINISTRATION (FMCSA): The administration within the U.S Department of Transportation (USDOT) responsible for 
+monitoring and developing safety standards for commercial motor vehicles operating in interstate commerce.
+FEDERAL MOTOR CARRIER SAFETY REGULATIONS (FMCSR): Regulations governing the safe operation of commercial vehicles engaged in interstate commerce. 
+The FMCSR are contained in the Code of Federal Regulations, Title 49, Subtitle B, Chapter III. States participating in MCSAP have adopted their own state-level 
+FIXED FACILITY: A state commercial vehicle "scale" facility or other permanent site used to conduct inspections.
+FLEET SIZE: The total number of power units (truck-tractors and straight trucks) owned or operated by a given motor carrier.
+FOR-HIRE CARRIER: A commercial motor carrier whose primary business activity is the transportation of property or passenger by motor vehicle for compensation.
+FOR-HIRE CARRIER - AUTHORIZED: A for-hire carrier subject to economic regulation by the Interstate Commerce Commission.
+FOR-HIRE CARRIER - EXEMPT: A for-hire carrier not subject to economic regulation by the Interstate Commerce Commission.
+FULL INSPECTION: The most comprehensive and thorough of the inspection types, it involves extensive vehicle checks - including under-the-vehicle measurement 
+of brake performance - and examination of hours-of-service logs. This inspection type is a Level I inspection; it is also sometimes referred to as the North American 
+HAZARDOUS MATERIALS: Materials, substances, or wastes, which, due to their compositional nature, may be toxic, harmful or fatal if accidentally exposed to 
+humans, animals, or the environment.
+HAZARDOUS MATERIALS REGULATIONS (HMR): Federal regulations governing the commercial transportation of hazardous materials. The HMR are contained in 
+the Code of Federal Regulations, Title 49, Subtitle B, Chapter I.
+HAZARDOUS MATERIALS VIOLATION: A violation discovered during the inspection which pertains to the transportation of hazardous materials.
+INSPECTION: The systematic examination of a commercial motor vehicle and its driver to determine their overall safety fitness.
+INSPECTION LEVEL: Refers to the inspection methodology employed in the examination of a given vehicle and driver. Five inspection levels are referenced in this 
+report: Full, Walk-Around, Driver-Only, Special, and Terminal.
+INTERSTATE CARRIER: A carrier who sometimes or always operates in interstate or foreign commerce. For the purposes of this report, "interstate carrier" is 
+defined also to include carriers of hazardous materials who operate in interstate, foreign, or intrastate commerce.
+INTRASTATE CARRIER: A carrier who operates solely in intrastate commerce and, for the purposes of this report, never transports hazardous materials.
+LOCATION: The U.S. State or Territory, Canadian Province, or Mexican State in which a specific inspection was conducted.
+MOBILE INSPECTION FACILITY: A non-permanent inspection facility. Mobile facilities can be moved from one location to another, as conditions warrant. 
+Sometimes called a "roadside" facility.
+MOTOR CARRIER CENSUS DATABASE: A database on the USDOT mainframe computer containing information identifying interstate and intrastate commercial 
+carriers. A unique USDOT Number is assigned to each carrier in the database and is used to link records in the Inspection Database to the appropriate carriers in 
+Revision 5 Page 10 of 84 10/15/2025
+--- PAGE 11 ---
+MCMIS Glossary of Terms
+MOTOR CARRIER MANAGEMENT INFORMATION SYSTEM (MCMIS): The computerized system, operated by the FMCSA, containing comprehensive safety data on 
+interstate and intrastate commercial carriers. Two parts of MCMIS are the Motor Carrier Inspection Database and the Motor Carrier Census Database.
+MOTOR CARRIER SAFETY ASSISTANCE PROGRAM (MCSAP): A Federal program providing funds to U.S. states and territories for activities in support of commercial 
+motor vehicle safety. To receive MCSAP funds, states must adopt interstate and intrastate regulations which are compatible with the FMCSR and the HMR. The 
+FMCSA is the Federal agency responsible for administering MCSAP.
+OUT-OF-SERVICE (OOS) VIOLATIONS: A violation of the FMCSR or HMR requiring that a commercial vehicle or driver be taken out of service or moved off the road 
+until the circumstances which caused the violation have been resolved or corrected.
+PRIVATE CARRIER: A commercial motor carrier for which private highway transportation activities are incidental to, and only in furtherance of, its primary 
+SAFETYNET: A state-based information system used to store and process commercial carrier safety information, including driver-vehicle inspection data. The use 
+of SAFETYNET ensures that data electronically transferred to MCMIS are in a standard format and have successfully passed through a variety of edit checks.
+SINGLE: A commercial motor vehicle consisting of a truck-tractor and a detachable trailer.
+SPECIAL STUDY: Ad hoc examination of particular items, usually inspected in support of a particular study or verification/refutation of a specific trend. This 
+inspection type is a Level IV inspection.
+STRAIGHT TRUCK: A commercial motor vehicle in which the power unit and cargo box are non-detachable.
+TERMINAL INSPECTION: Examination of vehicles at carriers' terminal facilities. Although the inspection methodology employed may vary, a Walk-Around 
+technique is generally used. Terminal inspections normally focus only on the "vehicle" aspects of the inspection process. This inspection type is a Level V 
+TRIPLE: A commercial motor vehicle consisting of a truck-tractor and three detachable trailers.
+TRUCK-TRACTOR: A self-propelled motor vehicle designed and primarily used to draw other vehicles.
+USDOT NUMBER: An identification number assigned to all interstate commercial carriers regulated by the FMCSA. The number is used to track the safety records 
+associated with a given carrier.
+VEHICLE CONFIGURATION: Arrangement of the individual units - truck-tractors, trailers, etc. - comprising a commercial vehicle.
+VEHICLE VIOLATION: A violation of the FMCSR or HRM.
+WALK-AROUND INSPECTION: Follows most procedures of the Full Inspection, except those actions which can only be accomplished by climbing underneath the 
+vehicle (e.g., to measure brake performance). This inspection type is a Level II inspection.
+Common Vehicle Configurations
+Bus
+Straight Truck
+Tractor
+Tractor-Trailer/Single
+Tractor-Trailer/Double
+Tractor-Trailer/Triple
+Revision 5 Page 11 of 84 10/15/2025
+--- PAGE 12 ---
+MCMIS State Abbreviations
+AL ALABAMA
+AK ALASKA
+AR ARKANSAS
+AZ ARIZONA
+CA CALIFORNIA
+CO COLORADO
+CT CONNECTICUT
+DC DISTRICT OF COLUMBIA
+DE DELAWARE
+FL FLORIDA
+GA GEORGIA
+HI HAWAII
+IA IOWA
+ID IDAHO
+IL ILLINOIS
+IN INDIANA
+KS KANSAS
+KY KENTUCKY
+LA LOUISIANA
+MA MASSACHUSETTS
+MD MARYLAND
+ME MAINE
+MI MICHIGAN
+MN MINNESOTA
+MO MISSOURI
+MS MISSISSIPPI
+MT MONTANA
+NC NORTH CAROLINA
+ND NORTH DAKOTA
+NE NEBRASKA
+NH NEW HAMPSHIRE
+NJ NEW JERSEY
+NM NEW MEXICO
+NV NEVADA
+NY NEW YORK
+OH OHIO
+OK OKLAHOMA
+OR OREGON
+PA PENNSYLVANIA
+PR PUERTO RICO
+RI RHODE ISLAND
+SC SOUTH CAROLINA
+SD SOUTH DAKOTA
+TN TENNESSEE
+TX TEXAS
+UT UTAH
+State Abbreviations
+Revision 5 Page 12 of 84 10/15/2025
+--- PAGE 13 ---
+MCMIS State Abbreviations
+VA VIRGINIA
+VI VIRGIN ISLANDS, U.S.
+VT VERMONT
+WA WASHINGTON
+WI WISCONSIN
+WV WEST VIRGINIA
+WY WYOMING
+OT OTHER
+UK UNKNOWN
+ZZ UNKNOWN
+Revision 5 Page 13 of 84 10/15/2025
+--- PAGE 14 ---
+MCMIS County Codes
+State County Code
+AL AUTAUGA 1
+AL BALDWIN 3
+AL BARBOUR 5
+AL BIBB 7
+AL BLOUNT 9
+AL BULLOCK 11
+AL BUTLER 13
+AL CALHOUN 15
+AL CHAMBERS 17
+AL CHEROKEE 19
+AL CHILTON 21
+AL CHOCTAW 23
+AL CLARKE 25
+AL CLAY 27
+AL CLEBURNE 29
+AL COFFEE 31
+AL COLBERT 33
+AL CONECUH 35
+AL COOSA 37
+AL COVINGTON 39
+AL CRENSHAW 41
+AL CULLMAN 43
+AL DALE 45
+AL DALLAS 47
+AL DE KALB 49
+AL ELMORE 51
+AL ESCAMBIA 53
+AL ETOWAH 55
+AL FAYETTE 57
+AL FRANKLIN 59
+AL GENEVA 61
+AL GREENE 63
+AL HALE 65
+AL HENRY 67
+AL HOUSTON 69
+AL JACKSON 71
+AL JEFFERSON 73
+AL LAMAR 75
+AL LAUDERDALE 77
+AL LAWRENCE 79
+AL LEE 81
+AL LIMESTONE 83
+AL LOWNDES 85
+AL MACON 87
+AL MADISON 89
+AL MARENGO 91
+Revision 5 Page 14 of 84 10/15/2025
+--- PAGE 15 ---
+MCMIS County Codes
+State County Code
+AL MARION 93
+AL MARSHALL 95
+AL MOBILE 97
+AL MONROE 99
+AL MONTGOMERY 101
+AL MORGAN 103
+AL PERRY 105
+AL PICKENS 107
+AL PIKE 109
+AL RANDOLPH 111
+AL RUSSELL 113
+AL SAINT CLAIR 115
+AL SHELBY 117
+AL SUMTER 119
+AL TALLADEGA 121
+AL TALLAPOOSA 123
+AL TUSCALOOSA 125
+AL WALKER 127
+AL WASHINGTON 129
+AL WILCOX 131
+AL WINSTON 133
+AK ALEUTIANS EAST 13
+AK ALEUTIANS WEST 16
+AK ANCHORAGE 20
+AK BETHEL 50
+AK BRISTOL BAY 60
+AK DENALI 68
+AK DILLINGHAM 70
+AK FAIRBANKS NORTH STAR 90
+AK HAINES 100
+AK JUNEAU 110
+AK KENAI PENINSULA 122
+AK KETCHIKAN GATEWAY 130
+AK KODIAK ISLAND 150
+AK LAKE AND PENINSULA 164
+AK MATANUSKA SUSITNA 170
+AK NOME 180
+AK NORTH SLOPE 185
+AK NORTHWEST ARCTIC 188
+AK PRINCE WALES KETCHIKAN 201
+AK SITKA 220
+AK SKAGWAY HOONAH ANGOON 232
+AK SOUTHEAST FAIRBANKS 240
+AK VALDEZ CORDOVA 261
+AK WADE HAMPTON 270
+AK WRANGELL PETERSBURG 280
+Revision 5 Page 15 of 84 10/15/2025
+--- PAGE 16 ---
+MCMIS County Codes
+State County Code
+AK YAKUTAT 282
+AK YUKON KOYUKUK 290
+AR ARKANSAS 1
+AR ASHLEY 3
+AR BAXTER 5
+AR BENTON 7
+AR BOONE 9
+AR BRADLEY 11
+AR CALHOUN 13
+AR CARROLL 15
+AR CHICOT 17
+AR CLARK 19
+AR CLAY 21
+AR CLEBURNE 23
+AR CLEVELAND 25
+AR COLUMBIA 27
+AR CONWAY 29
+AR CRAIGHEAD 31
+AR CRAWFORD 33
+AR CRITTENDEN 35
+AR CROSS 37
+AR DALLAS 39
+AR DESHA 41
+AR DREW 43
+AR FAULKNER 45
+AR FRANKLIN 47
+AR FULTON 49
+AR GARLAND 51
+AR GRANT 53
+AR GREENE 55
+AR HEMPSTEAD 57
+AR HOT SPRING 59
+AR HOWARD 61
+AR INDEPENDENCE 63
+AR IZARD 65
+AR JACKSON 67
+AR JEFFERSON 69
+AR JOHNSON 71
+AR LAFAYETTE 73
+AR LAWRENCE 75
+AR LEE 77
+AR LINCOLN 79
+AR LITTLE RIVER 81
+AR LOGAN 83
+AR LONOKE 85
+AR MADISON 87
+Revision 5 Page 16 of 84 10/15/2025
+--- PAGE 17 ---
+MCMIS County Codes
+State County Code
+AR MARION 89
+AR MILLER 91
+AR MISSISSIPPI 93
+AR MONROE 95
+AR MONTGOMERY 97
+AR NEVADA 99
+AR NEWTON 101
+AR OUACHITA 103
+AR PERRY 105
+AR PHILLIPS 107
+AR PIKE 109
+AR POINSETT 111
+AR POLK 113
+AR POPE 115
+AR PRAIRIE 117
+AR PULASKI 119
+AR RANDOLPH 121
+AR SAINT FRANCIS 123
+AR SALINE 125
+AR SCOTT 127
+AR SEARCY 129
+AR SEBASTIAN 131
+AR SEVIER 133
+AR SHARP 135
+AR STONE 137
+AR UNION 139
+AR VAN BUREN 141
+AR WASHINGTON 143
+AR WHITE 145
+AR WOODRUFF 147
+AR YELL 149
+AZ APACHE 1
+AZ COCHISE 3
+AZ COCONINO 5
+AZ GILA 7
+AZ GRAHAM 9
+AZ GREENLEE 11
+AZ LA PAZ 12
+AZ MARICOPA 13
+AZ MOHAVE 15
+AZ NAVAJO 17
+AZ PIMA 19
+AZ PINAL 21
+AZ SANTA CRUZ 23
+AZ YAVAPAI 25
+AZ YUMA 27
+Revision 5 Page 17 of 84 10/15/2025
+--- PAGE 18 ---
+MCMIS County Codes
+State County Code
+CA ALAMEDA 1
+CA ALPINE 3
+CA AMADOR 5
+CA BUTTE 7
+CA CALAVERAS 9
+CA COLUSA 11
+CA CONTRA COSTA 13
+CA DEL NORTE 15
+CA EL DORADO 17
+CA FRESNO 19
+CA GLENN 21
+CA HUMBOLDT 23
+CA IMPERIAL 25
+CA INYO 27
+CA KERN 29
+CA KINGS 31
+CA LAKE 33
+CA LASSEN 35
+CA LOS ANGELES 37
+CA MADERA 39
+CA MARIN 41
+CA MARIPOSA 43
+CA MENDOCINO 45
+CA MERCED 47
+CA MODOC 49
+CA MONO 51
+CA MONTEREY 53
+CA NAPA 55
+CA NEVADA 57
+CA ORANGE 59
+CA PLACER 61
+CA PLUMAS 63
+CA RIVERSIDE 65
+CA SACRAMENTO 67
+CA SAN BENITO 69
+CA SAN BERNARDINO 71
+CA SAN DIEGO 73
+CA SAN FRANCISCO 75
+CA SAN JOAQUIN 77
+CA SAN LUIS OBISPO 79
+CA SAN MATEO 81
+CA SANTA BARBARA 83
+CA SANTA CLARA 85
+CA SANTA CRUZ 87
+CA SHASTA 89
+CA SIERRA 91
+Revision 5 Page 18 of 84 10/15/2025
+--- PAGE 19 ---
+MCMIS County Codes
+State County Code
+CA SISKIYOU 93
+CA SOLANO 95
+CA SONOMA 97
+CA STANISLAUS 99
+CA SUTTER 101
+CA TEHAMA 103
+CA TRINITY 105
+CA TULARE 107
+CA TUOLUMNE 109
+CA VENTURA 111
+CA YOLO 113
+CA YUBA 115
+CO ADAMS 1
+CO ALAMOSA 3
+CO ARAPAHOE 5
+CO ARCHULETA 7
+CO BACA 9
+CO BENT 11
+CO BOULDER 13
+CO CHAFFEE 15
+CO CHEYENNE 17
+CO CLEAR CREEK 19
+CO CONEJOS 21
+CO COSTILLA 23
+CO CROWLEY 25
+CO CUSTER 27
+CO DELTA 29
+CO DENVER 31
+CO DOLORES 33
+CO DOUGLAS 35
+CO EAGLE 37
+CO EL PASO 41
+CO ELBERT 39
+CO FREMONT 43
+CO GARFIELD 45
+CO GILPIN 47
+CO GRAND 49
+CO GUNNISON 51
+CO HINSDALE 53
+CO HUERFANO 55
+CO JACKSON 57
+CO JEFFERSON 59
+CO KIOWA 61
+CO KIT CARSON 63
+CO LA PLATA 67
+CO LAKE 65
+Revision 5 Page 19 of 84 10/15/2025
+--- PAGE 20 ---
+MCMIS County Codes
+State County Code
+CO LARIMER 69
+CO LAS ANIMAS 71
+CO LINCOLN 73
+CO LOGAN 75
+CO MESA 77
+CO MINERAL 79
+CO MOFFAT 81
+CO MONTEZUMA 83
+CO MONTROSE 85
+CO MORGAN 87
+CO OTERO 89
+CO OURAY 91
+CO PARK 93
+CO PHILLIPS 95
+CO PITKIN 97
+CO PROWERS 99
+CO PUEBLO 101
+CO RIO BLANCO 103
+CO RIO GRANDE 105
+CO ROUTT 107
+CO SAGUACHE 109
+CO SAN JUAN 111
+CO SAN MIGUEL 113
+CO SEDGWICK 115
+CO SUMMIT 117
+CO TELLER 119
+CO WASHINGTON 121
+CO WELD 123
+CO YUMA 125
+CT FAIRFIELD 1
+CT HARTFORD 3
+CT LITCHFIELD 5
+CT MIDDLESEX 7
+CT NEW HAVEN 9
+CT NEW LONDON 11
+CT TOLLAND 13
+CT WINDHAM 15
+DC DISTRICT OF COLUMBIA 1
+DE KENT 1
+DE NEW CASTLE 3
+DE SUSSEX 5
+FL ALACHUA 1
+FL BAKER 3
+FL BAY 5
+FL BRADFORD 7
+FL BREVARD 9
+Revision 5 Page 20 of 84 10/15/2025
+--- PAGE 21 ---
+MCMIS County Codes
+State County Code
+FL BROWARD 11
+FL CALHOUN 13
+FL CHARLOTTE 15
+FL CITRUS 17
+FL CLAY 19
+FL COLLIER 21
+FL COLUMBIA 23
+FL DE SOTO 27
+FL DIXIE 29
+FL DUVAL 31
+FL ESCAMBIA 33
+FL FLAGLER 35
+FL FRANKLIN 37
+FL GADSDEN 39
+FL GILCHRIST 41
+FL GLADES 43
+FL GULF 45
+FL HAMILTON 47
+FL HARDEE 49
+FL HENDRY 51
+FL HERNANDO 53
+FL HIGHLANDS 55
+FL HILLSBOROUGH 57
+FL HOLMES 59
+FL INDIAN RIVER 61
+FL JACKSON 63
+FL JEFFERSON 65
+FL LAFAYETTE 67
+FL LAKE 69
+FL LEE 71
+FL LEON 73
+FL LEVY 75
+FL LIBERTY 77
+FL MADISON 79
+FL MANATEE 81
+FL MARION 83
+FL MARTIN 85
+FL MIAMI-DADE 86
+FL MONROE 87
+FL NASSAU 89
+FL OKALOOSA 91
+FL OKEECHOBEE 93
+FL ORANGE 95
+FL OSCEOLA 97
+FL PALM BEACH 99
+FL PASCO 101
+Revision 5 Page 21 of 84 10/15/2025
+--- PAGE 22 ---
+MCMIS County Codes
+State County Code
+FL PINELLAS 103
+FL POLK 105
+FL PUTNAM 107
+FL SAINT JOHNS 109
+FL SAINT LUCIE 111
+FL SANTA ROSA 113
+FL SARASOTA 115
+FL SEMINOLE 117
+FL SUMTER 119
+FL SUWANNEE 121
+FL TAYLOR 123
+FL UNION 125
+FL VOLUSIA 127
+FL WAKULLA 129
+FL WALTON 131
+FL WASHINGTON 133
+GA APPLING 1
+GA ATKINSON 3
+GA BACON 5
+GA BAKER 7
+GA BALDWIN 9
+GA BANKS 11
+GA BARROW 13
+GA BARTOW 15
+GA BEN HILL 17
+GA BERRIEN 19
+GA BIBB 21
+GA BLECKLEY 23
+GA BRANTLEY 25
+GA BROOKS 27
+GA BRYAN 29
+GA BULLOCH 31
+GA BURKE 33
+GA BUTTS 35
+GA CALHOUN 37
+GA CAMDEN 39
+GA CANDLER 43
+GA CARROLL 45
+GA CATOOSA 47
+GA CHARLTON 49
+GA CHATHAM 51
+GA CHATTAHOOCHEE 53
+GA CHATTOOGA 55
+GA CHEROKEE 57
+GA CLARKE 59
+GA CLAY 61
+Revision 5 Page 22 of 84 10/15/2025
+--- PAGE 23 ---
+MCMIS County Codes
+State County Code
+GA CLAYTON 63
+GA CLINCH 65
+GA COBB 67
+GA COFFEE 69
+GA COLQUITT 71
+GA COLUMBIA 73
+GA COOK 75
+GA COWETA 77
+GA CRAWFORD 79
+GA CRISP 81
+GA DADE 83
+GA DAWSON 85
+GA DECATUR 87
+GA DEKALB 89
+GA DODGE 91
+GA DOOLY 93
+GA DOUGHERTY 95
+GA DOUGLAS 97
+GA EARLY 99
+GA ECHOLS 101
+GA EFFINGHAM 103
+GA ELBERT 105
+GA EMANUEL 107
+GA EVANS 109
+GA FANNIN 111
+GA FAYETTE 113
+GA FLOYD 115
+GA FORSYTH 117
+GA FRANKLIN 119
+GA FULTON 121
+GA GILMER 123
+GA GLASCOCK 125
+GA GLYNN 127
+GA GORDON 129
+GA GRADY 131
+GA GREENE 133
+GA GWINNETT 135
+GA HABERSHAM 137
+GA HALL 139
+GA HANCOCK 141
+GA HARALSON 143
+GA HARRIS 145
+GA HART 147
+GA HEARD 149
+GA HENRY 151
+GA HOUSTON 153
+Revision 5 Page 23 of 84 10/15/2025
+--- PAGE 24 ---
+MCMIS County Codes
+State County Code
+GA IRWIN 155
+GA JACKSON 157
+GA JASPER 159
+GA JEFF DAVIS 161
+GA JEFFERSON 163
+GA JENKINS 165
+GA JOHNSON 167
+GA JONES 169
+GA LAMAR 171
+GA LANIER 173
+GA LAURENS 175
+GA LEE 177
+GA LIBERTY 179
+GA LINCOLN 181
+GA LONG 183
+GA LOWNDES 185
+GA LUMPKIN 187
+GA MACON 193
+GA MADISON 195
+GA MARION 197
+GA MCDUFFIE 189
+GA MCINTOSH 191
+GA MERIWETHER 199
+GA MILLER 201
+GA MITCHELL 205
+GA MONROE 207
+GA MONTGOMERY 209
+GA MORGAN 211
+GA MURRAY 213
+GA MUSCOGEE 215
+GA NEWTON 217
+GA OCONEE 219
+GA OGLETHORPE 221
+GA PAULDING 223
+GA PEACH 225
+GA PICKENS 227
+GA PIERCE 229
+GA PIKE 231
+GA POLK 233
+GA PULASKI 235
+GA PUTNAM 237
+GA QUITMAN 239
+GA RABUN 241
+GA RANDOLPH 243
+GA RICHMOND 245
+GA ROCKDALE 247
+Revision 5 Page 24 of 84 10/15/2025
+--- PAGE 25 ---
+MCMIS County Codes
+State County Code
+GA SCHLEY 249
+GA SCREVEN 251
+GA SEMINOLE 253
+GA SPALDING 255
+GA STEPHENS 257
+GA STEWART 259
+GA SUMTER 261
+GA TALBOT 263
+GA TALIAFERRO 265
+GA TATTNALL 267
+GA TAYLOR 269
+GA TELFAIR 271
+GA TERRELL 273
+GA THOMAS 275
+GA TIFT 277
+GA TOOMBS 279
+GA TOWNS 281
+GA TREUTLEN 283
+GA TROUP 285
+GA TURNER 287
+GA TWIGGS 289
+GA UNION 291
+GA UPSON 293
+GA WALKER 295
+GA WALTON 297
+GA WARE 299
+GA WARREN 301
+GA WASHINGTON 303
+GA WAYNE 305
+GA WEBSTER 307
+GA WHEELER 309
+GA WHITE 311
+GA WHITFIELD 313
+GA WILCOX 315
+GA WILKES 317
+GA WILKINSON 319
+GA WORTH 321
+HI HAWAII 1
+HI HONOLULU 3
+HI KALAWAO 5
+HI KAUAI 7
+HI MAUI 9
+IA ADAIR 1
+IA ADAMS 3
+IA ALLAMAKEE 5
+IA APPANOOSE 7
+Revision 5 Page 25 of 84 10/15/2025
+--- PAGE 26 ---
+MCMIS County Codes
+State County Code
+IA AUDUBON 9
+IA BENTON 11
+IA BLACK HAWK 13
+IA BOONE 15
+IA BREMER 17
+IA BUCHANAN 19
+IA BUENA VISTA 21
+IA BUTLER 23
+IA CALHOUN 25
+IA CARROLL 27
+IA CASS 29
+IA CEDAR 31
+IA CERRO GORDO 33
+IA CHEROKEE 35
+IA CHICKASAW 37
+IA CLARKE 39
+IA CLAY 41
+IA CLAYTON 43
+IA CLINTON 45
+IA CRAWFORD 47
+IA DALLAS 49
+IA DAVIS 51
+IA DECATUR 53
+IA DELAWARE 55
+IA DES MOINES 57
+IA DICKINSON 59
+IA DUBUQUE 61
+IA EMMET 63
+IA FAYETTE 65
+IA FLOYD 67
+IA FRANKLIN 69
+IA FREMONT 71
+IA GREENE 73
+IA GRUNDY 75
+IA GUTHRIE 77
+IA HAMILTON 79
+IA HANCOCK 81
+IA HARDIN 83
+IA HARRISON 85
+IA HENRY 87
+IA HOWARD 89
+IA HUMBOLDT 91
+IA IDA 93
+IA IOWA 95
+IA JACKSON 97
+IA JASPER 99
+Revision 5 Page 26 of 84 10/15/2025
+--- PAGE 27 ---
+MCMIS County Codes
+State County Code
+IA JEFFERSON 101
+IA JOHNSON 103
+IA JONES 105
+IA KEOKUK 107
+IA KOSSUTH 109
+IA LEE 111
+IA LINN 113
+IA LOUISA 115
+IA LUCAS 117
+IA LYON 119
+IA MADISON 121
+IA MAHASKA 123
+IA MARION 125
+IA MARSHALL 127
+IA MILLS 129
+IA MITCHELL 131
+IA MONONA 133
+IA MONROE 135
+IA MONTGOMERY 137
+IA MUSCATINE 139
+IA OBRIEN 141
+IA OSCEOLA 143
+IA PAGE 145
+IA PALO ALTO 147
+IA PLYMOUTH 149
+IA POCAHONTAS 151
+IA POLK 153
+IA POTTAWATTAMIE 155
+IA POWESHIEK 157
+IA RINGGOLD 159
+IA SAC 161
+IA SCOTT 163
+IA SHELBY 165
+IA SIOUX 167
+IA STORY 169
+IA TAMA 171
+IA TAYLOR 173
+IA UNION 175
+IA VAN BUREN 177
+IA WAPELLO 179
+IA WARREN 181
+IA WASHINGTON 183
+IA WAYNE 185
+IA WEBSTER 187
+IA WINNEBAGO 189
+IA WINNESHIEK 191
+Revision 5 Page 27 of 84 10/15/2025
+--- PAGE 28 ---
+MCMIS County Codes
+State County Code
+IA WOODBURY 193
+IA WORTH 195
+IA WRIGHT 197
+ID ADA 1
+ID ADAMS 3
+ID BANNOCK 5
+ID BEAR LAKE 7
+ID BENEWAH 9
+ID BINGHAM 11
+ID BLAINE 13
+ID BOISE 15
+ID BONNER 17
+ID BONNEVILLE 19
+ID BOUNDARY 21
+ID BUTTE 23
+ID CAMAS 25
+ID CANYON 27
+ID CARIBOU 29
+ID CASSIA 31
+ID CLARK 33
+ID CLEARWATER 35
+ID CUSTER 37
+ID ELMORE 39
+ID FRANKLIN 41
+ID FREMONT 43
+ID GEM 45
+ID GOODING 47
+ID IDAHO 49
+ID JEFFERSON 51
+ID JEROME 53
+ID KOOTENAI 55
+ID LATAH 57
+ID LEMHI 59
+ID LEWIS 61
+ID LINCOLN 63
+ID MADISON 65
+ID MINIDOKA 67
+ID NEZ PERCE 69
+ID ONEIDA 71
+ID OWYHEE 73
+ID PAYETTE 75
+ID POWER 77
+ID SHOSHONE 79
+ID TETON 81
+ID TWIN FALLS 83
+ID VALLEY 85
+Revision 5 Page 28 of 84 10/15/2025
+--- PAGE 29 ---
+MCMIS County Codes
+State County Code
+ID WASHINGTON 87
+IL ADAMS 1
+IL ALEXANDER 3
+IL BOND 5
+IL BOONE 7
+IL BROWN 9
+IL BUREAU 11
+IL CALHOUN 13
+IL CARROLL 15
+IL CASS 17
+IL CHAMPAIGN 19
+IL CHRISTIAN 21
+IL CLARK 23
+IL CLAY 25
+IL CLINTON 27
+IL COLES 29
+IL COOK 31
+IL CRAWFORD 33
+IL CUMBERLAND 35
+IL DE KALB 37
+IL DEWITT 39
+IL DOUGLAS 41
+IL DU PAGE 43
+IL EDGAR 45
+IL EDWARDS 47
+IL EFFINGHAM 49
+IL FAYETTE 51
+IL FORD 53
+IL FRANKLIN 55
+IL FULTON 57
+IL GALLATIN 59
+IL GREENE 61
+IL GRUNDY 63
+IL HAMILTON 65
+IL HANCOCK 67
+IL HARDIN 69
+IL HENDERSON 71
+IL HENRY 73
+IL IROQUOIS 75
+IL JACKSON 77
+IL JASPER 79
+IL JEFFERSON 81
+IL JERSEY 83
+IL JO DAVIESS 85
+IL JOHNSON 87
+IL KANE 89
+Revision 5 Page 29 of 84 10/15/2025
+--- PAGE 30 ---
+MCMIS County Codes
+State County Code
+IL KANKAKEE 91
+IL KENDALL 93
+IL KNOX 95
+IL LA SALLE 99
+IL LAKE 97
+IL LAWRENCE 101
+IL LEE 103
+IL LIVINGSTON 105
+IL LOGAN 107
+IL MACON 115
+IL MACOUPIN 117
+IL MADISON 119
+IL MARION 121
+IL MARSHALL 123
+IL MASON 125
+IL MASSAC 127
+IL MCDONOUGH 109
+IL MCHENRY 111
+IL MCLEAN 113
+IL MENARD 129
+IL MERCER 131
+IL MONROE 133
+IL MONTGOMERY 135
+IL MORGAN 137
+IL MOULTRIE 139
+IL OGLE 141
+IL PEORIA 143
+IL PERRY 145
+IL PIATT 147
+IL PIKE 149
+IL POPE 151
+IL PULASKI 153
+IL PUTNAM 155
+IL RANDOLPH 157
+IL RICHLAND 159
+IL ROCK ISLAND 161
+IL SAINT CLAIR 163
+IL SALINE 165
+IL SANGAMON 167
+IL SCHUYLER 169
+IL SCOTT 171
+IL SHELBY 173
+IL STARK 175
+IL STEPHENSON 177
+IL TAZEWELL 179
+IL UNION 181
+Revision 5 Page 30 of 84 10/15/2025
+--- PAGE 31 ---
+MCMIS County Codes
+State County Code
+IL VERMILION 183
+IL WABASH 185
+IL WARREN 187
+IL WASHINGTON 189
+IL WAYNE 191
+IL WHITE 193
+IL WHITESIDE 195
+IL WILL 197
+IL WILLIAMSON 199
+IL WINNEBAGO 201
+IL WOODFORD 203
+IN ADAMS 1
+IN ALLEN 3
+IN BARTHOLOMEW 5
+IN BENTON 7
+IN BLACKFORD 9
+IN BOONE 11
+IN BROWN 13
+IN CARROLL 15
+IN CASS 17
+IN CLARK 19
+IN CLAY 21
+IN CLINTON 23
+IN CRAWFORD 25
+IN DAVIESS 27
+IN DE KALB 33
+IN DEARBORN 29
+IN DECATUR 31
+IN DELAWARE 35
+IN DUBOIS 37
+IN ELKHART 39
+IN FAYETTE 41
+IN FLOYD 43
+IN FOUNTAIN 45
+IN FRANKLIN 47
+IN FULTON 49
+IN GIBSON 51
+IN GRANT 53
+IN GREENE 55
+IN HAMILTON 57
+IN HANCOCK 59
+IN HARRISON 61
+IN HENDRICKS 63
+IN HENRY 65
+IN HOWARD 67
+IN HUNTINGTON 69
+Revision 5 Page 31 of 84 10/15/2025
+--- PAGE 32 ---
+MCMIS County Codes
+State County Code
+IN JACKSON 71
+IN JASPER 73
+IN JAY 75
+IN JEFFERSON 77
+IN JENNINGS 79
+IN JOHNSON 81
+IN KNOX 83
+IN KOSCIUSKO 85
+IN LA PORTE 91
+IN LAGRANGE 87
+IN LAKE 89
+IN LAWRENCE 93
+IN MADISON 95
+IN MARION 97
+IN MARSHALL 99
+IN MARTIN 101
+IN MIAMI 103
+IN MONROE 105
+IN MONTGOMERY 107
+IN MORGAN 109
+IN NEWTON 111
+IN NOBLE 113
+IN OHIO 115
+IN ORANGE 117
+IN OWEN 119
+IN PARKE 121
+IN PERRY 123
+IN PIKE 125
+IN PORTER 127
+IN POSEY 129
+IN PULASKI 131
+IN PUTNAM 133
+IN RANDOLPH 135
+IN RIPLEY 137
+IN RUSH 139
+IN SCOTT 143
+IN SHELBY 145
+IN SPENCER 147
+IN ST JOSEPH 141
+IN STARKE 149
+IN STEUBEN 151
+IN SULLIVAN 153
+IN SWITZERLAND 155
+IN TIPPECANOE 157
+IN TIPTON 159
+IN UNION 161
+Revision 5 Page 32 of 84 10/15/2025
+--- PAGE 33 ---
+MCMIS County Codes
+State County Code
+IN VANDERBURGH 163
+IN VERMILLION 165
+IN VIGO 167
+IN WABASH 169
+IN WARREN 171
+IN WARRICK 173
+IN WASHINGTON 175
+IN WAYNE 177
+IN WELLS 179
+IN WHITE 181
+IN WHITLEY 183
+KS ALLEN 1
+KS ANDERSON 3
+KS ATCHISON 5
+KS BARBER 7
+KS BARTON 9
+KS BOURBON 11
+KS BROWN 13
+KS BUTLER 15
+KS CHASE 17
+KS CHAUTAUQUA 19
+KS CHEROKEE 21
+KS CHEYENNE 23
+KS CLARK 25
+KS CLAY 27
+KS CLOUD 29
+KS COFFEY 31
+KS COMANCHE 33
+KS COWLEY 35
+KS CRAWFORD 37
+KS DECATUR 39
+KS DICKINSON 41
+KS DONIPHAN 43
+KS DOUGLAS 45
+KS EDWARDS 47
+KS ELK 49
+KS ELLIS 51
+KS ELLSWORTH 53
+KS FINNEY 55
+KS FORD 57
+KS FRANKLIN 59
+KS GEARY 61
+KS GOVE 63
+KS GRAHAM 65
+KS GRANT 67
+KS GRAY 69
+Revision 5 Page 33 of 84 10/15/2025
+--- PAGE 34 ---
+MCMIS County Codes
+State County Code
+KS GREELEY 71
+KS GREENWOOD 73
+KS HAMILTON 75
+KS HARPER 77
+KS HARVEY 79
+KS HASKELL 81
+KS HODGEMAN 83
+KS JACKSON 85
+KS JEFFERSON 87
+KS JEWELL 89
+KS JOHNSON 91
+KS KEARNY 93
+KS KINGMAN 95
+KS KIOWA 97
+KS LABETTE 99
+KS LANE 101
+KS LEAVENWORTH 103
+KS LINCOLN 105
+KS LINN 107
+KS LOGAN 109
+KS LYON 111
+KS MARION 115
+KS MARSHALL 117
+KS MCPHERSON 113
+KS MEADE 119
+KS MIAMI 121
+KS MITCHELL 123
+KS MONTGOMERY 125
+KS MORRIS 127
+KS MORTON 129
+KS NEMAHA 131
+KS NEOSHO 133
+KS NESS 135
+KS NORTON 137
+KS OSAGE 139
+KS OSBORNE 141
+KS OTTAWA 143
+KS PAWNEE 145
+KS PHILLIPS 147
+KS POTTAWATOMIE 149
+KS PRATT 151
+KS RAWLINS 153
+KS RENO 155
+KS REPUBLIC 157
+KS RICE 159
+KS RILEY 161
+Revision 5 Page 34 of 84 10/15/2025
+--- PAGE 35 ---
+MCMIS County Codes
+State County Code
+KS ROOKS 163
+KS RUSH 165
+KS RUSSELL 167
+KS SALINE 169
+KS SCOTT 171
+KS SEDGWICK 173
+KS SEWARD 175
+KS SHAWNEE 177
+KS SHERIDAN 179
+KS SHERMAN 181
+KS SMITH 183
+KS STAFFORD 185
+KS STANTON 187
+KS STEVENS 189
+KS SUMNER 191
+KS THOMAS 193
+KS TREGO 195
+KS WABAUNSEE 197
+KS WALLACE 199
+KS WASHINGTON 201
+KS WICHITA 203
+KS WILSON 205
+KS WOODSON 207
+KS WYANDOTTE 209
+KY ADAIR 1
+KY ALLEN 3
+KY ANDERSON 5
+KY BALLARD 7
+KY BARREN 9
+KY BATH 11
+KY BELL 13
+KY BOONE 15
+KY BOURBON 17
+KY BOYD 19
+KY BOYLE 21
+KY BRACKEN 23
+KY BREATHITT 25
+KY BRECKINRIDGE 27
+KY BULLITT 29
+KY BUTLER 31
+KY CALDWELL 33
+KY CALLOWAY 35
+KY CAMPBELL 37
+KY CARLISLE 39
+KY CARROLL 41
+KY CARTER 43
+Revision 5 Page 35 of 84 10/15/2025
+--- PAGE 36 ---
+MCMIS County Codes
+State County Code
+KY CASEY 45
+KY CHRISTIAN 47
+KY CLARK 49
+KY CLAY 51
+KY CLINTON 53
+KY CRITTENDEN 55
+KY CUMBERLAND 57
+KY DAVIESS 59
+KY EDMONSON 61
+KY ELLIOTT 63
+KY ESTILL 65
+KY FAYETTE 67
+KY FLEMING 69
+KY FLOYD 71
+KY FRANKLIN 73
+KY FULTON 75
+KY GALLATIN 77
+KY GARRARD 79
+KY GRANT 81
+KY GRAVES 83
+KY GRAYSON 85
+KY GREEN 87
+KY GREENUP 89
+KY HANCOCK 91
+KY HARDIN 93
+KY HARLAN 95
+KY HARRISON 97
+KY HART 99
+KY HENDERSON 101
+KY HENRY 103
+KY HICKMAN 105
+KY HOPKINS 107
+KY JACKSON 109
+KY JEFFERSON 111
+KY JESSAMINE 113
+KY JOHNSON 115
+KY KENTON 117
+KY KNOTT 119
+KY KNOX 121
+KY LARUE 123
+KY LAUREL 125
+KY LAWRENCE 127
+KY LEE 129
+KY LESLIE 131
+KY LETCHER 133
+KY LEWIS 135
+Revision 5 Page 36 of 84 10/15/2025
+--- PAGE 37 ---
+MCMIS County Codes
+State County Code
+KY LINCOLN 137
+KY LIVINGSTON 139
+KY LOGAN 141
+KY LYON 143
+KY MADISON 151
+KY MAGOFFIN 153
+KY MARION 155
+KY MARSHALL 157
+KY MARTIN 159
+KY MASON 161
+KY MCCRACKEN 145
+KY MCCREARY 147
+KY MCLEAN 149
+KY MEADE 163
+KY MENIFEE 165
+KY MERCER 167
+KY METCALFE 169
+KY MONROE 171
+KY MONTGOMERY 173
+KY MORGAN 175
+KY MUHLENBERG 177
+KY NELSON 179
+KY NICHOLAS 181
+KY OHIO 183
+KY OLDHAM 185
+KY OWEN 187
+KY OWSLEY 189
+KY PENDLETON 191
+KY PERRY 193
+KY PIKE 195
+KY POWELL 197
+KY PULASKI 199
+KY ROBERTSON 201
+KY ROCKCASTLE 203
+KY ROWAN 205
+KY RUSSELL 207
+KY SCOTT 209
+KY SHELBY 211
+KY SIMPSON 213
+KY SPENCER 215
+KY TAYLOR 217
+KY TODD 219
+KY TRIGG 221
+KY TRIMBLE 223
+KY UNION 225
+KY WARREN 227
+Revision 5 Page 37 of 84 10/15/2025
+--- PAGE 38 ---
+MCMIS County Codes
+State County Code
+KY WASHINGTON 229
+KY WAYNE 231
+KY WEBSTER 233
+KY WHITLEY 235
+KY WOLFE 237
+KY WOODFORD 239
+LA ACADIA 1
+LA ALLEN 3
+LA ASCENSION 5
+LA ASSUMPTION 7
+LA AVOYELLES 9
+LA BEAUREGARD 11
+LA BIENVILLE 13
+LA BOSSIER 15
+LA CADDO 17
+LA CALCASIEU 19
+LA CALDWELL 21
+LA CAMERON 23
+LA CATAHOULA 25
+LA CLAIBORNE 27
+LA CONCORDIA 29
+LA DE SOTO 31
+LA EAST BATON ROUGE 33
+LA EAST CARROLL 35
+LA EAST FELICIANA 37
+LA EVANGELINE 39
+LA FRANKLIN 41
+LA GRANT 43
+LA IBERIA 45
+LA IBERVILLE 47
+LA JACKSON 49
+LA JEFFERSON DAVIS 53
+LA JEFFERSON 51
+LA LA SALLE 59
+LA LAFAYETTE 55
+LA LAFOURCHE 57
+LA LINCOLN 61
+LA LIVINGSTON 63
+LA MADISON 65
+LA MOREHOUSE 67
+LA NATCHITOCHES 69
+LA ORLEANS 71
+LA OUACHITA 73
+LA PLAQUEMINES 75
+LA POINTE COUPEE 77
+LA RAPIDES 79
+Revision 5 Page 38 of 84 10/15/2025
+--- PAGE 39 ---
+MCMIS County Codes
+State County Code
+LA RED RIVER 81
+LA RICHLAND 83
+LA SABINE 85
+LA SAINT BERNARD 87
+LA SAINT CHARLES 89
+LA SAINT HELENA 91
+LA SAINT JAMES 93
+LA SAINT LANDRY 97
+LA SAINT MARTIN 99
+LA SAINT MARY 101
+LA SAINT TAMMANY 103
+LA ST JOHN THE BAPTIST 95
+LA TANGIPAHOA 105
+LA TENSAS 107
+LA TERREBONNE 109
+LA UNION 111
+LA VERMILION 113
+LA VERNON 115
+LA WASHINGTON 117
+LA WEBSTER 119
+LA WEST BATON ROUGE 121
+LA WEST CARROLL 123
+LA WEST FELICIANA 125
+LA WINN 127
+MA BARNSTABLE 1
+MA BERKSHIRE 3
+MA BRISTOL 5
+MA DUKES 7
+MA ESSEX 9
+MA FRANKLIN 11
+MA HAMPDEN 13
+MA HAMPSHIRE 15
+MA MIDDLESEX 17
+MA NANTUCKET 19
+MA NORFOLK 21
+MA PLYMOUTH 23
+MA SUFFOLK 25
+MA WORCESTER 27
+MD ALLEGANY 1
+MD ANNE ARUNDEL 3
+MD BALTIMORE CITY 510
+MD BALTIMORE 5
+MD CALVERT 9
+MD CAROLINE 11
+MD CARROLL 13
+MD CECIL 15
+Revision 5 Page 39 of 84 10/15/2025
+--- PAGE 40 ---
+MCMIS County Codes
+State County Code
+MD CHARLES 17
+MD DORCHESTER 19
+MD FREDERICK 21
+MD GARRETT 23
+MD HARFORD 25
+MD HOWARD 27
+MD KENT 29
+MD MONTGOMERY 31
+MD PRINCE GEORGES 33
+MD QUEEN ANNES 35
+MD SAINT MARYS 37
+MD SOMERSET 39
+MD TALBOT 41
+MD WASHINGTON 43
+MD WICOMICO 45
+MD WORCESTER 47
+ME ANDROSCOGGIN 1
+ME AROOSTOOK 3
+ME CUMBERLAND 5
+ME FRANKLIN 7
+ME HANCOCK 9
+ME KENNEBEC 11
+ME KNOX 13
+ME LINCOLN 15
+ME OXFORD 17
+ME PENOBSCOT 19
+ME PISCATAQUIS 21
+ME SAGADAHOC 23
+ME SOMERSET 25
+ME WALDO 27
+ME WASHINGTON 29
+ME YORK 31
+MI ALCONA 1
+MI ALGER 3
+MI ALLEGAN 5
+MI ALPENA 7
+MI ANTRIM 9
+MI ARENAC 11
+MI BARAGA 13
+MI BARRY 15
+MI BAY 17
+MI BENZIE 19
+MI BERRIEN 21
+MI BRANCH 23
+MI CALHOUN 25
+MI CASS 27
+Revision 5 Page 40 of 84 10/15/2025
+--- PAGE 41 ---
+MCMIS County Codes
+State County Code
+MI CHARLEVOIX 29
+MI CHEBOYGAN 31
+MI CHIPPEWA 33
+MI CLARE 35
+MI CLINTON 37
+MI CRAWFORD 39
+MI DELTA 41
+MI DICKINSON 43
+MI EATON 45
+MI EMMET 47
+MI GENESEE 49
+MI GLADWIN 51
+MI GOGEBIC 53
+MI GRAND TRAVERSE 55
+MI GRATIOT 57
+MI HILLSDALE 59
+MI HOUGHTON 61
+MI HURON 63
+MI INGHAM 65
+MI IONIA 67
+MI IOSCO 69
+MI IRON 71
+MI ISABELLA 73
+MI JACKSON 75
+MI KALAMAZOO 77
+MI KALKASKA 79
+MI KENT 81
+MI KEWEENAW 83
+MI LAKE 85
+MI LAPEER 87
+MI LEELANAU 89
+MI LENAWEE 91
+MI LIVINGSTON 93
+MI LUCE 95
+MI MACKINAC 97
+MI MACOMB 99
+MI MANISTEE 101
+MI MARQUETTE 103
+MI MASON 105
+MI MECOSTA 107
+MI MENOMINEE 109
+MI MIDLAND 111
+MI MISSAUKEE 113
+MI MONROE 115
+MI MONTCALM 117
+MI MONTMORENCY 119
+Revision 5 Page 41 of 84 10/15/2025
+--- PAGE 42 ---
+MCMIS County Codes
+State County Code
+MI MUSKEGON 121
+MI NEWAYGO 123
+MI OAKLAND 125
+MI OCEANA 127
+MI OGEMAW 129
+MI ONTONAGON 131
+MI OSCEOLA 133
+MI OSCODA 135
+MI OTSEGO 137
+MI OTTAWA 139
+MI PRESQUE ISLE 141
+MI ROSCOMMON 143
+MI SAGINAW 145
+MI SAINT CLAIR 147
+MI SAINT JOSEPH 149
+MI SANILAC 151
+MI SCHOOLCRAFT 153
+MI SHIAWASSEE 155
+MI TUSCOLA 157
+MI VAN BUREN 159
+MI WASHTENAW 161
+MI WAYNE 163
+MI WEXFORD 165
+MN AITKIN 1
+MN ANOKA 3
+MN BECKER 5
+MN BELTRAMI 7
+MN BENTON 9
+MN BIG STONE 11
+MN BLUE EARTH 13
+MN BROWN 15
+MN CARLTON 17
+MN CARVER 19
+MN CASS 21
+MN CHIPPEWA 23
+MN CHISAGO 25
+MN CLAY 27
+MN CLEARWATER 29
+MN COOK 31
+MN COTTONWOOD 33
+MN CROW WING 35
+MN DAKOTA 37
+MN DODGE 39
+MN DOUGLAS 41
+MN FARIBAULT 43
+MN FILLMORE 45
+Revision 5 Page 42 of 84 10/15/2025
+--- PAGE 43 ---
+MCMIS County Codes
+State County Code
+MN FREEBORN 47
+MN GOODHUE 49
+MN GRANT 51
+MN HENNEPIN 53
+MN HOUSTON 55
+MN HUBBARD 57
+MN ISANTI 59
+MN ITASCA 61
+MN JACKSON 63
+MN KANABEC 65
+MN KANDIYOHI 67
+MN KITTSON 69
+MN KOOCHICHING 71
+MN LAC QUI PARLE 73
+MN LAKE OF THE WOODS 77
+MN LAKE 75
+MN LE SUEUR 79
+MN LINCOLN 81
+MN LYON 83
+MN MAHNOMEN 87
+MN MARSHALL 89
+MN MARTIN 91
+MN MCLEOD 85
+MN MEEKER 93
+MN MILLE LACS 95
+MN MORRISON 97
+MN MOWER 99
+MN MURRAY 101
+MN NICOLLET 103
+MN NOBLES 105
+MN NORMAN 107
+MN OLMSTED 109
+MN OTTER TAIL 111
+MN PENNINGTON 113
+MN PINE 115
+MN PIPESTONE 117
+MN POLK 119
+MN POPE 121
+MN RAMSEY 123
+MN RED LAKE 125
+MN REDWOOD 127
+MN RENVILLE 129
+MN RICE 131
+MN ROCK 133
+MN ROSEAU 135
+MN SAINT LOUIS 137
+Revision 5 Page 43 of 84 10/15/2025
+--- PAGE 44 ---
+MCMIS County Codes
+State County Code
+MN SCOTT 139
+MN SHERBURNE 141
+MN SIBLEY 143
+MN STEARNS 145
+MN STEELE 147
+MN STEVENS 149
+MN SWIFT 151
+MN TODD 153
+MN TRAVERSE 155
+MN WABASHA 157
+MN WADENA 159
+MN WASECA 161
+MN WASHINGTON 163
+MN WATONWAN 165
+MN WILKIN 167
+MN WINONA 169
+MN WRIGHT 171
+MN YELLOW MEDICINE 173
+MO ADAIR 1
+MO ANDREW 3
+MO ATCHISON 5
+MO AUDRAIN 7
+MO BARRY 9
+MO BARTON 11
+MO BATES 13
+MO BENTON 15
+MO BOLLINGER 17
+MO BOONE 19
+MO BUCHANAN 21
+MO BUTLER 23
+MO CALDWELL 25
+MO CALLAWAY 27
+MO CAMDEN 29
+MO CAPE GIRARDEAU 31
+MO CARROLL 33
+MO CARTER 35
+MO CASS 37
+MO CEDAR 39
+MO CHARITON 41
+MO CHRISTIAN 43
+MO CLARK 45
+MO CLAY 47
+MO CLINTON 49
+MO COLE 51
+MO COOPER 53
+MO CRAWFORD 55
+Revision 5 Page 44 of 84 10/15/2025
+--- PAGE 45 ---
+MCMIS County Codes
+State County Code
+MO DADE 57
+MO DALLAS 59
+MO DAVIESS 61
+MO DEKALB 63
+MO DENT 65
+MO DOUGLAS 67
+MO DUNKLIN 69
+MO FRANKLIN 71
+MO GASCONADE 73
+MO GENTRY 75
+MO GREENE 77
+MO GRUNDY 79
+MO HARRISON 81
+MO HENRY 83
+MO HICKORY 85
+MO HOLT 87
+MO HOWARD 89
+MO HOWELL 91
+MO IRON 93
+MO JACKSON 95
+MO JASPER 97
+MO JEFFERSON 99
+MO JOHNSON 101
+MO KNOX 103
+MO LACLEDE 105
+MO LAFAYETTE 107
+MO LAWRENCE 109
+MO LEWIS 111
+MO LINCOLN 113
+MO LINN 115
+MO LIVINGSTON 117
+MO MACON 121
+MO MADISON 123
+MO MARIES 125
+MO MARION 127
+MO MCDONALD 119
+MO MERCER 129
+MO MILLER 131
+MO MISSISSIPPI 133
+MO MONITEAU 135
+MO MONROE 137
+MO MONTGOMERY 139
+MO MORGAN 141
+MO NEW MADRID 143
+MO NEWTON 145
+MO NODAWAY 147
+Revision 5 Page 45 of 84 10/15/2025
+--- PAGE 46 ---
+MCMIS County Codes
+State County Code
+MO OREGON 149
+MO OSAGE 151
+MO OZARK 153
+MO PEMISCOT 155
+MO PERRY 157
+MO PETTIS 159
+MO PHELPS 161
+MO PIKE 163
+MO PLATTE 165
+MO POLK 167
+MO PULASKI 169
+MO PUTNAM 171
+MO RALLS 173
+MO RANDOLPH 175
+MO RAY 177
+MO REYNOLDS 179
+MO RIPLEY 181
+MO SAINT CHARLES 183
+MO SAINT CLAIR 185
+MO SAINT FRANCOIS 187
+MO SAINT LOUIS CITY 510
+MO SAINT LOUIS 189
+MO SAINTE GENEVIEVE 186
+MO SALINE 195
+MO SCHUYLER 197
+MO SCOTLAND 199
+MO SCOTT 201
+MO SHANNON 203
+MO SHELBY 205
+MO STODDARD 207
+MO STONE 209
+MO SULLIVAN 211
+MO TANEY 213
+MO TEXAS 215
+MO VERNON 217
+MO WARREN 219
+MO WASHINGTON 221
+MO WAYNE 223
+MO WEBSTER 225
+MO WORTH 227
+MO WRIGHT 229
+MS ADAMS 1
+MS ALCORN 3
+MS AMITE 5
+MS ATTALA 7
+MS BENTON 9
+Revision 5 Page 46 of 84 10/15/2025
+--- PAGE 47 ---
+MCMIS County Codes
+State County Code
+MS BOLIVAR 11
+MS CALHOUN 13
+MS CARROLL 15
+MS CHICKASAW 17
+MS CHOCTAW 19
+MS CLAIBORNE 21
+MS CLARKE 23
+MS CLAY 25
+MS COAHOMA 27
+MS COPIAH 29
+MS COVINGTON 31
+MS DE SOTO 33
+MS FORREST 35
+MS FRANKLIN 37
+MS GEORGE 39
+MS GREENE 41
+MS GRENADA 43
+MS HANCOCK 45
+MS HARRISON 47
+MS HINDS 49
+MS HOLMES 51
+MS HUMPHREYS 53
+MS ISSAQUENA 55
+MS ITAWAMBA 57
+MS JACKSON 59
+MS JASPER 61
+MS JEFFERSON DAVIS 65
+MS JEFFERSON 63
+MS JONES 67
+MS KEMPER 69
+MS LAFAYETTE 71
+MS LAMAR 73
+MS LAUDERDALE 75
+MS LAWRENCE 77
+MS LEAKE 79
+MS LEE 81
+MS LEFLORE 83
+MS LINCOLN 85
+MS LOWNDES 87
+MS MADISON 89
+MS MARION 91
+MS MARSHALL 93
+MS MONROE 95
+MS MONTGOMERY 97
+MS NESHOBA 99
+MS NEWTON 101
+Revision 5 Page 47 of 84 10/15/2025
+--- PAGE 48 ---
+MCMIS County Codes
+State County Code
+MS NOXUBEE 103
+MS OKTIBBEHA 105
+MS PANOLA 107
+MS PEARL RIVER 109
+MS PERRY 111
+MS PIKE 113
+MS PONTOTOC 115
+MS PRENTISS 117
+MS QUITMAN 119
+MS RANKIN 121
+MS SCOTT 123
+MS SHARKEY 125
+MS SIMPSON 127
+MS SMITH 129
+MS STONE 131
+MS SUNFLOWER 133
+MS TALLAHATCHIE 135
+MS TATE 137
+MS TIPPAH 139
+MS TISHOMINGO 141
+MS TUNICA 143
+MS UNION 145
+MS WALTHALL 147
+MS WARREN 149
+MS WASHINGTON 151
+MS WAYNE 153
+MS WEBSTER 155
+MS WILKINSON 157
+MS WINSTON 159
+MS YALOBUSHA 161
+MS YAZOO 163
+MT BEAVERHEAD 1
+MT BIG HORN 3
+MT BLAINE 5
+MT BROADWATER 7
+MT CARBON 9
+MT CARTER 11
+MT CASCADE 13
+MT CHOUTEAU 15
+MT CUSTER 17
+MT DANIELS 19
+MT DAWSON 21
+MT DEER LODGE 23
+MT FALLON 25
+MT FERGUS 27
+MT FLATHEAD 29
+Revision 5 Page 48 of 84 10/15/2025
+--- PAGE 49 ---
+MCMIS County Codes
+State County Code
+MT GALLATIN 31
+MT GARFIELD 33
+MT GLACIER 35
+MT GOLDEN VALLEY 37
+MT GRANITE 39
+MT HILL 41
+MT JEFFERSON 43
+MT JUDITH BASIN 45
+MT LAKE 47
+MT LEWIS AND CLARK 49
+MT LIBERTY 51
+MT LINCOLN 53
+MT MADISON 57
+MT MCCONE 55
+MT MEAGHER 59
+MT MINERAL 61
+MT MISSOULA 63
+MT MUSSELSHELL 65
+MT PARK 67
+MT PETROLEUM 69
+MT PHILLIPS 71
+MT PONDERA 73
+MT POWDER RIVER 75
+MT POWELL 77
+MT PRAIRIE 79
+MT RAVALLI 81
+MT RICHLAND 83
+MT ROOSEVELT 85
+MT ROSEBUD 87
+MT SANDERS 89
+MT SHERIDAN 91
+MT SILVER BOW 93
+MT STILLWATER 95
+MT SWEET GRASS 97
+MT TETON 99
+MT TOOLE 101
+MT TREASURE 103
+MT VALLEY 105
+MT WHEATLAND 107
+MT WIBAUX 109
+MT YELLOWSTONE 111
+NC ALAMANCE 1
+NC ALEXANDER 3
+NC ALLEGHANY 5
+NC ANSON 7
+NC ASHE 9
+Revision 5 Page 49 of 84 10/15/2025
+--- PAGE 50 ---
+MCMIS County Codes
+State County Code
+NC AVERY 11
+NC BEAUFORT 13
+NC BERTIE 15
+NC BLADEN 17
+NC BRUNSWICK 19
+NC BUNCOMBE 21
+NC BURKE 23
+NC CABARRUS 25
+NC CALDWELL 27
+NC CAMDEN 29
+NC CARTERET 31
+NC CASWELL 33
+NC CATAWBA 35
+NC CHATHAM 37
+NC CHEROKEE 39
+NC CHOWAN 41
+NC CLAY 43
+NC CLEVELAND 45
+NC COLUMBUS 47
+NC CRAVEN 49
+NC CUMBERLAND 51
+NC CURRITUCK 53
+NC DARE 55
+NC DAVIDSON 57
+NC DAVIE 59
+NC DUPLIN 61
+NC DURHAM 63
+NC EDGECOMBE 65
+NC FORSYTH 67
+NC FRANKLIN 69
+NC GASTON 71
+NC GATES 73
+NC GRAHAM 75
+NC GRANVILLE 77
+NC GREENE 79
+NC GUILFORD 81
+NC HALIFAX 83
+NC HARNETT 85
+NC HAYWOOD 87
+NC HENDERSON 89
+NC HERTFORD 91
+NC HOKE 93
+NC HYDE 95
+NC IREDELL 97
+NC JACKSON 99
+NC JOHNSTON 101
+Revision 5 Page 50 of 84 10/15/2025
+--- PAGE 51 ---
+MCMIS County Codes
+State County Code
+NC JONES 103
+NC LEE 105
+NC LENOIR 107
+NC LINCOLN 109
+NC MACON 113
+NC MADISON 115
+NC MARTIN 117
+NC MCDOWELL 111
+NC MECKLENBURG 119
+NC MITCHELL 121
+NC MONTGOMERY 123
+NC MOORE 125
+NC NASH 127
+NC NEW HANOVER 129
+NC NORTHAMPTON 131
+NC ONSLOW 133
+NC ORANGE 135
+NC PAMLICO 137
+NC PASQUOTANK 139
+NC PENDER 141
+NC PERQUIMANS 143
+NC PERSON 145
+NC PITT 147
+NC POLK 149
+NC RANDOLPH 151
+NC RICHMOND 153
+NC ROBESON 155
+NC ROCKINGHAM 157
+NC ROWAN 159
+NC RUTHERFORD 161
+NC SAMPSON 163
+NC SCOTLAND 165
+NC STANLY 167
+NC STOKES 169
+NC SURRY 171
+NC SWAIN 173
+NC TRANSYLVANIA 175
+NC TYRRELL 177
+NC UNION 179
+NC VANCE 181
+NC WAKE 183
+NC WARREN 185
+NC WASHINGTON 187
+NC WATAUGA 189
+NC WAYNE 191
+NC WILKES 193
+Revision 5 Page 51 of 84 10/15/2025
+--- PAGE 52 ---
+MCMIS County Codes
+State County Code
+NC WILSON 195
+NC YADKIN 197
+NC YANCEY 199
+ND ADAMS 1
+ND BARNES 3
+ND BENSON 5
+ND BILLINGS 7
+ND BOTTINEAU 9
+ND BOWMAN 11
+ND BURKE 13
+ND BURLEIGH 15
+ND CASS 17
+ND CAVALIER 19
+ND DICKEY 21
+ND DIVIDE 23
+ND DUNN 25
+ND EDDY 27
+ND EMMONS 29
+ND FOSTER 31
+ND GOLDEN VALLEY 33
+ND GRAND FORKS 35
+ND GRANT 37
+ND GRIGGS 39
+ND HETTINGER 41
+ND KIDDER 43
+ND LAMOURE 45
+ND LOGAN 47
+ND MCHENRY 49
+ND MCINTOSH 51
+ND MCKENZIE 53
+ND MCLEAN 55
+ND MERCER 57
+ND MORTON 59
+ND MOUNTRAIL 61
+ND NELSON 63
+ND OLIVER 65
+ND PEMBINA 67
+ND PIERCE 69
+ND RAMSEY 71
+ND RANSOM 73
+ND RENVILLE 75
+ND RICHLAND 77
+ND ROLETTE 79
+ND SARGENT 81
+ND SHERIDAN 83
+ND SIOUX 85
+Revision 5 Page 52 of 84 10/15/2025
+--- PAGE 53 ---
+MCMIS County Codes
+State County Code
+ND SLOPE 87
+ND STARK 89
+ND STEELE 91
+ND STUTSMAN 93
+ND TOWNER 95
+ND TRAILL 97
+ND WALSH 99
+ND WARD 101
+ND WELLS 103
+ND WILLIAMS 105
+NE ADAMS 1
+NE ANTELOPE 3
+NE ARTHUR 5
+NE BANNER 7
+NE BLAINE 9
+NE BOONE 11
+NE BOX BUTTE 13
+NE BOYD 15
+NE BROWN 17
+NE BUFFALO 19
+NE BURT 21
+NE BUTLER 23
+NE CASS 25
+NE CEDAR 27
+NE CHASE 29
+NE CHERRY 31
+NE CHEYENNE 33
+NE CLAY 35
+NE COLFAX 37
+NE CUMING 39
+NE CUSTER 41
+NE DAKOTA 43
+NE DAWES 45
+NE DAWSON 47
+NE DEUEL 49
+NE DIXON 51
+NE DODGE 53
+NE DOUGLAS 55
+NE DUNDY 57
+NE FILLMORE 59
+NE FRANKLIN 61
+NE FRONTIER 63
+NE FURNAS 65
+NE GAGE 67
+NE GARDEN 69
+NE GARFIELD 71
+Revision 5 Page 53 of 84 10/15/2025
+--- PAGE 54 ---
+MCMIS County Codes
+State County Code
+NE GOSPER 73
+NE GRANT 75
+NE GREELEY 77
+NE HALL 79
+NE HAMILTON 81
+NE HARLAN 83
+NE HAYES 85
+NE HITCHCOCK 87
+NE HOLT 89
+NE HOOKER 91
+NE HOWARD 93
+NE JEFFERSON 95
+NE JOHNSON 97
+NE KEARNEY 99
+NE KEITH 101
+NE KEYA PAHA 103
+NE KIMBALL 105
+NE KNOX 107
+NE LANCASTER 109
+NE LINCOLN 111
+NE LOGAN 113
+NE LOUP 115
+NE MADISON 119
+NE MCPHERSON 117
+NE MERRICK 121
+NE MORRILL 123
+NE NANCE 125
+NE NEMAHA 127
+NE NUCKOLLS 129
+NE OTOE 131
+NE PAWNEE 133
+NE PERKINS 135
+NE PHELPS 137
+NE PIERCE 139
+NE PLATTE 141
+NE POLK 143
+NE RED WILLOW 145
+NE RICHARDSON 147
+NE ROCK 149
+NE SALINE 151
+NE SARPY 153
+NE SAUNDERS 155
+NE SCOTTS BLUFF 157
+NE SEWARD 159
+NE SHERIDAN 161
+NE SHERMAN 163
+Revision 5 Page 54 of 84 10/15/2025
+--- PAGE 55 ---
+MCMIS County Codes
+State County Code
+NE SIOUX 165
+NE STANTON 167
+NE THAYER 169
+NE THOMAS 171
+NE THURSTON 173
+NE VALLEY 175
+NE WASHINGTON 177
+NE WAYNE 179
+NE WEBSTER 181
+NE WHEELER 183
+NE YORK 185
+NH BELKNAP 1
+NH CARROLL 3
+NH CHESHIRE 5
+NH COOS 7
+NH GRAFTON 9
+NH HILLSBOROUGH 11
+NH MERRIMACK 13
+NH ROCKINGHAM 15
+NH STRAFFORD 17
+NH SULLIVAN 19
+NJ ATLANTIC 1
+NJ BERGEN 3
+NJ BURLINGTON 5
+NJ CAMDEN 7
+NJ CAPE MAY 9
+NJ CUMBERLAND 11
+NJ ESSEX 13
+NJ GLOUCESTER 15
+NJ HUDSON 17
+NJ HUNTERDON 19
+NJ MERCER 21
+NJ MIDDLESEX 23
+NJ MONMOUTH 25
+NJ MORRIS 27
+NJ OCEAN 29
+NJ PASSAIC 31
+NJ SALEM 33
+NJ SOMERSET 35
+NJ SUSSEX 37
+NJ UNION 39
+NJ WARREN 41
+NM BERNALILLO 1
+NM CATRON 3
+NM CHAVES 5
+NM CIBOLA 6
+Revision 5 Page 55 of 84 10/15/2025
+--- PAGE 56 ---
+MCMIS County Codes
+State County Code
+NM COLFAX 7
+NM CURRY 9
+NM DE BACA 11
+NM DONA ANA 13
+NM EDDY 15
+NM GRANT 17
+NM GUADALUPE 19
+NM HARDING 21
+NM HIDALGO 23
+NM LEA 25
+NM LINCOLN 27
+NM LOS ALAMOS 28
+NM LUNA 29
+NM MCKINLEY 31
+NM MORA 33
+NM OTERO 35
+NM QUAY 37
+NM RIO ARRIBA 39
+NM ROOSEVELT 41
+NM SAN JUAN 45
+NM SAN MIGUEL 47
+NM SANDOVAL 43
+NM SANTA FE 49
+NM SIERRA 51
+NM SOCORRO 53
+NM TAOS 55
+NM TORRANCE 57
+NM UNION 59
+NM VALENCIA 61
+NV CARSON CITY 510
+NV CHURCHILL 1
+NV CLARK 3
+NV DOUGLAS 5
+NV ELKO 7
+NV ESMERALDA 9
+NV EUREKA 11
+NV HUMBOLDT 13
+NV LANDER 15
+NV LINCOLN 17
+NV LYON 19
+NV MINERAL 21
+NV NYE 23
+NV PERSHING 27
+NV STOREY 29
+NV WASHOE 31
+NV WHITE PINE 33
+Revision 5 Page 56 of 84 10/15/2025
+--- PAGE 57 ---
+MCMIS County Codes
+State County Code
+NY ALBANY 1
+NY ALLEGANY 3
+NY BRONX 5
+NY BROOME 7
+NY CATTARAUGUS 9
+NY CAYUGA 11
+NY CHAUTAUQUA 13
+NY CHEMUNG 15
+NY CHENANGO 17
+NY CLINTON 19
+NY COLUMBIA 21
+NY CORTLAND 23
+NY DELAWARE 25
+NY DUTCHESS 27
+NY ERIE 29
+NY ESSEX 31
+NY FRANKLIN 33
+NY FULTON 35
+NY GENESEE 37
+NY GREENE 39
+NY HAMILTON 41
+NY HERKIMER 43
+NY JEFFERSON 45
+NY KINGS 47
+NY LEWIS 49
+NY LIVINGSTON 51
+NY MADISON 53
+NY MONROE 55
+NY MONTGOMERY 57
+NY NASSAU 59
+NY NEW YORK 61
+NY NIAGARA 63
+NY ONEIDA 65
+NY ONONDAGA 67
+NY ONTARIO 69
+NY ORANGE 71
+NY ORLEANS 73
+NY OSWEGO 75
+NY OTSEGO 77
+NY PUTNAM 79
+NY QUEENS 81
+NY RENSSELAER 83
+NY RICHMOND 85
+NY ROCKLAND 87
+NY SAINT LAWRENCE 89
+NY SARATOGA 91
+Revision 5 Page 57 of 84 10/15/2025
+--- PAGE 58 ---
+MCMIS County Codes
+State County Code
+NY SCHENECTADY 93
+NY SCHOHARIE 95
+NY SCHUYLER 97
+NY SENECA 99
+NY STEUBEN 101
+NY SUFFOLK 103
+NY SULLIVAN 105
+NY TIOGA 107
+NY TOMPKINS 109
+NY ULSTER 111
+NY WARREN 113
+NY WASHINGTON 115
+NY WAYNE 117
+NY WESTCHESTER 119
+NY WYOMING 121
+NY YATES 123
+OH ADAMS 1
+OH ALLEN 3
+OH ASHLAND 5
+OH ASHTABULA 7
+OH ATHENS 9
+OH AUGLAIZE 11
+OH BELMONT 13
+OH BROWN 15
+OH BUTLER 17
+OH CARROLL 19
+OH CHAMPAIGN 21
+OH CLARK 23
+OH CLERMONT 25
+OH CLINTON 27
+OH COLUMBIANA 29
+OH COSHOCTON 31
+OH CRAWFORD 33
+OH CUYAHOGA 35
+OH DARKE 37
+OH DEFIANCE 39
+OH DELAWARE 41
+OH ERIE 43
+OH FAIRFIELD 45
+OH FAYETTE 47
+OH FRANKLIN 49
+OH FULTON 51
+OH GALLIA 53
+OH GEAUGA 55
+OH GREENE 57
+OH GUERNSEY 59
+Revision 5 Page 58 of 84 10/15/2025
+--- PAGE 59 ---
+MCMIS County Codes
+State County Code
+OH HAMILTON 61
+OH HANCOCK 63
+OH HARDIN 65
+OH HARRISON 67
+OH HENRY 69
+OH HIGHLAND 71
+OH HOCKING 73
+OH HOLMES 75
+OH HURON 77
+OH JACKSON 79
+OH JEFFERSON 81
+OH KNOX 83
+OH LAKE 85
+OH LAWRENCE 87
+OH LICKING 89
+OH LOGAN 91
+OH LORAIN 93
+OH LUCAS 95
+OH MADISON 97
+OH MAHONING 99
+OH MARION 101
+OH MEDINA 103
+OH MEIGS 105
+OH MERCER 107
+OH MIAMI 109
+OH MONROE 111
+OH MONTGOMERY 113
+OH MORGAN 115
+OH MORROW 117
+OH MUSKINGUM 119
+OH NOBLE 121
+OH OTTAWA 123
+OH PAULDING 125
+OH PERRY 127
+OH PICKAWAY 129
+OH PIKE 131
+OH PORTAGE 133
+OH PREBLE 135
+OH PUTNAM 137
+OH RICHLAND 139
+OH ROSS 141
+OH SANDUSKY 143
+OH SCIOTO 145
+OH SENECA 147
+OH SHELBY 149
+OH STARK 151
+Revision 5 Page 59 of 84 10/15/2025
+--- PAGE 60 ---
+MCMIS County Codes
+State County Code
+OH SUMMIT 153
+OH TRUMBULL 155
+OH TUSCARAWAS 157
+OH UNION 159
+OH VAN WERT 161
+OH VINTON 163
+OH WARREN 165
+OH WASHINGTON 167
+OH WAYNE 169
+OH WILLIAMS 171
+OH WOOD 173
+OH WYANDOT 175
+OK ADAIR 1
+OK ALFALFA 3
+OK ATOKA 5
+OK BEAVER 7
+OK BECKHAM 9
+OK BLAINE 11
+OK BRYAN 13
+OK CADDO 15
+OK CANADIAN 17
+OK CARTER 19
+OK CHEROKEE 21
+OK CHOCTAW 23
+OK CIMARRON 25
+OK CLEVELAND 27
+OK COAL 29
+OK COMANCHE 31
+OK COTTON 33
+OK CRAIG 35
+OK CREEK 37
+OK CUSTER 39
+OK DELAWARE 41
+OK DEWEY 43
+OK ELLIS 45
+OK GARFIELD 47
+OK GARVIN 49
+OK GRADY 51
+OK GRANT 53
+OK GREER 55
+OK HARMON 57
+OK HARPER 59
+OK HASKELL 61
+OK HUGHES 63
+OK JACKSON 65
+OK JEFFERSON 67
+Revision 5 Page 60 of 84 10/15/2025
+--- PAGE 61 ---
+MCMIS County Codes
+State County Code
+OK JOHNSTON 69
+OK KAY 71
+OK KINGFISHER 73
+OK KIOWA 75
+OK LATIMER 77
+OK LE FLORE 79
+OK LINCOLN 81
+OK LOGAN 83
+OK LOVE 85
+OK MAJOR 93
+OK MARSHALL 95
+OK MAYES 97
+OK MCCLAIN 87
+OK MCCURTAIN 89
+OK MCINTOSH 91
+OK MURRAY 99
+OK MUSKOGEE 101
+OK NOBLE 103
+OK NOWATA 105
+OK OKFUSKEE 107
+OK OKLAHOMA 109
+OK OKMULGEE 111
+OK OSAGE 113
+OK OTTAWA 115
+OK PAWNEE 117
+OK PAYNE 119
+OK PITTSBURG 121
+OK PONTOTOC 123
+OK POTTAWATOMIE 125
+OK PUSHMATAHA 127
+OK ROGER MILLS 129
+OK ROGERS 131
+OK SEMINOLE 133
+OK SEQUOYAH 135
+OK STEPHENS 137
+OK TEXAS 139
+OK TILLMAN 141
+OK TULSA 143
+OK WAGONER 145
+OK WASHINGTON 147
+OK WASHITA 149
+OK WOODS 151
+OK WOODWARD 153
+OR BAKER 1
+OR BENTON 3
+OR CLACKAMAS 5
+Revision 5 Page 61 of 84 10/15/2025
+--- PAGE 62 ---
+MCMIS County Codes
+State County Code
+OR CLATSOP 7
+OR COLUMBIA 9
+OR COOS 11
+OR CROOK 13
+OR CURRY 15
+OR DESCHUTES 17
+OR DOUGLAS 19
+OR GILLIAM 21
+OR GRANT 23
+OR HARNEY 25
+OR HOOD RIVER 27
+OR JACKSON 29
+OR JEFFERSON 31
+OR JOSEPHINE 33
+OR KLAMATH 35
+OR LAKE 37
+OR LANE 39
+OR LINCOLN 41
+OR LINN 43
+OR MALHEUR 45
+OR MARION 47
+OR MORROW 49
+OR MULTNOMAH 51
+OR POLK 53
+OR SHERMAN 55
+OR TILLAMOOK 57
+OR UMATILLA 59
+OR UNION 61
+OR WALLOWA 63
+OR WASCO 65
+OR WASHINGTON 67
+OR WHEELER 69
+OR YAMHILL 71
+PA ADAMS 1
+PA ALLEGHENY 3
+PA ARMSTRONG 5
+PA BEAVER 7
+PA BEDFORD 9
+PA BERKS 11
+PA BLAIR 13
+PA BRADFORD 15
+PA BUCKS 17
+PA BUTLER 19
+PA CAMBRIA 21
+PA CAMERON 23
+PA CARBON 25
+Revision 5 Page 62 of 84 10/15/2025
+--- PAGE 63 ---
+MCMIS County Codes
+State County Code
+PA CENTRE 27
+PA CHESTER 29
+PA CLARION 31
+PA CLEARFIELD 33
+PA CLINTON 35
+PA COLUMBIA 37
+PA CRAWFORD 39
+PA CUMBERLAND 41
+PA DAUPHIN 43
+PA DELAWARE 45
+PA ELK 47
+PA ERIE 49
+PA FAYETTE 51
+PA FOREST 53
+PA FRANKLIN 55
+PA FULTON 57
+PA GREENE 59
+PA HUNTINGDON 61
+PA INDIANA 63
+PA JEFFERSON 65
+PA JUNIATA 67
+PA LACKAWANNA 69
+PA LANCASTER 71
+PA LAWRENCE 73
+PA LEBANON 75
+PA LEHIGH 77
+PA LUZERNE 79
+PA LYCOMING 81
+PA MCKEAN 83
+PA MERCER 85
+PA MIFFLIN 87
+PA MONROE 89
+PA MONTGOMERY 91
+PA MONTOUR 93
+PA NORTHAMPTON 95
+PA NORTHUMBERLAND 97
+PA PERRY 99
+PA PHILADELPHIA 101
+PA PIKE 103
+PA POTTER 105
+PA SCHUYLKILL 107
+PA SNYDER 109
+PA SOMERSET 111
+PA SULLIVAN 113
+PA SUSQUEHANNA 115
+PA TIOGA 117
+Revision 5 Page 63 of 84 10/15/2025
+--- PAGE 64 ---
+MCMIS County Codes
+State County Code
+PA UNION 119
+PA VENANGO 121
+PA WARREN 123
+PA WASHINGTON 125
+PA WAYNE 127
+PA WESTMORELAND 129
+PA WYOMING 131
+PA YORK 133
+PR ADJUNTAS 1
+PR AGUADA 3
+PR AGUADILLA 5
+PR AGUAS BUENAS 7
+PR AIBONITO 9
+PR ANASCO 11
+PR ARECIBO 13
+PR ARROYO 15
+PR BARCELONETA 17
+PR BARRANQUITAS 19
+PR BAYAMON 21
+PR CABO ROJO 23
+PR CAGUAS 25
+PR CAMUY 27
+PR CANOVANAS 29
+PR CAROLINA 31
+PR CATANO 33
+PR CAYEY 35
+PR CEIBA 37
+PR CIALES 39
+PR CIDRA 41
+PR COAMO 43
+PR COMERIO 45
+PR COROZAL 47
+PR CULEBRA 49
+PR DORADO 51
+PR FAJARDO 53
+PR FLORIDA 54
+PR GUANICA 55
+PR GUAYAMA 57
+PR GUAYANILLA 59
+PR GUAYNABO 61
+PR GURABO 63
+PR HATILLO 65
+PR HORMIGUEROS 67
+PR HUMACAO 69
+PR ISABELA 71
+PR JAYUYA 73
+Revision 5 Page 64 of 84 10/15/2025
+--- PAGE 65 ---
+MCMIS County Codes
+State County Code
+PR JUANA DIAZ 75
+PR JUNCOS 77
+PR LAJAS 79
+PR LARES 81
+PR LAS MARIAS 83
+PR LAS PIEDRAS 85
+PR LOIZA 87
+PR LUQUILLO 89
+PR MANATI 91
+PR MARICAO 93
+PR MAUNABO 95
+PR MAYAGUEZ 97
+PR MOCA 99
+PR MOROVIS 101
+PR NAGUABO 103
+PR NARANJITO 105
+PR OROCOVIS 107
+PR PATILLAS 109
+PR PENUELAS 111
+PR PONCE 113
+PR QUEBRADILLAS 115
+PR RINCON 117
+PR RIO GRANDE 119
+PR SABANA GRANDE 121
+PR SALINAS 123
+PR SAN GERMAN 125
+PR SAN JUAN 127
+PR SAN LORENZO 129
+PR SAN SEBASTIAN 131
+PR SANTA ISABEL 133
+PR TOA ALTA 135
+PR TOA BAJA 137
+PR TRUJILLO ALTO 139
+PR UTUADO 141
+PR VEGA ALTA 143
+PR VEGA BAJA 145
+PR VIEQUES 147
+PR VILLALBA 149
+PR YABUCOA 151
+PR YAUCO 153
+RI BRISTOL 1
+RI KENT 3
+RI NEWPORT 5
+RI PROVIDENCE 7
+RI WASHINGTON 9
+SC ABBEVILLE 1
+Revision 5 Page 65 of 84 10/15/2025
+--- PAGE 66 ---
+MCMIS County Codes
+State County Code
+SC AIKEN 3
+SC ALLENDALE 5
+SC ANDERSON 7
+SC BAMBERG 9
+SC BARNWELL 11
+SC BEAUFORT 13
+SC BERKELEY 15
+SC CALHOUN 17
+SC CHARLESTON 19
+SC CHEROKEE 21
+SC CHESTER 23
+SC CHESTERFIELD 25
+SC CLARENDON 27
+SC COLLETON 29
+SC DARLINGTON 31
+SC DILLON 33
+SC DORCHESTER 35
+SC EDGEFIELD 37
+SC FAIRFIELD 39
+SC FLORENCE 41
+SC GEORGETOWN 43
+SC GREENVILLE 45
+SC GREENWOOD 47
+SC HAMPTON 49
+SC HORRY 51
+SC JASPER 53
+SC KERSHAW 55
+SC LANCASTER 57
+SC LAURENS 59
+SC LEE 61
+SC LEXINGTON 63
+SC MARION 67
+SC MARLBORO 69
+SC MCCORMICK 65
+SC NEWBERRY 71
+SC OCONEE 73
+SC ORANGEBURG 75
+SC PICKENS 77
+SC RICHLAND 79
+SC SALUDA 81
+SC SPARTANBURG 83
+SC SUMTER 85
+SC UNION 87
+SC WILLIAMSBURG 89
+SC YORK 91
+SD AURORA 3
+Revision 5 Page 66 of 84 10/15/2025
+--- PAGE 67 ---
+MCMIS County Codes
+State County Code
+SD BEADLE 5
+SD BENNETT 7
+SD BON HOMME 9
+SD BROOKINGS 11
+SD BROWN 13
+SD BRULE 15
+SD BUFFALO 17
+SD BUTTE 19
+SD CAMPBELL 21
+SD CHARLES MIX 23
+SD CLARK 25
+SD CLAY 27
+SD CODINGTON 29
+SD CORSON 31
+SD CUSTER 33
+SD DAVISON 35
+SD DAY 37
+SD DEUEL 39
+SD DEWEY 41
+SD DOUGLAS 43
+SD EDMUNDS 45
+SD FALL RIVER 47
+SD FAULK 49
+SD GRANT 51
+SD GREGORY 53
+SD HAAKON 55
+SD HAMLIN 57
+SD HAND 59
+SD HANSON 61
+SD HARDING 63
+SD HUGHES 65
+SD HUTCHINSON 67
+SD HYDE 69
+SD JACKSON 71
+SD JERAULD 73
+SD JONES 75
+SD KINGSBURY 77
+SD LAKE 79
+SD LAWRENCE 81
+SD LINCOLN 83
+SD LYMAN 85
+SD MARSHALL 91
+SD MCCOOK 87
+SD MCPHERSON 89
+SD MEADE 93
+SD MELLETTE 95
+Revision 5 Page 67 of 84 10/15/2025
+--- PAGE 68 ---
+MCMIS County Codes
+State County Code
+SD MINER 97
+SD MINNEHAHA 99
+SD MOODY 101
+SD PENNINGTON 103
+SD PERKINS 105
+SD POTTER 107
+SD ROBERTS 109
+SD SANBORN 111
+SD SHANNON 113
+SD SPINK 115
+SD STANLEY 117
+SD SULLY 119
+SD TODD 121
+SD TRIPP 123
+SD TURNER 125
+SD UNION 127
+SD WALWORTH 129
+SD YANKTON 135
+SD ZIEBACH 137
+TN ANDERSON 1
+TN BEDFORD 3
+TN BENTON 5
+TN BLEDSOE 7
+TN BLOUNT 9
+TN BRADLEY 11
+TN CAMPBELL 13
+TN CANNON 15
+TN CARROLL 17
+TN CARTER 19
+TN CHEATHAM 21
+TN CHESTER 23
+TN CLAIBORNE 25
+TN CLAY 27
+TN COCKE 29
+TN COFFEE 31
+TN CROCKETT 33
+TN CUMBERLAND 35
+TN DAVIDSON 37
+TN DECATUR 39
+TN DEKALB 41
+TN DICKSON 43
+TN DYER 45
+TN FAYETTE 47
+TN FENTRESS 49
+TN FRANKLIN 51
+TN GIBSON 53
+Revision 5 Page 68 of 84 10/15/2025
+--- PAGE 69 ---
+MCMIS County Codes
+State County Code
+TN GILES 55
+TN GRAINGER 57
+TN GREENE 59
+TN GRUNDY 61
+TN HAMBLEN 63
+TN HAMILTON 65
+TN HANCOCK 67
+TN HARDEMAN 69
+TN HARDIN 71
+TN HAWKINS 73
+TN HAYWOOD 75
+TN HENDERSON 77
+TN HENRY 79
+TN HICKMAN 81
+TN HOUSTON 83
+TN HUMPHREYS 85
+TN JACKSON 87
+TN JEFFERSON 89
+TN JOHNSON 91
+TN KNOX 93
+TN LAKE 95
+TN LAUDERDALE 97
+TN LAWRENCE 99
+TN LEWIS 101
+TN LINCOLN 103
+TN LOUDON 105
+TN MACON 111
+TN MADISON 113
+TN MARION 115
+TN MARSHALL 117
+TN MAURY 119
+TN MCMINN 107
+TN MCNAIRY 109
+TN MEIGS 121
+TN MONROE 123
+TN MONTGOMERY 125
+TN MOORE 127
+TN MORGAN 129
+TN OBION 131
+TN OVERTON 133
+TN PERRY 135
+TN PICKETT 137
+TN POLK 139
+TN PUTNAM 141
+TN RHEA 143
+TN ROANE 145
+Revision 5 Page 69 of 84 10/15/2025
+--- PAGE 70 ---
+MCMIS County Codes
+State County Code
+TN ROBERTSON 147
+TN RUTHERFORD 149
+TN SCOTT 151
+TN SEQUATCHIE 153
+TN SEVIER 155
+TN SHELBY 157
+TN SMITH 159
+TN STEWART 161
+TN SULLIVAN 163
+TN SUMNER 165
+TN TIPTON 167
+TN TROUSDALE 169
+TN UNICOI 171
+TN UNION 173
+TN VAN BUREN 175
+TN WARREN 177
+TN WASHINGTON 179
+TN WAYNE 181
+TN WEAKLEY 183
+TN WHITE 185
+TN WILLIAMSON 187
+TN WILSON 189
+TX ANDERSON 1
+TX ANDREWS 3
+TX ANGELINA 5
+TX ARANSAS 7
+TX ARCHER 9
+TX ARMSTRONG 11
+TX ATASCOSA 13
+TX AUSTIN 15
+TX BAILEY 17
+TX BANDERA 19
+TX BASTROP 21
+TX BAYLOR 23
+TX BEE 25
+TX BELL 27
+TX BEXAR 29
+TX BLANCO 31
+TX BORDEN 33
+TX BOSQUE 35
+TX BOWIE 37
+TX BRAZORIA 39
+TX BRAZOS 41
+TX BREWSTER 43
+TX BRISCOE 45
+TX BROOKS 47
+Revision 5 Page 70 of 84 10/15/2025
+--- PAGE 71 ---
+MCMIS County Codes
+State County Code
+TX BROWN 49
+TX BURLESON 51
+TX BURNET 53
+TX CALDWELL 55
+TX CALHOUN 57
+TX CALLAHAN 59
+TX CAMERON 61
+TX CAMP 63
+TX CARSON 65
+TX CASS 67
+TX CASTRO 69
+TX CHAMBERS 71
+TX CHEROKEE 73
+TX CHILDRESS 75
+TX CLAY 77
+TX COCHRAN 79
+TX COKE 81
+TX COLEMAN 83
+TX COLLIN 85
+TX COLLINGSWORTH 87
+TX COLORADO 89
+TX COMAL 91
+TX COMANCHE 93
+TX CONCHO 95
+TX COOKE 97
+TX CORYELL 99
+TX COTTLE 101
+TX CRANE 103
+TX CROCKETT 105
+TX CROSBY 107
+TX CULBERSON 109
+TX DALLAM 111
+TX DALLAS 113
+TX DAWSON 115
+TX DE WITT 123
+TX DEAF SMITH 117
+TX DELTA 119
+TX DENTON 121
+TX DICKENS 125
+TX DIMMIT 127
+TX DONLEY 129
+TX DUVAL 131
+TX EASTLAND 133
+TX ECTOR 135
+TX EDWARDS 137
+TX EL PASO 141
+Revision 5 Page 71 of 84 10/15/2025
+--- PAGE 72 ---
+MCMIS County Codes
+State County Code
+TX ELLIS 139
+TX ERATH 143
+TX FALLS 145
+TX FANNIN 147
+TX FAYETTE 149
+TX FISHER 151
+TX FLOYD 153
+TX FOARD 155
+TX FORT BEND 157
+TX FRANKLIN 159
+TX FREESTONE 161
+TX FRIO 163
+TX GAINES 165
+TX GALVESTON 167
+TX GARZA 169
+TX GILLESPIE 171
+TX GLASSCOCK 173
+TX GOLIAD 175
+TX GONZALES 177
+TX GRAY 179
+TX GRAYSON 181
+TX GREGG 183
+TX GRIMES 185
+TX GUADALUPE 187
+TX HALE 189
+TX HALL 191
+TX HAMILTON 193
+TX HANSFORD 195
+TX HARDEMAN 197
+TX HARDIN 199
+TX HARRIS 201
+TX HARRISON 203
+TX HARTLEY 205
+TX HASKELL 207
+TX HAYS 209
+TX HEMPHILL 211
+TX HENDERSON 213
+TX HIDALGO 215
+TX HILL 217
+TX HOCKLEY 219
+TX HOOD 221
+TX HOPKINS 223
+TX HOUSTON 225
+TX HOWARD 227
+TX HUDSPETH 229
+TX HUNT 231
+Revision 5 Page 72 of 84 10/15/2025
+--- PAGE 73 ---
+MCMIS County Codes
+State County Code
+TX HUTCHINSON 233
+TX IRION 235
+TX JACK 237
+TX JACKSON 239
+TX JASPER 241
+TX JEFF DAVIS 243
+TX JEFFERSON 245
+TX JIM HOGG 247
+TX JIM WELLS 249
+TX JOHNSON 251
+TX JONES 253
+TX KARNES 255
+TX KAUFMAN 257
+TX KENDALL 259
+TX KENEDY 261
+TX KENT 263
+TX KERR 265
+TX KIMBLE 267
+TX KING 269
+TX KINNEY 271
+TX KLEBERG 273
+TX KNOX 275
+TX LA SALLE 283
+TX LAMAR 277
+TX LAMB 279
+TX LAMPASAS 281
+TX LAVACA 285
+TX LEE 287
+TX LEON 289
+TX LIBERTY 291
+TX LIMESTONE 293
+TX LIPSCOMB 295
+TX LIVE OAK 297
+TX LLANO 299
+TX LOVING 301
+TX LUBBOCK 303
+TX LYNN 305
+TX MADISON 313
+TX MARION 315
+TX MARTIN 317
+TX MASON 319
+TX MATAGORDA 321
+TX MAVERICK 323
+TX MCCULLOCH 307
+TX MCLENNAN 309
+TX MCMULLEN 311
+Revision 5 Page 73 of 84 10/15/2025
+--- PAGE 74 ---
+MCMIS County Codes
+State County Code
+TX MEDINA 325
+TX MENARD 327
+TX MIDLAND 329
+TX MILAM 331
+TX MILLS 333
+TX MITCHELL 335
+TX MONTAGUE 337
+TX MONTGOMERY 339
+TX MOORE 341
+TX MORRIS 343
+TX MOTLEY 345
+TX NACOGDOCHES 347
+TX NAVARRO 349
+TX NEWTON 351
+TX NOLAN 353
+TX NUECES 355
+TX OCHILTREE 357
+TX OLDHAM 359
+TX ORANGE 361
+TX PALO PINTO 363
+TX PANOLA 365
+TX PARKER 367
+TX PARMER 369
+TX PECOS 371
+TX POLK 373
+TX POTTER 375
+TX PRESIDIO 377
+TX RAINS 379
+TX RANDALL 381
+TX REAGAN 383
+TX REAL 385
+TX RED RIVER 387
+TX REEVES 389
+TX REFUGIO 391
+TX ROBERTS 393
+TX ROBERTSON 395
+TX ROCKWALL 397
+TX RUNNELS 399
+TX RUSK 401
+TX SABINE 403
+TX SAN AUGUSTINE 405
+TX SAN JACINTO 407
+TX SAN PATRICIO 409
+TX SAN SABA 411
+TX SCHLEICHER 413
+TX SCURRY 415
+Revision 5 Page 74 of 84 10/15/2025
+--- PAGE 75 ---
+MCMIS County Codes
+State County Code
+TX SHACKELFORD 417
+TX SHELBY 419
+TX SHERMAN 421
+TX SMITH 423
+TX SOMERVELL 425
+TX STARR 427
+TX STEPHENS 429
+TX STERLING 431
+TX STONEWALL 433
+TX SUTTON 435
+TX SWISHER 437
+TX TARRANT 439
+TX TAYLOR 441
+TX TERRELL 443
+TX TERRY 445
+TX THROCKMORTON 447
+TX TITUS 449
+TX TOM GREEN 451
+TX TRAVIS 453
+TX TRINITY 455
+TX TYLER 457
+TX UPSHUR 459
+TX UPTON 461
+TX UVALDE 463
+TX VAL VERDE 465
+TX VAN ZANDT 467
+TX VICTORIA 469
+TX WALKER 471
+TX WALLER 473
+TX WARD 475
+TX WASHINGTON 477
+TX WEBB 479
+TX WHARTON 481
+TX WHEELER 483
+TX WICHITA 485
+TX WILBARGER 487
+TX WILLACY 489
+TX WILLIAMSON 491
+TX WILSON 493
+TX WINKLER 495
+TX WISE 497
+TX WOOD 499
+TX YOAKUM 501
+TX YOUNG 503
+TX ZAPATA 505
+TX ZAVALA 507
+Revision 5 Page 75 of 84 10/15/2025
+--- PAGE 76 ---
+MCMIS County Codes
+State County Code
+UT BEAVER 1
+UT BOX ELDER 3
+UT CACHE 5
+UT CARBON 7
+UT DAGGETT 9
+UT DAVIS 11
+UT DUCHESNE 13
+UT EMERY 15
+UT GARFIELD 17
+UT GRAND 19
+UT IRON 21
+UT JUAB 23
+UT KANE 25
+UT MILLARD 27
+UT MORGAN 29
+UT PIUTE 31
+UT RICH 33
+UT SALT LAKE 35
+UT SAN JUAN 37
+UT SANPETE 39
+UT SEVIER 41
+UT SUMMIT 43
+UT TOOELE 45
+UT UINTAH 47
+UT UTAH 49
+UT WASATCH 51
+UT WASHINGTON 53
+UT WAYNE 55
+UT WEBER 57
+VA ACCOMACK 1
+VA ALBEMARLE 3
+VA ALEXANDRIA CITY 510
+VA ALLEGHANY 5
+VA AMELIA 7
+VA AMHERST 9
+VA APPOMATTOX 11
+VA ARLINGTON 13
+VA AUGUSTA 15
+VA BATH 17
+VA BEDFORD CITY 515
+VA BEDFORD 19
+VA BLAND 21
+VA BOTETOURT 23
+VA BRISTOL 520
+VA BRUNSWICK 25
+VA BUCHANAN 27
+Revision 5 Page 76 of 84 10/15/2025
+--- PAGE 77 ---
+MCMIS County Codes
+State County Code
+VA BUCKINGHAM 29
+VA BUENA VISTA CITY 530
+VA CAMPBELL 31
+VA CAROLINE 33
+VA CARROLL 35
+VA CHARLES CITY 36
+VA CHARLOTTE 37
+VA CHARLOTTESVILLE CITY 540
+VA CHESAPEAKE CITY 550
+VA CHESTERFIELD 41
+VA CLARKE 43
+VA CLIFTON FORGE CITY 560
+VA COLONIAL HEIGHTS CITY 570
+VA COVINGTON CITY 580
+VA CRAIG 45
+VA CULPEPER 47
+VA CUMBERLAND 49
+VA DANVILLE CITY 590
+VA DICKENSON 51
+VA DINWIDDIE 53
+VA EMPORIA CITY 595
+VA ESSEX 57
+VA FAIRFAX CITY 600
+VA FAIRFAX 59
+VA FALLS CHURCH CITY 610
+VA FAUQUIER 61
+VA FLOYD 63
+VA FLUVANNA 65
+VA FRANKLIN CITY 620
+VA FRANKLIN 67
+VA FREDERICK 69
+VA FREDERICKSBURG CITY 630
+VA GALAX CITY 640
+VA GILES 71
+VA GLOUCESTER 73
+VA GOOCHLAND 75
+VA GRAYSON 77
+VA GREENE 79
+VA GREENSVILLE 81
+VA HALIFAX 83
+VA HAMPTON CITY 650
+VA HANOVER 85
+VA HARRISONBURG CITY 660
+VA HENRICO 87
+VA HENRY 89
+VA HIGHLAND 91
+Revision 5 Page 77 of 84 10/15/2025
+--- PAGE 78 ---
+MCMIS County Codes
+State County Code
+VA HOPEWELL CITY 670
+VA ISLE OF WIGHT 93
+VA JAMES CITY 95
+VA KING AND QUEEN 97
+VA KING GEORGE 99
+VA KING WILLIAM 101
+VA LANCASTER 103
+VA LEE 105
+VA LEXINGTON CITY 678
+VA LOUDOUN 107
+VA LOUISA 109
+VA LUNENBURG 111
+VA LYNCHBURG CITY 680
+VA MADISON 113
+VA MANASSAS CITY 683
+VA MANASSAS PARK CITY 685
+VA MARTINSVILLE CITY 690
+VA MATHEWS 115
+VA MECKLENBURG 117
+VA MIDDLESEX 119
+VA MONTGOMERY 121
+VA NELSON 125
+VA NEW KENT 127
+VA NEWPORT NEWS CITY 700
+VA NORFOLK CITY 710
+VA NORTHAMPTON 131
+VA NORTHUMBERLAND 133
+VA NORTON CITY 720
+VA NOTTOWAY 135
+VA ORANGE 137
+VA PAGE 139
+VA PATRICK 141
+VA PETERSBURG CITY 730
+VA PITTSYLVANIA 143
+VA POQUOSON CITY 735
+VA PORTSMOUTH CITY 740
+VA POWHATAN 145
+VA PRINCE EDWARD 147
+VA PRINCE GEORGE 149
+VA PRINCE WILLIAM 153
+VA PULASKI 155
+VA RADFORD 750
+VA RAPPAHANNOCK 157
+VA RICHMOND CITY 760
+VA RICHMOND 159
+VA ROANOKE CITY 770
+Revision 5 Page 78 of 84 10/15/2025
+--- PAGE 79 ---
+MCMIS County Codes
+State County Code
+VA ROANOKE 161
+VA ROCKBRIDGE 163
+VA ROCKINGHAM 165
+VA RUSSELL 167
+VA SALEM 775
+VA SCOTT 169
+VA SHENANDOAH 171
+VA SMYTH 173
+VA SOUTHAMPTON 175
+VA SPOTSYLVANIA 177
+VA STAFFORD 179
+VA STAUNTON CITY 790
+VA SUFFOLK CITY 800
+VA SURRY 181
+VA SUSSEX 183
+VA TAZEWELL 185
+VA VIRGINIA BEACH CITY 810
+VA WARREN 187
+VA WASHINGTON 191
+VA WAYNESBORO CITY 820
+VA WESTMORELAND 193
+VA WILLIAMSBURG CITY 830
+VA WINCHESTER CITY 840
+VA WISE 195
+VA WYTHE 197
+VA YORK 199
+VI SAINT CROIX 10
+VI SAINT JOHN 20
+VI SAINT THOMAS 30
+VT ADDISON 1
+VT BENNINGTON 3
+VT CALEDONIA 5
+VT CHITTENDEN 7
+VT ESSEX 9
+VT FRANKLIN 11
+VT GRAND ISLE 13
+VT LAMOILLE 15
+VT ORANGE 17
+VT ORLEANS 19
+VT RUTLAND 21
+VT WASHINGTON 23
+VT WINDHAM 25
+VT WINDSOR 27
+WA ADAMS 1
+WA ASOTIN 3
+WA BENTON 5
+Revision 5 Page 79 of 84 10/15/2025
+--- PAGE 80 ---
+MCMIS County Codes
+State County Code
+WA CHELAN 7
+WA CLALLAM 9
+WA CLARK 11
+WA COLUMBIA 13
+WA COWLITZ 15
+WA DOUGLAS 17
+WA FERRY 19
+WA FRANKLIN 21
+WA GARFIELD 23
+WA GRANT 25
+WA GRAYS HARBOR 27
+WA ISLAND 29
+WA JEFFERSON 31
+WA KING 33
+WA KITSAP 35
+WA KITTITAS 37
+WA KLICKITAT 39
+WA LEWIS 41
+WA LINCOLN 43
+WA MASON 45
+WA OKANOGAN 47
+WA PACIFIC 49
+WA PEND OREILLE 51
+WA PIERCE 53
+WA SAN JUAN 55
+WA SKAGIT 57
+WA SKAMANIA 59
+WA SNOHOMISH 61
+WA SPOKANE 63
+WA STEVENS 65
+WA THURSTON 67
+WA WAHKIAKUM 69
+WA WALLA WALLA 71
+WA WHATCOM 73
+WA WHITMAN 75
+WA YAKIMA 77
+WI ADAMS 1
+WI ASHLAND 3
+WI BARRON 5
+WI BAYFIELD 7
+WI BROWN 9
+WI BUFFALO 11
+WI BURNETT 13
+WI CALUMET 15
+WI CHIPPEWA 17
+WI CLARK 19
+Revision 5 Page 80 of 84 10/15/2025
+--- PAGE 81 ---
+MCMIS County Codes
+State County Code
+WI COLUMBIA 21
+WI CRAWFORD 23
+WI DANE 25
+WI DODGE 27
+WI DOOR 29
+WI DOUGLAS 31
+WI DUNN 33
+WI EAU CLAIRE 35
+WI FLORENCE 37
+WI FOND DU LAC 39
+WI FOREST 41
+WI GRANT 43
+WI GREEN LAKE 47
+WI GREEN 45
+WI IOWA 49
+WI IRON 51
+WI JACKSON 53
+WI JEFFERSON 55
+WI JUNEAU 57
+WI KENOSHA 59
+WI KEWAUNEE 61
+WI LA CROSSE 63
+WI LAFAYETTE 65
+WI LANGLADE 67
+WI LINCOLN 69
+WI MANITOWOC 71
+WI MARATHON 73
+WI MARINETTE 75
+WI MARQUETTE 77
+WI MENOMINEE 78
+WI MILWAUKEE 79
+WI MONROE 81
+WI OCONTO 83
+WI ONEIDA 85
+WI OUTAGAMIE 87
+WI OZAUKEE 89
+WI PEPIN 91
+WI PIERCE 93
+WI POLK 95
+WI PORTAGE 97
+WI PRICE 99
+WI RACINE 101
+WI RICHLAND 103
+WI ROCK 105
+WI RUSK 107
+WI SAINT CROIX 109
+Revision 5 Page 81 of 84 10/15/2025
+--- PAGE 82 ---
+MCMIS County Codes
+State County Code
+WI SAUK 111
+WI SAWYER 113
+WI SHAWANO 115
+WI SHEBOYGAN 117
+WI TAYLOR 119
+WI TREMPEALEAU 121
+WI VERNON 123
+WI VILAS 125
+WI WALWORTH 127
+WI WASHBURN 129
+WI WASHINGTON 131
+WI WAUKESHA 133
+WI WAUPACA 135
+WI WAUSHARA 137
+WI WINNEBAGO 139
+WI WOOD 141
+WV BARBOUR 1
+WV BERKELEY 3
+WV BOONE 5
+WV BRAXTON 7
+WV BROOKE 9
+WV CABELL 11
+WV CALHOUN 13
+WV CLAY 15
+WV DODDRIDGE 17
+WV FAYETTE 19
+WV GILMER 21
+WV GRANT 23
+WV GREENBRIER 25
+WV HAMPSHIRE 27
+WV HANCOCK 29
+WV HARDY 31
+WV HARRISON 33
+WV JACKSON 35
+WV JEFFERSON 37
+WV KANAWHA 39
+WV LEWIS 41
+WV LINCOLN 43
+WV LOGAN 45
+WV MARION 49
+WV MARSHALL 51
+WV MASON 53
+WV MCDOWELL 47
+WV MERCER 55
+WV MINERAL 57
+WV MINGO 59
+Revision 5 Page 82 of 84 10/15/2025
+--- PAGE 83 ---
+MCMIS County Codes
+State County Code
+WV MONONGALIA 61
+WV MONROE 63
+WV MORGAN 65
+WV NICHOLAS 67
+WV OHIO 69
+WV PENDLETON 71
+WV PLEASANTS 73
+WV POCAHONTAS 75
+WV PRESTON 77
+WV PUTNAM 79
+WV RALEIGH 81
+WV RANDOLPH 83
+WV RITCHIE 85
+WV ROANE 87
+WV SUMMERS 89
+WV TAYLOR 91
+WV TUCKER 93
+WV TYLER 95
+WV UPSHUR 97
+WV WAYNE 99
+WV WEBSTER 101
+WV WETZEL 103
+WV WIRT 105
+WV WOOD 107
+WV WYOMING 109
+WY ALBANY 1
+WY BIG HORN 3
+WY CAMPBELL 5
+WY CARBON 7
+WY CONVERSE 9
+WY CROOK 11
+WY FREMONT 13
+WY GOSHEN 15
+WY HOT SPRINGS 17
+WY JOHNSON 19
+WY LARAMIE 21
+WY LINCOLN 23
+WY NATRONA 25
+WY NIOBRARA 27
+WY PARK 29
+WY PLATTE 31
+WY SHERIDAN 33
+WY SUBLETTE 35
+WY SWEETWATER 37
+WY TETON 39
+WY UINTA 41
+Revision 5 Page 83 of 84 10/15/2025
+--- PAGE 84 ---
+MCMIS County Codes
+State County Code
+WY WASHAKIE 43
+WY WESTON 45
+Revision 5 Page 84 of 84 10/15/2025
