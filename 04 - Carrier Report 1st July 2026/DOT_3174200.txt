@@ -1,0 +1,93 @@
+================================================================================
+CARRIER INTELLIGENCE REPORT — FMCSA DATA
+Generated : 2026-07-01 21:37:28
+DOT       : 3174200
+================================================================================
+
+── CARRIER IDENTITY ────────────────────────────────────────────────────────────
+  Legal Name    : ARBORWAY TREE CARE INC
+  DOT Number    : 3174200
+  MC Number     : (none)
+  Carrier Type  : PRIVATE
+  USDOT Status  : ACTIVE
+
+── CURRENT AUTHORITY ───────────────────────────────────────────────────────────
+  Required      : NO
+  Status        : NOT_REQUIRED
+  First Auth    : —
+  Active Period : —
+
+── INSURANCE ───────────────────────────────────────────────────────────────────
+  Required      : NO
+  Status        : NOT_REQUIRED
+  Cancellation  : NOT_REQUIRED
+  Replacement   : NOT_REQUIRED
+
+── FLEET & OPERATIONS ──────────────────────────────────────────────────────────
+  Power Units   : 12  (11-50 (medium))
+  Drivers       : 16
+  Inspections   : 0  (historical total, all available records; deduped)
+  Crashes       : 0  (historical total, all available records)
+  Violations    : 0  (historical total, all available records)
+  BOC-3 on File : BOC-3 status not verified from imported data — manual L&I/MOTUS verification required
+  SMS Data      : Not present in imported dataset
+
+── DATA CONFIDENCE ─────────────────────────────────────────────────────────────
+  authority     : HIGH
+  insurance     : HIGH
+  fleet         : HIGH
+  identity      : HIGH
+
+── VALIDATION RULES ────────────────────────────────────────────────────────────
+  21/21 rules passed | 0 failed
+
+  [PASS] Rule 01 authority_not_both_active_and_revoked
+         N/A — authority is not CONFIRMED_ACTIVE
+  [PASS] Rule 02 private_no_authority_required
+         OK — authority_required=NO
+  [PASS] Rule 03 private_no_insurance_required
+         OK — insurance_required=NO
+  [PASS] Rule 04 intrastate_not_rendered_as_revoked
+         N/A — carrier_type=PRIVATE
+  [PASS] Rule 05 no_sms_without_inspections
+         OK — inspection_count=0, no SMS — consistent
+  [PASS] Rule 06 lapsed_requires_explicit_cancellation
+         N/A — insurance_status=NOT_REQUIRED
+  [PASS] Rule 07 revoked_requires_revocation_event
+         N/A — authority_status=NOT_REQUIRED
+  [PASS] Rule 08 authority_status_is_valid_sentinel
+         OK — =NOT_REQUIRED
+  [PASS] Rule 09 usdot_status_is_valid
+         OK — =ACTIVE
+  [PASS] Rule 10 no_mc_placeholder
+         OK — mc_number=(none)
+  [PASS] Rule 11 insurance_dates_internally_consistent
+         N/A — insurance_status=NOT_REQUIRED
+  [PASS] Rule 12 first_authority_date_not_future
+         N/A — no first_authority_date
+  [PASS] Rule 13 accident_date_is_valid_past_date
+         N/A — no accident_date filter
+  [PASS] Rule 14 no_prohibited_wording_in_status_fields
+         OK
+  [PASS] Rule 15 no_overconfident_negative_from_empty_records
+         OK
+  [PASS] Rule 16 fleet_data_not_asymmetric
+         OK — power_units=12, drivers=16
+  [PASS] Rule 17 inspection_count_non_negative_int
+         OK — inspection_count=0
+  [PASS] Rule 18 data_confidence_keys_present
+         OK — {'fleet': 'HIGH', 'authority': 'HIGH', 'identity': 'HIGH', 'insurance': 'HIGH'}
+  [PASS] Rule 19 for_hire_has_mc_or_auth_evidence
+         N/A — carrier_type=PRIVATE
+  [PASS] Rule 20 accident_date_parseable_if_set
+         N/A — no accident_date set
+  [PASS] Rule 21 authorized_carrier_not_classified_private
+         N/A — authority_status=NOT_REQUIRED
+
+── VALIDATION CONFLICTS ────────────────────────────────────────────────────────
+  None detected.
+
+================================================================================
+Data source: FMCSA MCMIS via Socrata open data (data.transportation.gov)
+Pipeline  : carrier_facts.py + validation_rules.py (Carrier Check USA)
+================================================================================
