@@ -1,0 +1,85 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Env / secrets
+.env
+*.env
+
+# Logs
+*.log
+*.output
+*.err
+
+# Cache / temp
+fmcsa_cache/
+*.json.bak
+cookies.txt
+
+# Node (generate_pdf.js deps)
+node_modules/
+
+# Large data / xlsx
+*.xlsx
+*.pdf
+
+# Progress / state files
+*_progress.json
+violations_insp_cache.json
+
+# Redundant versioned scripts (keep only latest)
+*-V1.py
+*-V2.py
+*-V3.py
+reimport_inspections.py
+reimport_inspections_V2.py
+reimport_inspections_V3.py
+reimport_crashes-V1.py
+backfill_inspection_fk-V1.py
+backfill_inspection_fk-V2.py
+backfill_inspection_id-V1.py
+dedup_insurance_v2.py
+dedup_insurance_v3.py
+dedup_insurance_fast.py
+dedup_insurance_fastest.py
+dedup_insurance_parallel.py
+dedup_insurance_chunked.py
+dedup_crashes_v2.py
+dedup_crashes_v3.py
+
+# One-off diagnostic / debug scripts
+_debug_*.py
+_diag_*.py
+_sample_*.py
+_check_*.py
+_kill_*.py
+_scope_*.py
+_status_*.py
+_terminate_*.py
+_verify_*.py
+_violations_*.py
+_violation_freq.py
+_dedup_cleanup.py
+_inspect_db.py
+_quick_counts.py
+_schema2.py
+diag_*.py
+diagnose_*.py
+pilot_check.py
+
+# Parallel worker logs
+reimport_*_w[0-9].log
+reimport_*_w[0-9]_*.txt
+reimport_*_w[0-9][0-9].log
+ins_dedup_w[0-9].log
+ins_dedup_w[0-9].err
+
+# Reports (generated, not source)
+Carrier Report 1st July 2026/
+carrier-reports/
+TEST REPORT/
+
+# Supabase / SQL
+schema.sql

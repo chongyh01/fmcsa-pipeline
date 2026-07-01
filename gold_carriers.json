@@ -1,0 +1,106 @@
+{
+  "_meta": {
+    "description": "Regression gold standard — verified expected values for known carriers. Only fields present in a carrier's record are checked; absent fields are skipped. A wrong expected value is worse than none — only lock values verified against SAFER.",
+    "verified_date": "2026-06-26",
+    "source": "REPORT_PIPELINE_REBUILD.md audit section + CLAUDE.md SESSION_LOG_JUN22"
+  },
+
+  "204814": {
+    "_name": "BINKS COCA COLA BOTTLING CO",
+    "_notes": "Fully verified against SAFER Jun 22 2026. Private property carrier, no MC#, no FMCSA authority or insurance filing required.",
+    "legal_name": "BINKS COCA COLA BOTTLING CO",
+    "carrier_type": "PRIVATE",
+    "usdot_status": "ACTIVE",
+    "authority_required": "NO",
+    "authority_status": "NOT_REQUIRED",
+    "insurance_required": "NO",
+    "fleet_power_units": 14,
+    "fleet_drivers": 13
+  },
+
+  "3431540": {
+    "_name": "YAFET TRUCKING LLC",
+    "_notes": "Audit flagged: report showed 12 inspections, SMS shows ~9. Inspection count inflated — likely dedup issue. Add full expected values after dedup fix verified.",
+    "legal_name": "YAFET TRUCKING LLC"
+  },
+
+  "3612954": {
+    "_name": "AMPF LOGISTICS LLC",
+    "_notes": "Audit flagged: active+revoked contradiction and no-record-to-no-insurance error. Must pass validation rules 1, 6, 7 after rebuild. Expected values TBD — verify against SAFER before locking.",
+    "legal_name": "AMPF LOGISTICS LLC"
+  },
+
+  "3841767": {
+    "_name": "ABLE BODY LOGISTICS LLC",
+    "_notes": "Audit flagged: summary showed INACTIVE while body showed ACTIVE (rules 8, 9 conflict). Must not produce contradictory status across sections after rebuild.",
+    "legal_name": "ABLE BODY LOGISTICS LLC"
+  },
+
+  "623336": {
+    "_name": "CARBARB ENTERPRISES INC",
+    "_notes": "Audit flagged: revoked vs active conflict. Verify against SAFER and lock expected values once resolved.",
+    "legal_name": "CARBARB ENTERPRISES INC"
+  },
+
+  "3012101": {
+    "_name": "XIANGFENG TRADING INC",
+    "_notes": "Private carrier, 1 truck / 1 driver. Verified from audit notes Jun 22 2026. Must pass rules 2 and 3 (private+authority_required=NO, private+insurance_required=NO).",
+    "legal_name": "XIANGFENG TRADING INC",
+    "carrier_type": "PRIVATE",
+    "authority_required": "NO",
+    "insurance_required": "NO",
+    "fleet_power_units": 1,
+    "fleet_drivers": 1
+  },
+
+  "1612145": {
+    "_name": "J8 EQUIPMENT COMPANY INC",
+    "_notes": "Private property carrier, 1 truck / 1 driver. Verified from audit notes Jun 22 2026.",
+    "legal_name": "J8 EQUIPMENT COMPANY INC",
+    "carrier_type": "PRIVATE",
+    "authority_required": "NO",
+    "insurance_required": "NO",
+    "fleet_power_units": 1,
+    "fleet_drivers": 1
+  },
+
+  "2308088": {
+    "_name": "JEREMIAH BROOKS",
+    "_notes": "Audit flagged: report showed 'for-hire' wording but carrier appears to be service/intrastate (rule 19). Correct carrier_type TBD — verify against SAFER before locking.",
+    "legal_name": "JEREMIAH BROOKS"
+  },
+
+  "2051387": {
+    "_name": "TREDZ CENTRAL LLC",
+    "_notes": "Confirmed against SAFER Jul 1 2026. SAFER shows Private(Property), NOT AUTHORIZED, blank MC field. Our DB has MC940282 (import artifact) and cargo_type=PRIVATE PROPERTY. After Bug 1 fix, cargo_type must win over MC presence.",
+    "legal_name": "TREDZ CENTRAL LLC",
+    "carrier_type": "PRIVATE",
+    "authority_required": "NO",
+    "insurance_required": "NO"
+  },
+
+  "888283": {
+    "_name": "PUBLIC SERVICE COMPANY OF NORTH CAROLINA INCORPORATED",
+    "_notes": "Reported by auditor Jul 1 2026 as Private misclassified as FOR_HIRE. cargo_type=PRIVATE PROPERTY in our DB. After Bug 1 fix must classify as PRIVATE.",
+    "legal_name": "PUBLIC SERVICE COMPANY OF NORTH CAROLINA INCORPORATED",
+    "carrier_type": "PRIVATE",
+    "authority_required": "NO",
+    "insurance_required": "NO"
+  },
+
+  "830598": {
+    "_name": "SURJIT S DHALIWAL",
+    "_notes": "Pending SAFER verification (prev session). FOR_HIRE with repeated annual revocation/reinstatement cycles — all authority_history revocations show reason=DISCONTINUED REVOCATION; alert at 2024-01-29 lacks DISCONTIN flag. REINSTATED 2024-06-17. After Bug 2 fix: CONFIRMED_ACTIVE, revocation_date=None, rule 01 PASS.",
+    "carrier_type": "FOR_HIRE_INTERSTATE",
+    "authority_status": "CONFIRMED_ACTIVE",
+    "authority_required": "YES"
+  },
+
+  "833248": {
+    "_name": "JAVIER GONZALEZ",
+    "_notes": "Pending SAFER verification (prev session). FOR_HIRE with repeated revocation/reinstatement cycles. Alerts lack DISCONTIN flag but authority_history shows reinstatements after each. After Bug 2 fix: CONFIRMED_ACTIVE, revocation_date=None, rule 01 PASS.",
+    "carrier_type": "FOR_HIRE_INTERSTATE",
+    "authority_status": "CONFIRMED_ACTIVE",
+    "authority_required": "YES"
+  }
+}
