@@ -1,5 +1,5 @@
 ================================================================================
-CARRIER FACTS + VALIDATION AUDIT — 2026-07-01 20:00:46
+CARRIER FACTS + VALIDATION AUDIT — 2026-07-01 20:54:42
 Layers: 1 (carrier_facts.py)  +  2 (validation_rules.py)
 ================================================================================
 
@@ -30,7 +30,28 @@ Note: 14 trucks/13 drivers — fleet should both be non-zero
   accident_date              (none)
   data_confidence            {'authority': 'HIGH', 'insurance': 'HIGH', 'fleet': 'HIGH', 'identity': 'HIGH'}
 
-  [LAYER 2 — VALIDATION]  20/20 rules passed  ✓
+  [LAYER 2 — VALIDATION]  21/21 rules passed  ✓
+    [PASS] Rule 01 authority_not_both_active_and_revoked: N/A — authority is not CONFIRMED_ACTIVE
+    [PASS] Rule 02 private_no_authority_required: OK — authority_required=NO
+    [PASS] Rule 03 private_no_insurance_required: OK — insurance_required=NO
+    [PASS] Rule 04 intrastate_not_rendered_as_revoked: N/A — carrier_type=PRIVATE
+    [PASS] Rule 05 no_sms_without_inspections: N/A — inspection_count=2
+    [PASS] Rule 06 lapsed_requires_explicit_cancellation: N/A — insurance_status=NOT_REQUIRED
+    [PASS] Rule 07 revoked_requires_revocation_event: N/A — authority_status=NOT_REQUIRED
+    [PASS] Rule 08 authority_status_is_valid_sentinel: OK — =NOT_REQUIRED
+    [PASS] Rule 09 usdot_status_is_valid: OK — =ACTIVE
+    [PASS] Rule 10 no_mc_placeholder: OK — mc_number=(none)
+    [PASS] Rule 11 insurance_dates_internally_consistent: N/A — insurance_status=NOT_REQUIRED
+    [PASS] Rule 12 first_authority_date_not_future: N/A — no first_authority_date
+    [PASS] Rule 13 accident_date_is_valid_past_date: N/A — no accident_date filter
+    [PASS] Rule 14 no_prohibited_wording_in_status_fields: OK
+    [PASS] Rule 15 no_overconfident_negative_from_empty_records: OK
+    [PASS] Rule 16 fleet_data_not_asymmetric: OK — power_units=14, drivers=13
+    [PASS] Rule 17 inspection_count_non_negative_int: OK — inspection_count=2
+    [PASS] Rule 18 data_confidence_keys_present: OK — {'insurance': 'HIGH', 'identity': 'HIGH', 'fleet': 'HIGH', 'authority': 'HIGH'}
+    [PASS] Rule 19 for_hire_has_mc_or_auth_evidence: N/A — carrier_type=PRIVATE
+    [PASS] Rule 20 accident_date_parseable_if_set: N/A — no accident_date set
+    [PASS] Rule 21 authorized_carrier_not_classified_private: N/A — authority_status=NOT_REQUIRED
 
 ────────────────────────────────────────────────────────────────────────────────
 DOT 3431540  —  YAFET TRUCKING
@@ -59,7 +80,28 @@ Note: inspection count: report said 12, SMS ~9 — verify dedup gives correct co
   accident_date              (none)
   data_confidence            {'authority': 'HIGH', 'insurance': 'HIGH', 'fleet': 'HIGH', 'identity': 'HIGH'}
 
-  [LAYER 2 — VALIDATION]  20/20 rules passed  ✓
+  [LAYER 2 — VALIDATION]  21/21 rules passed  ✓
+    [PASS] Rule 01 authority_not_both_active_and_revoked: OK
+    [PASS] Rule 02 private_no_authority_required: N/A — carrier_type=FOR_HIRE_INTERSTATE
+    [PASS] Rule 03 private_no_insurance_required: N/A — carrier_type=FOR_HIRE_INTERSTATE
+    [PASS] Rule 04 intrastate_not_rendered_as_revoked: N/A — carrier_type=FOR_HIRE_INTERSTATE
+    [PASS] Rule 05 no_sms_without_inspections: N/A — inspection_count=12
+    [PASS] Rule 06 lapsed_requires_explicit_cancellation: N/A — insurance_status=CONFIRMED_ACTIVE
+    [PASS] Rule 07 revoked_requires_revocation_event: N/A — authority_status=CONFIRMED_ACTIVE
+    [PASS] Rule 08 authority_status_is_valid_sentinel: OK — =CONFIRMED_ACTIVE
+    [PASS] Rule 09 usdot_status_is_valid: OK — =ACTIVE
+    [PASS] Rule 10 no_mc_placeholder: OK — mc_number=MC1111962
+    [PASS] Rule 11 insurance_dates_internally_consistent: OK
+    [PASS] Rule 12 first_authority_date_not_future: OK — first_authority_date=2020-07-02
+    [PASS] Rule 13 accident_date_is_valid_past_date: N/A — no accident_date filter
+    [PASS] Rule 14 no_prohibited_wording_in_status_fields: OK
+    [PASS] Rule 15 no_overconfident_negative_from_empty_records: OK
+    [PASS] Rule 16 fleet_data_not_asymmetric: OK — power_units=1, drivers=1
+    [PASS] Rule 17 inspection_count_non_negative_int: OK — inspection_count=12
+    [PASS] Rule 18 data_confidence_keys_present: OK — {'insurance': 'HIGH', 'identity': 'HIGH', 'fleet': 'HIGH', 'authority': 'HIGH'}
+    [PASS] Rule 19 for_hire_has_mc_or_auth_evidence: OK — mc=MC1111962, auth_records=1
+    [PASS] Rule 20 accident_date_parseable_if_set: N/A — no accident_date set
+    [PASS] Rule 21 authorized_carrier_not_classified_private: OK — carrier_type=FOR_HIRE_INTERSTATE is consistent with CONFIRMED_ACTIVE authority
 
 ────────────────────────────────────────────────────────────────────────────────
 DOT 3612954  —  AMPF LOGISTICS
@@ -88,7 +130,28 @@ Note: active vs revoked + no insurance contradiction — rules 1, 6, 7 must all 
   accident_date              (none)
   data_confidence            {'authority': 'HIGH', 'insurance': 'HIGH', 'fleet': 'HIGH', 'identity': 'HIGH'}
 
-  [LAYER 2 — VALIDATION]  20/20 rules passed  ✓
+  [LAYER 2 — VALIDATION]  21/21 rules passed  ✓
+    [PASS] Rule 01 authority_not_both_active_and_revoked: N/A — authority is not CONFIRMED_ACTIVE
+    [PASS] Rule 02 private_no_authority_required: N/A — carrier_type=FOR_HIRE_INTERSTATE
+    [PASS] Rule 03 private_no_insurance_required: N/A — carrier_type=FOR_HIRE_INTERSTATE
+    [PASS] Rule 04 intrastate_not_rendered_as_revoked: N/A — carrier_type=FOR_HIRE_INTERSTATE
+    [PASS] Rule 05 no_sms_without_inspections: N/A — inspection_count=2
+    [PASS] Rule 06 lapsed_requires_explicit_cancellation: OK — cancellation confirmed by explicit record
+    [PASS] Rule 07 revoked_requires_revocation_event: OK — revocation_date=2022-09-28
+    [PASS] Rule 08 authority_status_is_valid_sentinel: OK — =CONFIRMED_REVOKED
+    [PASS] Rule 09 usdot_status_is_valid: OK — =ACTIVE
+    [PASS] Rule 10 no_mc_placeholder: OK — mc_number=MC1231283
+    [PASS] Rule 11 insurance_dates_internally_consistent: OK
+    [PASS] Rule 12 first_authority_date_not_future: OK — first_authority_date=2021-06-14
+    [PASS] Rule 13 accident_date_is_valid_past_date: N/A — no accident_date filter
+    [PASS] Rule 14 no_prohibited_wording_in_status_fields: OK
+    [PASS] Rule 15 no_overconfident_negative_from_empty_records: OK
+    [PASS] Rule 16 fleet_data_not_asymmetric: OK — power_units=1, drivers=1
+    [PASS] Rule 17 inspection_count_non_negative_int: OK — inspection_count=2
+    [PASS] Rule 18 data_confidence_keys_present: OK — {'insurance': 'HIGH', 'identity': 'HIGH', 'fleet': 'HIGH', 'authority': 'HIGH'}
+    [PASS] Rule 19 for_hire_has_mc_or_auth_evidence: OK — mc=MC1231283, auth_records=2
+    [PASS] Rule 20 accident_date_parseable_if_set: N/A — no accident_date set
+    [PASS] Rule 21 authorized_carrier_not_classified_private: N/A — authority_status=CONFIRMED_REVOKED
 
 ────────────────────────────────────────────────────────────────────────────────
 DOT 3841767  —  ABLE BODY LOGISTICS
@@ -117,7 +180,28 @@ Note: summary inactive vs findings active — usdot_status must be consistent
   accident_date              (none)
   data_confidence            {'authority': 'MEDIUM', 'insurance': 'LOW', 'fleet': 'HIGH', 'identity': 'HIGH'}
 
-  [LAYER 2 — VALIDATION]  20/20 rules passed  ✓
+  [LAYER 2 — VALIDATION]  21/21 rules passed  ✓
+    [PASS] Rule 01 authority_not_both_active_and_revoked: N/A — authority is not CONFIRMED_ACTIVE
+    [PASS] Rule 02 private_no_authority_required: N/A — carrier_type=FOR_HIRE_INTERSTATE
+    [PASS] Rule 03 private_no_insurance_required: N/A — carrier_type=FOR_HIRE_INTERSTATE
+    [PASS] Rule 04 intrastate_not_rendered_as_revoked: N/A — carrier_type=FOR_HIRE_INTERSTATE
+    [PASS] Rule 05 no_sms_without_inspections: OK — inspection_count=0, no SMS — consistent
+    [PASS] Rule 06 lapsed_requires_explicit_cancellation: N/A — insurance_status=NOT_FOUND
+    [PASS] Rule 07 revoked_requires_revocation_event: N/A — authority_status=REQUIRES_VERIFICATION
+    [PASS] Rule 08 authority_status_is_valid_sentinel: OK — =REQUIRES_VERIFICATION
+    [PASS] Rule 09 usdot_status_is_valid: OK — =INACTIVE
+    [PASS] Rule 10 no_mc_placeholder: OK — mc_number=MC1397346
+    [PASS] Rule 11 insurance_dates_internally_consistent: N/A — insurance_status=NOT_FOUND
+    [PASS] Rule 12 first_authority_date_not_future: N/A — no first_authority_date
+    [PASS] Rule 13 accident_date_is_valid_past_date: N/A — no accident_date filter
+    [PASS] Rule 14 no_prohibited_wording_in_status_fields: OK
+    [PASS] Rule 15 no_overconfident_negative_from_empty_records: OK
+    [PASS] Rule 16 fleet_data_not_asymmetric: OK — power_units=1, drivers=1
+    [PASS] Rule 17 inspection_count_non_negative_int: OK — inspection_count=0
+    [PASS] Rule 18 data_confidence_keys_present: OK — {'insurance': 'LOW', 'identity': 'HIGH', 'fleet': 'HIGH', 'authority': 'MEDIUM'}
+    [PASS] Rule 19 for_hire_has_mc_or_auth_evidence: OK — mc=MC1397346, auth_records=1
+    [PASS] Rule 20 accident_date_parseable_if_set: N/A — no accident_date set
+    [PASS] Rule 21 authorized_carrier_not_classified_private: N/A — authority_status=REQUIRES_VERIFICATION
 
 ────────────────────────────────────────────────────────────────────────────────
 DOT 623336  —  CARBARB ENTERPRISES
@@ -146,7 +230,28 @@ Note: revoked vs active conflict — rules 1 and 7 must catch contradiction if p
   accident_date              (none)
   data_confidence            {'authority': 'HIGH', 'insurance': 'MEDIUM', 'fleet': 'HIGH', 'identity': 'HIGH'}
 
-  [LAYER 2 — VALIDATION]  20/20 rules passed  ✓
+  [LAYER 2 — VALIDATION]  21/21 rules passed  ✓
+    [PASS] Rule 01 authority_not_both_active_and_revoked: N/A — authority is not CONFIRMED_ACTIVE
+    [PASS] Rule 02 private_no_authority_required: N/A — carrier_type=FOR_HIRE_INTERSTATE
+    [PASS] Rule 03 private_no_insurance_required: N/A — carrier_type=FOR_HIRE_INTERSTATE
+    [PASS] Rule 04 intrastate_not_rendered_as_revoked: N/A — carrier_type=FOR_HIRE_INTERSTATE
+    [PASS] Rule 05 no_sms_without_inspections: OK — inspection_count=0, no SMS — consistent
+    [PASS] Rule 06 lapsed_requires_explicit_cancellation: N/A — insurance_status=REQUIRES_VERIFICATION
+    [PASS] Rule 07 revoked_requires_revocation_event: OK — revocation_date=1998-03-18
+    [PASS] Rule 08 authority_status_is_valid_sentinel: OK — =CONFIRMED_REVOKED
+    [PASS] Rule 09 usdot_status_is_valid: OK — =INACTIVE
+    [PASS] Rule 10 no_mc_placeholder: OK — mc_number=MC297804
+    [PASS] Rule 11 insurance_dates_internally_consistent: OK
+    [PASS] Rule 12 first_authority_date_not_future: OK — first_authority_date=1996-01-10
+    [PASS] Rule 13 accident_date_is_valid_past_date: N/A — no accident_date filter
+    [PASS] Rule 14 no_prohibited_wording_in_status_fields: OK
+    [PASS] Rule 15 no_overconfident_negative_from_empty_records: OK
+    [PASS] Rule 16 fleet_data_not_asymmetric: OK — power_units=2, drivers=2
+    [PASS] Rule 17 inspection_count_non_negative_int: OK — inspection_count=0
+    [PASS] Rule 18 data_confidence_keys_present: OK — {'insurance': 'MEDIUM', 'identity': 'HIGH', 'fleet': 'HIGH', 'authority': 'HIGH'}
+    [PASS] Rule 19 for_hire_has_mc_or_auth_evidence: OK — mc=MC297804, auth_records=5
+    [PASS] Rule 20 accident_date_parseable_if_set: N/A — no accident_date set
+    [PASS] Rule 21 authorized_carrier_not_classified_private: N/A — authority_status=CONFIRMED_REVOKED
 
 ────────────────────────────────────────────────────────────────────────────────
 DOT 3012101  —  XIANGFENG TRADING
@@ -175,7 +280,28 @@ Note: private, 1/1 — must classify as PRIVATE, not FOR_HIRE_INTERSTATE (rules 
   accident_date              (none)
   data_confidence            {'authority': 'HIGH', 'insurance': 'HIGH', 'fleet': 'HIGH', 'identity': 'HIGH'}
 
-  [LAYER 2 — VALIDATION]  20/20 rules passed  ✓
+  [LAYER 2 — VALIDATION]  21/21 rules passed  ✓
+    [PASS] Rule 01 authority_not_both_active_and_revoked: N/A — authority is not CONFIRMED_ACTIVE
+    [PASS] Rule 02 private_no_authority_required: OK — authority_required=NO
+    [PASS] Rule 03 private_no_insurance_required: OK — insurance_required=NO
+    [PASS] Rule 04 intrastate_not_rendered_as_revoked: N/A — carrier_type=PRIVATE
+    [PASS] Rule 05 no_sms_without_inspections: N/A — inspection_count=5
+    [PASS] Rule 06 lapsed_requires_explicit_cancellation: N/A — insurance_status=NOT_REQUIRED
+    [PASS] Rule 07 revoked_requires_revocation_event: N/A — authority_status=NOT_REQUIRED
+    [PASS] Rule 08 authority_status_is_valid_sentinel: OK — =NOT_REQUIRED
+    [PASS] Rule 09 usdot_status_is_valid: OK — =ACTIVE
+    [PASS] Rule 10 no_mc_placeholder: OK — mc_number=(none)
+    [PASS] Rule 11 insurance_dates_internally_consistent: N/A — insurance_status=NOT_REQUIRED
+    [PASS] Rule 12 first_authority_date_not_future: N/A — no first_authority_date
+    [PASS] Rule 13 accident_date_is_valid_past_date: N/A — no accident_date filter
+    [PASS] Rule 14 no_prohibited_wording_in_status_fields: OK
+    [PASS] Rule 15 no_overconfident_negative_from_empty_records: OK
+    [PASS] Rule 16 fleet_data_not_asymmetric: OK — power_units=1, drivers=1
+    [PASS] Rule 17 inspection_count_non_negative_int: OK — inspection_count=5
+    [PASS] Rule 18 data_confidence_keys_present: OK — {'insurance': 'HIGH', 'identity': 'HIGH', 'fleet': 'HIGH', 'authority': 'HIGH'}
+    [PASS] Rule 19 for_hire_has_mc_or_auth_evidence: N/A — carrier_type=PRIVATE
+    [PASS] Rule 20 accident_date_parseable_if_set: N/A — no accident_date set
+    [PASS] Rule 21 authorized_carrier_not_classified_private: N/A — authority_status=NOT_REQUIRED
 
 ────────────────────────────────────────────────────────────────────────────────
 DOT 1612145  —  J8 EQUIPMENT
@@ -204,25 +330,46 @@ Note: private property 1/1 — same as above, rules 2 and 3
   accident_date              (none)
   data_confidence            {'authority': 'HIGH', 'insurance': 'HIGH', 'fleet': 'HIGH', 'identity': 'HIGH'}
 
-  [LAYER 2 — VALIDATION]  20/20 rules passed  ✓
+  [LAYER 2 — VALIDATION]  21/21 rules passed  ✓
+    [PASS] Rule 01 authority_not_both_active_and_revoked: N/A — authority is not CONFIRMED_ACTIVE
+    [PASS] Rule 02 private_no_authority_required: OK — authority_required=NO
+    [PASS] Rule 03 private_no_insurance_required: OK — insurance_required=NO
+    [PASS] Rule 04 intrastate_not_rendered_as_revoked: N/A — carrier_type=PRIVATE
+    [PASS] Rule 05 no_sms_without_inspections: OK — inspection_count=0, no SMS — consistent
+    [PASS] Rule 06 lapsed_requires_explicit_cancellation: N/A — insurance_status=NOT_REQUIRED
+    [PASS] Rule 07 revoked_requires_revocation_event: N/A — authority_status=NOT_REQUIRED
+    [PASS] Rule 08 authority_status_is_valid_sentinel: OK — =NOT_REQUIRED
+    [PASS] Rule 09 usdot_status_is_valid: OK — =ACTIVE
+    [PASS] Rule 10 no_mc_placeholder: OK — mc_number=(none)
+    [PASS] Rule 11 insurance_dates_internally_consistent: N/A — insurance_status=NOT_REQUIRED
+    [PASS] Rule 12 first_authority_date_not_future: N/A — no first_authority_date
+    [PASS] Rule 13 accident_date_is_valid_past_date: N/A — no accident_date filter
+    [PASS] Rule 14 no_prohibited_wording_in_status_fields: OK
+    [PASS] Rule 15 no_overconfident_negative_from_empty_records: OK
+    [PASS] Rule 16 fleet_data_not_asymmetric: OK — power_units=1, drivers=1
+    [PASS] Rule 17 inspection_count_non_negative_int: OK — inspection_count=0
+    [PASS] Rule 18 data_confidence_keys_present: OK — {'insurance': 'HIGH', 'identity': 'HIGH', 'fleet': 'HIGH', 'authority': 'HIGH'}
+    [PASS] Rule 19 for_hire_has_mc_or_auth_evidence: N/A — carrier_type=PRIVATE
+    [PASS] Rule 20 accident_date_parseable_if_set: N/A — no accident_date set
+    [PASS] Rule 21 authorized_carrier_not_classified_private: N/A — authority_status=NOT_REQUIRED
 
 ────────────────────────────────────────────────────────────────────────────────
 DOT 2308088  —  JEREMIAH BROOKS
 Note: for-hire wording vs service/intrastate — carrier_type must match evidence (rule 19)
 
   [LAYER 1 — CARRIER_FACTS]
-  carrier_type               PRIVATE
+  carrier_type               REQUIRES_VERIFICATION
   usdot_status               ACTIVE
   mc_number                  (none)
-  authority_required         NO
-  authority_status           NOT_REQUIRED
+  authority_required         REQUIRES_VERIFICATION
+  authority_status           NOT_FOUND
   authority_revoc_date       —
   first_authority_date       —
   active_auth_period         —
-  insurance_required         NO
-  insurance_status           NOT_REQUIRED
-  insurance_cancellation     NOT_REQUIRED
-  insurance_replacement      NOT_REQUIRED
+  insurance_required         REQUIRES_VERIFICATION
+  insurance_status           NOT_FOUND
+  insurance_cancellation     NOT_FOUND
+  insurance_replacement      NOT_FOUND
   fleet_power_units          1
   fleet_drivers              1
   inspection_count           0 (deduped)
@@ -231,25 +378,46 @@ Note: for-hire wording vs service/intrastate — carrier_type must match evidenc
   boc3_on_file               NO
   sms_percentile             False
   accident_date              (none)
-  data_confidence            {'authority': 'HIGH', 'insurance': 'HIGH', 'fleet': 'HIGH', 'identity': 'HIGH'}
+  data_confidence            {'authority': 'LOW', 'insurance': 'LOW', 'fleet': 'HIGH', 'identity': 'HIGH'}
 
-  [LAYER 2 — VALIDATION]  20/20 rules passed  ✓
+  [LAYER 2 — VALIDATION]  21/21 rules passed  ✓
+    [PASS] Rule 01 authority_not_both_active_and_revoked: N/A — authority is not CONFIRMED_ACTIVE
+    [PASS] Rule 02 private_no_authority_required: N/A — carrier_type=REQUIRES_VERIFICATION
+    [PASS] Rule 03 private_no_insurance_required: N/A — carrier_type=REQUIRES_VERIFICATION
+    [PASS] Rule 04 intrastate_not_rendered_as_revoked: N/A — carrier_type=REQUIRES_VERIFICATION
+    [PASS] Rule 05 no_sms_without_inspections: OK — inspection_count=0, no SMS — consistent
+    [PASS] Rule 06 lapsed_requires_explicit_cancellation: N/A — insurance_status=NOT_FOUND
+    [PASS] Rule 07 revoked_requires_revocation_event: N/A — authority_status=NOT_FOUND
+    [PASS] Rule 08 authority_status_is_valid_sentinel: OK — =NOT_FOUND
+    [PASS] Rule 09 usdot_status_is_valid: OK — =ACTIVE
+    [PASS] Rule 10 no_mc_placeholder: OK — mc_number=(none)
+    [PASS] Rule 11 insurance_dates_internally_consistent: N/A — insurance_status=NOT_FOUND
+    [PASS] Rule 12 first_authority_date_not_future: N/A — no first_authority_date
+    [PASS] Rule 13 accident_date_is_valid_past_date: N/A — no accident_date filter
+    [PASS] Rule 14 no_prohibited_wording_in_status_fields: OK
+    [PASS] Rule 15 no_overconfident_negative_from_empty_records: OK
+    [PASS] Rule 16 fleet_data_not_asymmetric: OK — power_units=1, drivers=1
+    [PASS] Rule 17 inspection_count_non_negative_int: OK — inspection_count=0
+    [PASS] Rule 18 data_confidence_keys_present: OK — {'insurance': 'LOW', 'identity': 'HIGH', 'fleet': 'HIGH', 'authority': 'LOW'}
+    [PASS] Rule 19 for_hire_has_mc_or_auth_evidence: N/A — carrier_type=REQUIRES_VERIFICATION
+    [PASS] Rule 20 accident_date_parseable_if_set: N/A — no accident_date set
+    [PASS] Rule 21 authorized_carrier_not_classified_private: N/A — authority_status=NOT_FOUND
 
 ================================================================================
 SUMMARY
 ================================================================================
   DOT         Pass  Fail  Status         Name
   --------------------------------------------------------------------------------
-  204814        20     0  OK             BINKS COCA COLA BOTTLING
-  3431540       20     0  OK             YAFET TRUCKING
-  3612954       20     0  OK             AMPF LOGISTICS
-  3841767       20     0  OK             ABLE BODY LOGISTICS
-  623336        20     0  OK             CARBARB ENTERPRISES
-  3012101       20     0  OK             XIANGFENG TRADING
-  1612145       20     0  OK             J8 EQUIPMENT
-  2308088       20     0  OK             JEREMIAH BROOKS
+  204814        21     0  OK             BINKS COCA COLA BOTTLING
+  3431540       21     0  OK             YAFET TRUCKING
+  3612954       21     0  OK             AMPF LOGISTICS
+  3841767       21     0  OK             ABLE BODY LOGISTICS
+  623336        21     0  OK             CARBARB ENTERPRISES
+  3012101       21     0  OK             XIANGFENG TRADING
+  1612145       21     0  OK             J8 EQUIPMENT
+  2308088       21     0  OK             JEREMIAH BROOKS
 
-  Total: 160/160 rules passed (100.0%) | 0 failures
+  Total: 168/168 rules passed (100.0%) | 0 failures
 ================================================================================
 PASS = all 20 rules green  |  FAIL = one or more rules failed
 N/A rules count as PASS (rule does not apply to this carrier type)

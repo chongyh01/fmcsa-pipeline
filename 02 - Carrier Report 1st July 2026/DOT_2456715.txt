@@ -1,0 +1,111 @@
+================================================================================
+CARRIER INTELLIGENCE REPORT — FMCSA DATA
+Generated : 2026-07-01 20:28:58  
+DOT       : 2456715
+================================================================================
+
+── CARRIER IDENTITY ────────────────────────────────────────────────────────────
+  Legal Name    : MTM CARRIERS LLC
+  DOT Number    : 2456715
+  MC Number     : MC489289
+  Carrier Type  : FOR_HIRE_INTERSTATE
+  USDOT Status  : ACTIVE
+
+── CURRENT AUTHORITY ───────────────────────────────────────────────────────────
+  Required      : YES
+  Status        : CONFIRMED_REVOKED
+  Revoc Date    : 2016-08-29
+  First Auth    : 2005-06-13
+  Active Period : 2005-06-13 to 2016-08-29 (11 yr)
+
+── HISTORICAL AUTHORITY EVENTS ──────────────────────────────────────────────────
+  2014-03-03  GRANTED  (resolved 2016-08-29)  [REVOKED]
+  2013-10-15  INVOLUNTARY REVOCATION  (resolved 2013-11-12)  [DISCONTINUED REVOCATION]
+  2013-08-13  INVOLUNTARY REVOCATION  (resolved 2013-08-15)  [DISCONTINUED REVOCATION]
+  2013-05-14  INVOLUNTARY REVOCATION  (resolved 2013-06-11)  [DISCONTINUED REVOCATION]
+  2013-03-14  INVOLUNTARY REVOCATION  (resolved 2013-03-28)  [DISCONTINUED REVOCATION]
+  2013-02-12  INVOLUNTARY REVOCATION  (resolved 2013-02-13)  [DISCONTINUED REVOCATION]
+  2012-10-22  INVOLUNTARY REVOCATION  (resolved 2012-11-09)  [DISCONTINUED REVOCATION]
+  2012-09-12  INVOLUNTARY REVOCATION  (resolved 2012-10-11)  [DISCONTINUED REVOCATION]
+  2011-11-22  REINSTATED  (resolved 2014-01-07)  [REVOKED]
+  2008-04-24  REINSTATED  (resolved 2008-07-02)  [REVOKED]
+  2007-10-11  INVOLUNTARY REVOCATION  (resolved 2007-10-31)  [DISCONTINUED REVOCATION]
+  2006-04-26  INVOLUNTARY REVOCATION  (resolved 2006-05-24)  [DISCONTINUED REVOCATION]
+  2005-06-13  GRANTED  (resolved 2008-02-19)  [REVOKED]
+  2016-08-29  ALERT: INVOLUNTARY REVOCATION
+  2014-01-07  ALERT: INVOLUNTARY REVOCATION
+  2008-07-02  ALERT: INVOLUNTARY REVOCATION
+  2008-02-19  ALERT: INVOLUNTARY REVOCATION
+
+── INSURANCE ───────────────────────────────────────────────────────────────────
+  Required      : YES
+  Status        : REQUIRES_VERIFICATION
+  Cancellation  : YES
+  Replacement   : YES
+
+── FLEET & OPERATIONS ──────────────────────────────────────────────────────────
+  Power Units   : 1  (1-2 (owner-op))
+  Drivers       : 1
+  Inspections   : 0  (historical total, all available records; deduped)
+  Crashes       : 0  (historical total, all available records)
+  Violations    : 0  (historical total, all available records)
+  BOC-3 on File : BOC-3 status not verified from imported data — manual L&I/MOTUS verification required
+  SMS Data      : Not present in imported dataset
+
+── DATA CONFIDENCE ─────────────────────────────────────────────────────────────
+  authority     : HIGH
+  insurance     : MEDIUM
+  fleet         : HIGH
+  identity      : HIGH
+
+── VALIDATION RULES ────────────────────────────────────────────────────────────
+  20/20 rules passed | 0 failed
+
+  [PASS] Rule 01 authority_not_both_active_and_revoked
+         N/A — authority is not CONFIRMED_ACTIVE
+  [PASS] Rule 02 private_no_authority_required
+         N/A — carrier_type=FOR_HIRE_INTERSTATE
+  [PASS] Rule 03 private_no_insurance_required
+         N/A — carrier_type=FOR_HIRE_INTERSTATE
+  [PASS] Rule 04 intrastate_not_rendered_as_revoked
+         N/A — carrier_type=FOR_HIRE_INTERSTATE
+  [PASS] Rule 05 no_sms_without_inspections
+         OK — inspection_count=0, no SMS — consistent
+  [PASS] Rule 06 lapsed_requires_explicit_cancellation
+         N/A — insurance_status=REQUIRES_VERIFICATION
+  [PASS] Rule 07 revoked_requires_revocation_event
+         OK — revocation_date=2016-08-29
+  [PASS] Rule 08 authority_status_is_valid_sentinel
+         OK — =CONFIRMED_REVOKED
+  [PASS] Rule 09 usdot_status_is_valid
+         OK — =ACTIVE
+  [PASS] Rule 10 no_mc_placeholder
+         OK — mc_number=MC489289
+  [PASS] Rule 11 insurance_dates_internally_consistent
+         OK
+  [PASS] Rule 12 first_authority_date_not_future
+         OK — first_authority_date=2005-06-13
+  [PASS] Rule 13 accident_date_is_valid_past_date
+         N/A — no accident_date filter
+  [PASS] Rule 14 no_prohibited_wording_in_status_fields
+         OK
+  [PASS] Rule 15 no_overconfident_negative_from_empty_records
+         OK
+  [PASS] Rule 16 fleet_data_not_asymmetric
+         OK — power_units=1, drivers=1
+  [PASS] Rule 17 inspection_count_non_negative_int
+         OK — inspection_count=0
+  [PASS] Rule 18 data_confidence_keys_present
+         OK — {'fleet': 'HIGH', 'identity': 'HIGH', 'insurance': 'MEDIUM', 'authority': 'HIGH'}
+  [PASS] Rule 19 for_hire_has_mc_or_auth_evidence
+         OK — mc=MC489289, auth_records=13
+  [PASS] Rule 20 accident_date_parseable_if_set
+         N/A — no accident_date set
+
+── VALIDATION CONFLICTS ────────────────────────────────────────────────────────
+  None detected.
+
+================================================================================
+Data source: FMCSA MCMIS via Socrata open data (data.transportation.gov)
+Pipeline  : carrier_facts.py + validation_rules.py (Carrier Check USA)
+================================================================================

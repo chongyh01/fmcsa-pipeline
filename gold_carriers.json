@@ -102,5 +102,30 @@
     "carrier_type": "FOR_HIRE_INTERSTATE",
     "authority_status": "CONFIRMED_ACTIVE",
     "authority_required": "YES"
+  },
+
+  "2383948": {
+    "_name": "CASTELLI DEVELOPMENT CORPORATION LLC",
+    "_notes": "Confirmed SAFER Jul 1 2026. Operation classification shows BOTH Auth. For Hire AND Private(Property). MC-819002. Currently AUTHORIZED. cargo_type in DB: 'PRIVATE PROPERTY;AUTHORIZED FOR HIRE'. Must classify as MIXED_OPERATION (not PRIVATE). Round 2 audit fix.",
+    "legal_name": "CASTELLI DEVELOPMENT CORPORATION LLC",
+    "carrier_type": "MIXED_OPERATION",
+    "authority_required": "YES",
+    "authority_status": "CONFIRMED_ACTIVE"
+  },
+
+  "3036633": {
+    "_name": "STEEL VALLEY CONTRACTORS LLC",
+    "_notes": "High-confidence MIXED_OPERATION match — same pattern as CASTELLI (cargo_type has both PRIVATE PROPERTY and AUTHORIZED FOR HIRE, MC number present, authority records present). Round 2 audit fix.",
+    "legal_name": "STEEL VALLEY CONTRACTORS LLC",
+    "carrier_type": "MIXED_OPERATION",
+    "authority_required": "YES"
+  },
+
+  "2675124": {
+    "_name": "JAMES R PERRY",
+    "_notes": "cargo_type='AUTHORIZED FOR HIRE' but no MC number and no authority_history records. Operating under state authority only. Must classify as INTRASTATE_ONLY, not PRIVATE. Round 2 audit fix.",
+    "legal_name": "JAMES R PERRY",
+    "carrier_type": "INTRASTATE_ONLY",
+    "authority_required": "NO"
   }
 }

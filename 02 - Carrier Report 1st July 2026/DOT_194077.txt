@@ -1,0 +1,115 @@
+================================================================================
+CARRIER INTELLIGENCE REPORT — FMCSA DATA
+Generated : 2026-07-01 20:28:58  
+DOT       : 194077
+================================================================================
+
+── CARRIER IDENTITY ────────────────────────────────────────────────────────────
+  Legal Name    : COMBINED TRANSPORT INC
+  DOT Number    : 194077
+  MC Number     : MC152144
+  Carrier Type  : FOR_HIRE_INTERSTATE
+  USDOT Status  : ACTIVE
+
+── CURRENT AUTHORITY ───────────────────────────────────────────────────────────
+  Required      : YES
+  Status        : CONFIRMED_ACTIVE
+  First Auth    : 1981-03-16
+  Active Period : 1981-03-16 to present (45 yr)
+
+── HISTORICAL AUTHORITY EVENTS ──────────────────────────────────────────────────
+  2025-10-06  INVOLUNTARY REVOCATION  (resolved 2025-10-16)  [DISCONTINUED REVOCATION]
+  2021-04-29  INVOLUNTARY REVOCATION  (resolved 2021-06-08)  [DISCONTINUED REVOCATION]
+  2017-05-08  INVOLUNTARY REVOCATION  (resolved 2017-05-10)  [DISCONTINUED REVOCATION]
+  2004-12-30  INVOLUNTARY REVOCATION  (resolved 2005-01-12)  [DISCONTINUED REVOCATION]
+  2003-01-29  INVOLUNTARY REVOCATION  (resolved 2003-02-10)  [DISCONTINUED REVOCATION]
+  2000-06-27  INVOLUNTARY REVOCATION  (resolved 2000-07-18)  [DISCONTINUED REVOCATION]
+  1998-07-29  INVOLUNTARY REVOCATION  (resolved 1998-08-03)  [DISCONTINUED REVOCATION]
+  1988-09-22  GRANTED
+  1985-11-20  GRANTED
+  1984-09-07  GRANTED
+  1984-03-21  GRANTED
+  1983-12-16  GRANTED
+  1982-12-22  GRANTED
+  1982-06-08  GRANTED
+  1982-01-28  GRANTED
+  1981-03-16  GRANTED
+
+── INSURANCE ───────────────────────────────────────────────────────────────────
+  Required      : YES
+  Status        : CONFIRMED_ACTIVE
+  Cancellation  : YES
+  Replacement   : YES
+
+── FLEET & OPERATIONS ──────────────────────────────────────────────────────────
+  Power Units   : 221  (200+ (very large))
+  Drivers       : 173
+  Inspections   : 799  (historical total, all available records; deduped)
+  Crashes       : 322  (historical total, all available records)
+  Violations    : 791  (historical total, all available records)
+  BOC-3 on File : YES
+  SMS Data      : Not present in imported dataset
+
+── DATA CONFIDENCE ─────────────────────────────────────────────────────────────
+  authority     : HIGH
+  insurance     : HIGH
+  fleet         : HIGH
+  identity      : HIGH
+
+── VALIDATION RULES ────────────────────────────────────────────────────────────
+  19/20 rules passed | 1 failed
+
+  [PASS] Rule 01 authority_not_both_active_and_revoked
+         OK
+  [PASS] Rule 02 private_no_authority_required
+         N/A — carrier_type=FOR_HIRE_INTERSTATE
+  [PASS] Rule 03 private_no_insurance_required
+         N/A — carrier_type=FOR_HIRE_INTERSTATE
+  [PASS] Rule 04 intrastate_not_rendered_as_revoked
+         N/A — carrier_type=FOR_HIRE_INTERSTATE
+  [PASS] Rule 05 no_sms_without_inspections
+         N/A — inspection_count=799
+  [PASS] Rule 06 lapsed_requires_explicit_cancellation
+         N/A — insurance_status=CONFIRMED_ACTIVE
+  [PASS] Rule 07 revoked_requires_revocation_event
+         N/A — authority_status=CONFIRMED_ACTIVE
+  [PASS] Rule 08 authority_status_is_valid_sentinel
+         OK — =CONFIRMED_ACTIVE
+  [PASS] Rule 09 usdot_status_is_valid
+         OK — =ACTIVE
+  [PASS] Rule 10 no_mc_placeholder
+         OK — mc_number=MC152144
+  [FAIL] Rule 11 insurance_dates_internally_consistent
+         cancellation_date 2025-10-01 < effective_date 2025-11-02 for AMERICAN CONTRACTORS INDEMNITY COMPANY — impossible
+  [PASS] Rule 12 first_authority_date_not_future
+         OK — first_authority_date=1981-03-16
+  [PASS] Rule 13 accident_date_is_valid_past_date
+         N/A — no accident_date filter
+  [PASS] Rule 14 no_prohibited_wording_in_status_fields
+         OK
+  [PASS] Rule 15 no_overconfident_negative_from_empty_records
+         OK
+  [PASS] Rule 16 fleet_data_not_asymmetric
+         OK — power_units=221, drivers=173
+  [PASS] Rule 17 inspection_count_non_negative_int
+         OK — inspection_count=799
+  [PASS] Rule 18 data_confidence_keys_present
+         OK — {'fleet': 'HIGH', 'identity': 'HIGH', 'insurance': 'HIGH', 'authority': 'HIGH'}
+  [PASS] Rule 19 for_hire_has_mc_or_auth_evidence
+         OK — mc=MC152144, auth_records=16
+  [PASS] Rule 20 accident_date_parseable_if_set
+         N/A — no accident_date set
+
+── VALIDATION CONFLICTS ────────────────────────────────────────────────────────
+  1 conflict(s) found — manual SAFER verification recommended.
+
+  [1] Rule : insurance_dates_internally_consistent
+      Fields: insurance_status, _insurance_records
+      Detail: cancellation_date 2025-10-01 < effective_date
+              2025-11-02 for AMERICAN CONTRACTORS INDEMNITY COMPANY
+              — impossible
+
+================================================================================
+Data source: FMCSA MCMIS via Socrata open data (data.transportation.gov)
+Pipeline  : carrier_facts.py + validation_rules.py (Carrier Check USA)
+================================================================================

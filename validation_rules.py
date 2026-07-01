@@ -123,18 +123,19 @@ def rule_03_private_no_insurance_required(f) -> RuleResult:
 
 def rule_04_intrastate_not_rendered_as_revoked(f) -> RuleResult:
     """
-    INTRASTATE carriers never had FMCSA authority in the first place.
-    Their authority_status must be NOT_REQUIRED (not CONFIRMED_REVOKED,
-    which would falsely imply they had and lost federal authority).
+    INTRASTATE / INTRASTATE_ONLY carriers never held FMCSA interstate authority.
+    Their authority_status must be NOT_REQUIRED — not CONFIRMED_REVOKED or
+    CONFIRMED_ACTIVE, which would falsely imply they had (and lost / hold)
+    federal authority.
     """
     cf = _cf()
-    if f.carrier_type != cf.INTRASTATE:
+    if f.carrier_type not in (cf.INTRASTATE, cf.INTRASTATE_ONLY):
         return _na(4, "intrastate_not_rendered_as_revoked", f"carrier_type={f.carrier_type}")
     bad_statuses = {cf.CONFIRMED_REVOKED, cf.CONFIRMED_ACTIVE}
     if f.authority_status in bad_statuses:
         return _fail(4, "intrastate_not_rendered_as_revoked",
-                     f"carrier_type=INTRASTATE but authority_status={f.authority_status} "
-                     f"(should be NOT_REQUIRED)")
+                     f"carrier_type={f.carrier_type} but authority_status={f.authority_status} "
+                     f"(should be NOT_REQUIRED — intrastate carriers hold no federal authority)")
     return _ok(4, "intrastate_not_rendered_as_revoked",
                f"authority_status={f.authority_status}")
 
@@ -382,22 +383,46 @@ def rule_18_data_confidence_keys_present(f) -> RuleResult:
 
 def rule_19_for_hire_has_mc_or_auth_evidence(f) -> RuleResult:
     """
-    FOR_HIRE_INTERSTATE classification requires at least one supporting signal:
-    an MC number OR at least one authority history record.
-    Without either, the classification is speculative and should be UNKNOWN.
+    FOR_HIRE_INTERSTATE and MIXED_OPERATION classifications require at least one
+    supporting signal: an MC number OR at least one authority history record.
+    Without either, the interstate for-hire classification is speculative.
     """
     cf = _cf()
-    if f.carrier_type != cf.FOR_HIRE_INTERSTATE:
+    if f.carrier_type not in (cf.FOR_HIRE_INTERSTATE, cf.MIXED_OPERATION):
         return _na(19, "for_hire_has_mc_or_auth_evidence",
                    f"carrier_type={f.carrier_type}")
     has_mc   = bool(f.mc_number and f.mc_number != "MC")
     has_auth = len(f._authority_records) > 0
     if not has_mc and not has_auth:
         return _fail(19, "for_hire_has_mc_or_auth_evidence",
-                     "carrier_type=FOR_HIRE_INTERSTATE but no MC number and no "
-                     "authority_history records — classification needs evidence")
+                     f"carrier_type={f.carrier_type} but no MC number and no "
+                     "authority_history records — for-hire classification needs evidence")
     return _ok(19, "for_hire_has_mc_or_auth_evidence",
                f"mc={f.mc_number or '—'}, auth_records={len(f._authority_records)}")
+
+
+def rule_21_authorized_carrier_not_classified_private(f) -> RuleResult:
+    """
+    Classification guard: a carrier with authority_status=CONFIRMED_ACTIVE must
+    not be classified as PRIVATE or INTRASTATE_ONLY.  CONFIRMED_ACTIVE means the
+    carrier holds live FMCSA interstate operating authority, which is incompatible
+    with a PRIVATE or INTRASTATE_ONLY classification.
+
+    This fires only if _infer_carrier_type() has a bug — a legitimate carrier with
+    active authority must be FOR_HIRE_INTERSTATE, MIXED_OPERATION, or PASSENGER.
+    """
+    cf = _cf()
+    if f.authority_status != cf.CONFIRMED_ACTIVE:
+        return _na(21, "authorized_carrier_not_classified_private",
+                   f"authority_status={f.authority_status}")
+    bad_types = {cf.PRIVATE, cf.INTRASTATE_ONLY, cf.INTRASTATE}
+    if f.carrier_type in bad_types:
+        return _fail(21, "authorized_carrier_not_classified_private",
+                     f"authority_status=CONFIRMED_ACTIVE but carrier_type={f.carrier_type} "
+                     f"— a carrier with active FMCSA authority cannot be classified as private "
+                     f"or intrastate; classification logic error")
+    return _ok(21, "authorized_carrier_not_classified_private",
+               f"carrier_type={f.carrier_type} is consistent with CONFIRMED_ACTIVE authority")
 
 
 def rule_20_accident_date_parseable_if_set(f) -> RuleResult:
@@ -439,6 +464,7 @@ ALL_RULES: list[Callable] = [
     rule_18_data_confidence_keys_present,
     rule_19_for_hire_has_mc_or_auth_evidence,
     rule_20_accident_date_parseable_if_set,
+    rule_21_authorized_carrier_not_classified_private,
 ]
 
 
@@ -485,6 +511,7 @@ _RULE_CONFLICT_FIELDS: dict = {
     "data_confidence_keys_present":                 ["data_confidence"],
     "for_hire_has_mc_or_auth_evidence":             ["carrier_type", "mc_number"],
     "accident_date_parseable_if_set":               ["accident_date"],
+    "authorized_carrier_not_classified_private":    ["authority_status", "carrier_type"],
 }
 
 

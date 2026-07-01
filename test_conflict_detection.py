@@ -13,8 +13,8 @@ sys.path.insert(0, os.path.dirname(__file__))
 
 from carrier_facts import (
     CarrierFacts,
-    NOT_FOUND, CONFIRMED_ACTIVE, NOT_REQUIRED,
-    FOR_HIRE_INTERSTATE, PRIVATE,
+    NOT_FOUND, CONFIRMED_ACTIVE, CONFIRMED_REVOKED, NOT_REQUIRED,
+    FOR_HIRE_INTERSTATE, MIXED_OPERATION, PRIVATE, INTRASTATE_ONLY,
 )
 from validation_rules import run_validation_with_conflicts
 
@@ -81,7 +81,7 @@ assert_true(fleet_c is not None, "fleet conflict entry present")
 assert_true(fleet_c is not None and "fleet_power_units" in fleet_c["fields"], "fields list includes fleet_power_units")
 assert_true(fleet_c is not None and bool(fleet_c["detail"]), "detail string is non-empty")
 assert_true(len(facts1.validation_conflicts) > 0, "facts.validation_conflicts populated in-place")
-assert_true(isinstance(results1, list) and len(results1) == 20, "returns 20 rule results (no crash)")
+assert_true(isinstance(results1, list) and len(results1) == 21, "returns 21 rule results (no crash)")
 
 
 # ─── Test 2: insurance date inversion ────────────────────────────────────────
@@ -115,7 +115,7 @@ ins_c = next((c for c in conflicts2 if c["rule"] == "insurance_dates_internally_
 assert_true(ins_c is not None, "insurance date conflict entry present")
 assert_true(ins_c is not None and bool(ins_c["detail"]), "detail string is non-empty")
 assert_true(len(facts2.validation_conflicts) > 0, "facts.validation_conflicts populated in-place")
-assert_true(isinstance(results2, list) and len(results2) == 20, "returns 20 rule results (no crash)")
+assert_true(isinstance(results2, list) and len(results2) == 21, "returns 21 rule results (no crash)")
 
 
 # ─── Test 3: clean carrier — no conflicts ─────────────────────────────────────
@@ -127,7 +127,7 @@ results3, conflicts3 = run_validation_with_conflicts(facts3)
 
 assert_true(len(conflicts3) == 0, "conflict list is empty")
 assert_true(len(facts3.validation_conflicts) == 0, "facts.validation_conflicts is empty")
-assert_true(isinstance(results3, list) and len(results3) == 20, "returns 20 rule results")
+assert_true(isinstance(results3, list) and len(results3) == 21, "returns 21 rule results")
 
 
 # ─── Test 4: reinstated carrier — no rule 01 conflict ────────────────────────
@@ -156,7 +156,62 @@ assert_true(rule_01 is not None, "rule 01 present in results")
 assert_true(rule_01 is not None and rule_01.passed, "rule 01 PASSES for CONFIRMED_ACTIVE + None revocation_date")
 assert_true(not any(c["rule"] == "authority_not_both_active_and_revoked" for c in conflicts4),
             "no authority_not_both_active_and_revoked conflict in conflict report")
-assert_true(isinstance(results4, list) and len(results4) == 20, "returns 20 rule results (no crash)")
+assert_true(isinstance(results4, list) and len(results4) == 21, "returns 21 rule results (no crash)")
+
+# ─── Test 5: Rule 21 — CONFIRMED_ACTIVE + PRIVATE must fail ──────────────────
+# Mirrors the failure mode that caused CASTELLI to be misclassified:
+# a carrier with active authority classified as PRIVATE.
+
+print("\nTest 5: Rule 21 fires when authority_status=CONFIRMED_ACTIVE + carrier_type=PRIVATE")
+
+facts5 = base_facts(
+    carrier_type=PRIVATE,
+    authority_required="YES",        # intentional inconsistency to trigger rule
+    authority_status=CONFIRMED_ACTIVE,
+    authority_revocation_date=None,
+    mc_number="MC819002",
+    insurance_required="YES",
+    insurance_status=CONFIRMED_ACTIVE,
+    insurance_cancellation="NO",
+    insurance_replacement="NO",
+)
+results5, conflicts5 = run_validation_with_conflicts(facts5)
+
+rule21 = next((r for r in results5 if r.rule_name == "authorized_carrier_not_classified_private"), None)
+assert_true(rule21 is not None, "rule 21 present in results")
+assert_true(rule21 is not None and not rule21.passed,
+            "rule 21 FAILS for CONFIRMED_ACTIVE + PRIVATE combination")
+assert_true(any(c["rule"] == "authorized_carrier_not_classified_private" for c in conflicts5),
+            "rule 21 appears in conflict report")
+assert_true(isinstance(results5, list) and len(results5) == 21, "returns 21 rule results (no crash)")
+
+
+# ─── Test 6: Rule 21 must NOT fire for CONFIRMED_ACTIVE + MIXED_OPERATION ────
+# CASTELLI / STEEL VALLEY pattern: active authority + MIXED_OPERATION is valid.
+
+print("\nTest 6: Rule 21 does NOT fire for CONFIRMED_ACTIVE + MIXED_OPERATION")
+
+facts6 = base_facts(
+    carrier_type=MIXED_OPERATION,
+    authority_required="YES",
+    authority_status=CONFIRMED_ACTIVE,
+    authority_revocation_date=None,
+    mc_number="MC819002",
+    insurance_required="YES",
+    insurance_status=CONFIRMED_ACTIVE,
+    insurance_cancellation="NO",
+    insurance_replacement="NO",
+)
+results6, conflicts6 = run_validation_with_conflicts(facts6)
+
+rule21_6 = next((r for r in results6 if r.rule_name == "authorized_carrier_not_classified_private"), None)
+assert_true(rule21_6 is not None, "rule 21 present in results")
+assert_true(rule21_6 is not None and rule21_6.passed,
+            "rule 21 PASSES for CONFIRMED_ACTIVE + MIXED_OPERATION")
+assert_true(not any(c["rule"] == "authorized_carrier_not_classified_private" for c in conflicts6),
+            "no rule 21 conflict for MIXED_OPERATION")
+assert_true(isinstance(results6, list) and len(results6) == 21, "returns 21 rule results (no crash)")
+
 
 # ─── Summary ─────────────────────────────────────────────────────────────────
 

@@ -1,0 +1,94 @@
+================================================================================
+CARRIER INTELLIGENCE REPORT — FMCSA DATA
+Generated : 2026-07-01 20:28:58  
+DOT       : 3049985
+================================================================================
+
+── CARRIER IDENTITY ────────────────────────────────────────────────────────────
+  Legal Name    : J LLAMAS TRUCKING LLC
+  DOT Number    : 3049985
+  MC Number     : MC1353193
+  Carrier Type  : FOR_HIRE_INTERSTATE
+  USDOT Status  : ACTIVE
+
+── CURRENT AUTHORITY ───────────────────────────────────────────────────────────
+  Required      : YES
+  Status        : CONFIRMED_ACTIVE
+  First Auth    : 2022-02-28
+  Active Period : 2022-02-28 to present (4 yr)
+
+── HISTORICAL AUTHORITY EVENTS ──────────────────────────────────────────────────
+  2022-02-28  GRANTED
+
+── INSURANCE ───────────────────────────────────────────────────────────────────
+  Required      : YES
+  Status        : CONFIRMED_ACTIVE
+  Cancellation  : NO
+  Replacement   : YES
+
+── FLEET & OPERATIONS ──────────────────────────────────────────────────────────
+  Power Units   : 1  (1-2 (owner-op))
+  Drivers       : 1
+  Inspections   : 1  (historical total, all available records; deduped)
+  Crashes       : 1  (historical total, all available records)
+  Violations    : 0  (historical total, all available records)
+  BOC-3 on File : BOC-3 status not verified from imported data — manual L&I/MOTUS verification required
+  SMS Data      : Not present in imported dataset
+
+── DATA CONFIDENCE ─────────────────────────────────────────────────────────────
+  authority     : HIGH
+  insurance     : HIGH
+  fleet         : HIGH
+  identity      : HIGH
+
+── VALIDATION RULES ────────────────────────────────────────────────────────────
+  20/20 rules passed | 0 failed
+
+  [PASS] Rule 01 authority_not_both_active_and_revoked
+         OK
+  [PASS] Rule 02 private_no_authority_required
+         N/A — carrier_type=FOR_HIRE_INTERSTATE
+  [PASS] Rule 03 private_no_insurance_required
+         N/A — carrier_type=FOR_HIRE_INTERSTATE
+  [PASS] Rule 04 intrastate_not_rendered_as_revoked
+         N/A — carrier_type=FOR_HIRE_INTERSTATE
+  [PASS] Rule 05 no_sms_without_inspections
+         N/A — inspection_count=1
+  [PASS] Rule 06 lapsed_requires_explicit_cancellation
+         N/A — insurance_status=CONFIRMED_ACTIVE
+  [PASS] Rule 07 revoked_requires_revocation_event
+         N/A — authority_status=CONFIRMED_ACTIVE
+  [PASS] Rule 08 authority_status_is_valid_sentinel
+         OK — =CONFIRMED_ACTIVE
+  [PASS] Rule 09 usdot_status_is_valid
+         OK — =ACTIVE
+  [PASS] Rule 10 no_mc_placeholder
+         OK — mc_number=MC1353193
+  [PASS] Rule 11 insurance_dates_internally_consistent
+         OK
+  [PASS] Rule 12 first_authority_date_not_future
+         OK — first_authority_date=2022-02-28
+  [PASS] Rule 13 accident_date_is_valid_past_date
+         N/A — no accident_date filter
+  [PASS] Rule 14 no_prohibited_wording_in_status_fields
+         OK
+  [PASS] Rule 15 no_overconfident_negative_from_empty_records
+         OK
+  [PASS] Rule 16 fleet_data_not_asymmetric
+         OK — power_units=1, drivers=1
+  [PASS] Rule 17 inspection_count_non_negative_int
+         OK — inspection_count=1
+  [PASS] Rule 18 data_confidence_keys_present
+         OK — {'fleet': 'HIGH', 'identity': 'HIGH', 'insurance': 'HIGH', 'authority': 'HIGH'}
+  [PASS] Rule 19 for_hire_has_mc_or_auth_evidence
+         OK — mc=MC1353193, auth_records=1
+  [PASS] Rule 20 accident_date_parseable_if_set
+         N/A — no accident_date set
+
+── VALIDATION CONFLICTS ────────────────────────────────────────────────────────
+  None detected.
+
+================================================================================
+Data source: FMCSA MCMIS via Socrata open data (data.transportation.gov)
+Pipeline  : carrier_facts.py + validation_rules.py (Carrier Check USA)
+================================================================================

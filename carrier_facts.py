@@ -25,11 +25,13 @@ NOT_FOUND             = "NOT_FOUND"
 REQUIRES_VERIFICATION = "REQUIRES_VERIFICATION"
 
 # carrier_type
-FOR_HIRE_INTERSTATE = "FOR_HIRE_INTERSTATE"
-PRIVATE             = "PRIVATE"
-INTRASTATE          = "INTRASTATE"
-PASSENGER           = "PASSENGER"
-UNKNOWN             = "UNKNOWN"
+FOR_HIRE_INTERSTATE  = "FOR_HIRE_INTERSTATE"
+MIXED_OPERATION      = "MIXED_OPERATION"      # for-hire + private both present
+PRIVATE              = "PRIVATE"
+INTRASTATE           = "INTRASTATE"           # legacy; prefer INTRASTATE_ONLY for new carriers
+INTRASTATE_ONLY      = "INTRASTATE_ONLY"      # authorised for hire at state level, no federal MC
+PASSENGER            = "PASSENGER"
+UNKNOWN              = "UNKNOWN"
 
 # authority_status / insurance_status
 CONFIRMED_ACTIVE  = "CONFIRMED_ACTIVE"
@@ -50,7 +52,7 @@ class CarrierFacts:
     dot_number:               str
     mc_number:                Optional[str]   # None if no MC — never "MC" placeholder
     legal_name:               str
-    carrier_type:             str             # FOR_HIRE_INTERSTATE | PRIVATE | INTRASTATE | PASSENGER | UNKNOWN
+    carrier_type:             str             # FOR_HIRE_INTERSTATE | MIXED_OPERATION | PRIVATE | INTRASTATE_ONLY | INTRASTATE | PASSENGER | UNKNOWN | REQUIRES_VERIFICATION
     usdot_status:             str             # ACTIVE | INACTIVE | NOT AUTHORIZED | OUT-OF-SERVICE | NOT_FOUND
     authority_required:       str             # YES | NO | REQUIRES_VERIFICATION
     authority_status:         str             # CONFIRMED_ACTIVE | CONFIRMED_REVOKED | NOT_REQUIRED | NOT_FOUND | REQUIRES_VERIFICATION
@@ -100,42 +102,79 @@ def _fmt(d: Optional[date]) -> Optional[str]:
 
 def _infer_carrier_type(carrier: dict, authority_records: list) -> str:
     """
-    Infer carrier_type from MC number, authority history, and cargo_type.
+    Infer carrier_type from cargo_type (multi-value), MC number, and authority records.
+
+    cargo_type is a semicolon-delimited field from the FMCSA carrier census — a carrier
+    may have multiple operation classifications simultaneously (e.g. both
+    "PRIVATE PROPERTY" and "AUTHORIZED FOR HIRE").  The old substring match on the
+    joined string incorrectly treated "PRIVATE PROPERTY;AUTHORIZED FOR HIRE" as PRIVATE.
 
     Priority order:
-    1. Passenger signals in cargo_type
-    2. Explicit for-hire authority records (COMMON / CONTRACT in authority_type)
-    3. "PRIVATE" in cargo_type → PRIVATE
-       Deliberately before the MC-number check: some private carriers have an
-       MC number in the FMCSA import (historical artifact or misclassified field)
-       while SAFER shows Operation Classification = Private(Property) and a blank
-       MC field.  cargo_type is the authoritative FMCSA census field; MC presence
-       alone does not override it.
-    4. MC number present (and no explicit private cargo) → FOR_HIRE_INTERSTATE
-    5. Default → PRIVATE
+    1. PASSENGER signal in any cargo_type part → PASSENGER
+    2. PRIVATE + interstate for-hire (has_mc OR federal auth records) → MIXED_OPERATION
+    3. Interstate for-hire (no private) → FOR_HIRE_INTERSTATE
+    4. PRIVATE only (no for-hire flag, or for-hire flag but no MC/federal auth) → PRIVATE
+    5. FOR-HIRE flag present but NO MC and NO federal auth records → INTRASTATE_ONLY
+       (state-authorised carrier; no federal FMCSA docket number)
+    6. INTRASTATE flag in cargo → INTRASTATE_ONLY
+    7. MC number present with no cargo flag (data quality gap) → FOR_HIRE_INTERSTATE
+    8. Default → REQUIRES_VERIFICATION (genuinely unknown; never guess)
     """
-    mc = (carrier.get("mc_number") or "").strip()
-    cargo = (carrier.get("cargo_type") or "").upper()
+    mc        = (carrier.get("mc_number") or "").strip()
+    cargo_raw = (carrier.get("cargo_type") or "")
+    parts     = {p.strip().upper() for p in cargo_raw.split(";") if p.strip()}
 
-    if "PASSENGER" in cargo:
+    has_passenger  = any("PASSENGER" in p for p in parts)
+    has_for_hire   = any(
+        "AUTHORIZED FOR HIRE" in p or "AUTH. FOR HIRE" in p or "AUTH FOR HIRE" in p
+        for p in parts
+    )
+    has_private    = any("PRIVATE" in p for p in parts)
+    has_intrastate = any("INTRASTATE" in p for p in parts)
+    has_mc         = bool(mc and mc != "MC" and len(mc) > 2)
+
+    # Federal authority evidence: any GRANTED or REINSTATED record (not DISCONTINUED).
+    # authority_type is NULL in our import — use status field instead.
+    has_federal_auth = any(
+        "GRANT" in (rec.get("status") or "").upper() or
+        "REINSTAT" in (rec.get("status") or "").upper()
+        for rec in authority_records
+        if "DISCONTIN" not in (rec.get("reason") or "").upper()
+    )
+
+    # Interstate for-hire = cargo says for-hire AND carrier has federal presence
+    # (MC docket number or FMCSA authority records).
+    is_interstate_fh = has_for_hire and (has_mc or has_federal_auth)
+
+    if has_passenger:
         return PASSENGER
 
-    # Explicit for-hire authority records prove interstate for-hire classification
-    for rec in authority_records:
-        atype = (rec.get("authority_type") or "").upper()
-        if any(k in atype for k in ("COMMON", "CONTRACT", "FOR HIRE", "FORHIRE")):
-            return FOR_HIRE_INTERSTATE
+    if has_private and is_interstate_fh:
+        # Both operation types present — carrier operates in both modes.
+        return MIXED_OPERATION
 
-    # Explicit private cargo classification overrides MC-number presence.
-    if "PRIVATE" in cargo:
-        return PRIVATE
-
-    # MC number (not the "MC" placeholder) without any private cargo signal
-    # = for-hire carrier that registered for interstate authority.
-    if mc and mc != "MC" and len(mc) > 2:
+    if is_interstate_fh:
         return FOR_HIRE_INTERSTATE
 
-    return PRIVATE
+    if has_private:
+        # Pure private: private cargo classification, no interstate for-hire evidence.
+        # An MC number in the DB without a for-hire cargo flag is treated as an import
+        # artifact (TREDZ CENTRAL / PUBLIC SERVICE NC pattern).
+        return PRIVATE
+
+    # For-hire flag present but no MC and no federal authority records
+    # → operating under state authority only, not FMCSA interstate authority.
+    if has_for_hire:
+        return INTRASTATE_ONLY
+
+    if has_intrastate:
+        return INTRASTATE_ONLY
+
+    # No recognised cargo flags — fall back to MC number as last resort.
+    if has_mc:
+        return FOR_HIRE_INTERSTATE
+
+    return REQUIRES_VERIFICATION
 
 
 # ── Authority status inference ────────────────────────────────────────────────
@@ -413,13 +452,19 @@ def build_carrier_facts(conn, dot_number: str, accident_date: Optional[str] = No
     usdot_status = raw_status if raw_status in valid_statuses else NOT_FOUND
 
     # Authority and insurance requirements
-    if carrier_type in (PRIVATE, INTRASTATE):
+    if carrier_type in (PRIVATE, INTRASTATE, INTRASTATE_ONLY):
+        # No federal FMCSA authority or insurance filing required.
+        # INTRASTATE_ONLY carriers operate under state authority — display the
+        # carrier type explicitly rather than implying no regulation applies.
         authority_required = "NO"
         insurance_required = "NO"
-    elif carrier_type == UNKNOWN:
+    elif carrier_type in (UNKNOWN, REQUIRES_VERIFICATION):
         authority_required = REQUIRES_VERIFICATION
         insurance_required = REQUIRES_VERIFICATION
     else:
+        # FOR_HIRE_INTERSTATE, MIXED_OPERATION, PASSENGER — all have for-hire exposure.
+        # MIXED_OPERATION must show authority/insurance status even though it also does
+        # private hauling; the for-hire portion triggers federal filing requirements.
         authority_required = "YES"
         insurance_required = "YES"
 

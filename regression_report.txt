@@ -1,6 +1,6 @@
 ================================================================================
-CARRIER FACTS REGRESSION SUITE — 2026-07-01 20:01:08
-Gold file: gold_carriers.json  |  Carriers: 12
+CARRIER FACTS REGRESSION SUITE — 2026-07-01 20:55:13
+Gold file: gold_carriers.json  |  Carriers: 15
 ================================================================================
 
 ────────────────────────────────────────────────────────────────────────────────
@@ -51,14 +51,26 @@ DOT 830598  —  SURJIT S DHALIWAL
 DOT 833248  —  JAVIER GONZALEZ
   IDENTICAL  (3 fields checked)
 
+────────────────────────────────────────────────────────────────────────────────
+DOT 2383948  —  CASTELLI DEVELOPMENT CORPORATION LLC
+  IDENTICAL  (4 fields checked)
+
+────────────────────────────────────────────────────────────────────────────────
+DOT 3036633  —  STEEL VALLEY CONTRACTORS LLC
+  IDENTICAL  (3 fields checked)
+
+────────────────────────────────────────────────────────────────────────────────
+DOT 2675124  —  JAMES R PERRY
+  IDENTICAL  (3 fields checked)
+
 ================================================================================
 REGRESSION SUMMARY
 ================================================================================
-  Carriers checked: 12
-  Identical:        12
+  Carriers checked: 15
+  Identical:        15
   Changed:          0
   Errors/not in DB: 0
-  Fields matched:   39/39 (100.0%)
+  Fields matched:   49/49 (100.0%)
 
   All gold fields matched. No regressions detected.
 ================================================================================
